@@ -48,6 +48,7 @@ function ContactRow({ icon: Icon, href, children, external }: { icon: ComponentT
 export function Footer() {
   const socials = configuredSocialLinks();
   const year = new Date().getFullYear();
+  const credit = siteConfig.developerCredit;
   return (
     <footer className="relative overflow-hidden bg-navy-950 text-white">
       <div className="bg-grid-dark absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" aria-hidden="true" />
@@ -134,6 +135,26 @@ export function Footer() {
             </li>
           </ul>
         </div>
+
+        {credit ? (
+          <p className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-white/10 pt-6 text-center text-[0.8125rem] text-white/50">
+            <span>
+              Developed by{" "}
+              <a href={credit.url} target="_blank" rel="noopener" className="font-semibold text-gold-400 transition-colors hover:text-white">
+                {credit.name}
+              </a>
+            </span>
+            <span aria-hidden="true" className="hidden sm:inline">
+              ·
+            </span>
+            <span className="basis-full sm:basis-auto">
+              Contact:{" "}
+              <a href={telHref(credit.phone)} className="font-semibold text-white/75 transition-colors hover:text-white">
+                {credit.phone}
+              </a>
+            </span>
+          </p>
+        ) : null}
       </div>
     </footer>
   );

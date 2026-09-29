@@ -166,6 +166,12 @@ export const siteConfig: SiteConfig = {
     twitterHandle: "",
   },
 
+  developerCredit: {
+    name: "botwebtechnologies.com",
+    url: "https://botwebtechnologies.com",
+    phone: "+92 3040500121",
+  },
+
   features: {
     showStatistics: true,
     showTestimonials: true,

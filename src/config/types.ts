@@ -97,6 +97,12 @@ export interface SiteConfig {
     keywords: string[];
     twitterHandle: string;
   };
+  /** Website developer credit shown in the footer. Set to null to hide it. */
+  developerCredit: {
+    name: string;
+    url: string;
+    phone: string;
+  } | null;
   /** Switch sections off without touching components. */
   features: {
     showStatistics: boolean;
