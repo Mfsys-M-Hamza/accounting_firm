@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import type { QuoteData } from "./schemas";
+import type { ContactData, QuoteData } from "./schemas";
 
 const line = (label: string, value?: string) => `*${label}:* ${value && value.trim() ? value.trim() : "—"}`;
 
@@ -26,5 +26,25 @@ export function buildQuoteMessage(q: QuoteData): string {
     line("Additional Requirements", q.message),
     "",
     "Please contact me regarding the quotation.",
+  ].join("\n");
+}
+
+/** Formats a validated contact-form enquiry as a readable WhatsApp message. */
+export function buildContactMessage(c: ContactData): string {
+  return [
+    `Hello ${siteConfig.companyName},`,
+    "",
+    "I'm getting in touch through your website.",
+    "",
+    line("Name", c.name),
+    line("Email", c.email),
+    line("Phone", c.phone),
+    line("Company", c.company),
+    line("Subject", c.subject),
+    line("Service", c.service),
+    line("Preferred Contact", c.contactMethod),
+    "",
+    "*Message:*",
+    (c.message ?? "").trim(),
   ].join("\n");
 }

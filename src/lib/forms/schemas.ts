@@ -125,6 +125,7 @@ export const callbackSchema = z.object({
 export type QuoteInput = z.input<typeof quoteSchema>;
 export type QuoteData = z.output<typeof quoteSchema>;
 export type ContactInput = z.input<typeof contactSchema>;
+export type ContactData = z.output<typeof contactSchema>;
 export type ConsultationInput = z.input<typeof consultationSchema>;
 export type CallbackInput = z.input<typeof callbackSchema>;
 

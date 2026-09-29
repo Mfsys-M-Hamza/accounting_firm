@@ -342,10 +342,15 @@ section("Contact form");
 {
   const { page } = await openPage("desktop");
   await page.goto(`${BASE}/contact`, { waitUntil: "networkidle0" });
+  await page.evaluate(() => {
+    window.__opened = [];
+    window.open = (u) => (window.__opened.push(u), {});
+  });
   await page.click("main form button[type=submit]");
   await sleep(400);
   const n = await page.$$eval('main form [aria-invalid="true"]', (e) => e.length);
-  n >= 5 ? pass(`contact validation shows ${n} errors`) : fail(`contact validation showed ${n}`);
+  const opened0 = await page.evaluate(() => window.__opened.length);
+  n >= 5 && opened0 === 0 ? pass(`contact validation shows ${n} errors, WhatsApp not opened`) : fail(`contact validation showed ${n}, opened=${opened0}`);
   await fill(page, "Name", "Sam Client");
   await fill(page, "Email", "not-an-email");
   await page.click("main form button[type=submit]");
@@ -356,10 +361,16 @@ section("Contact form");
   await fill(page, "Message", "We need help with our year-end accounts this year.");
   await choose(page, "Email");
   await page.$eval('main form input[name="consent"]', (i) => i.click());
-  await sleep(2600);
   await page.click("main form button[type=submit]");
-  await page.waitForFunction(() => document.body.innerText.includes("Message sent") || document.querySelector('main [role="alert"]'), { timeout: 10000 });
-  (await page.$eval("body", (b) => b.innerText.includes("Message sent"))) ? pass("contact submitted → confirmation shown") : fail("contact submit failed");
+  await sleep(600);
+  const opened = await page.evaluate(() => window.__opened);
+  if (opened.length === 1) {
+    const u = new URL(opened[0]);
+    const text = u.searchParams.get("text") ?? "";
+    const missing = ["Sam Client", "sam@example.com", "Year-end accounts", "Email", "We need help with our year-end accounts this year."].filter((e) => !text.includes(e));
+    u.hostname === "wa.me" && !missing.length ? pass("contact form opens WhatsApp with all details") : fail(`contact WhatsApp message missing: ${missing.join(", ")}`);
+  } else fail(`contact form opened WhatsApp ${opened.length} times`);
+  (await page.$eval("body", (b) => b.innerText.includes("WhatsApp has been opened"))) ? pass("contact WhatsApp confirmation shown") : fail("no contact WhatsApp confirmation");
   await page.close();
 }
 
