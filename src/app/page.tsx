@@ -1,69 +1,216 @@
 import Image from "next/image";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { siteConfig } from "@/config/site";
+import { services } from "@/content/services";
+import { sortedPosts } from "@/content/posts";
+import { faqs } from "@/content/faqs";
+import { images } from "@/content/images";
+import { buildMetadata } from "@/lib/seo";
+import { Hero } from "@/components/sections/hero";
+import { ServicesGrid } from "@/components/sections/services-grid";
+import { Stats } from "@/components/sections/stats";
+import { Advantages } from "@/components/sections/advantages";
+import { Process } from "@/components/sections/process";
+import { IndustriesGrid } from "@/components/sections/industries-grid";
+import { Testimonials } from "@/components/sections/testimonials";
+import { PostCard } from "@/components/sections/post-card";
+import { FaqList } from "@/components/sections/faq-list";
+import { CtaBand } from "@/components/sections/cta-band";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { ButtonLink } from "@/components/ui/button";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/motion";
+import { Illustration } from "@/components/icons/illustrations";
+import { WhatsAppIcon } from "@/components/icons/brand-icons";
+import { generalWhatsappUrl } from "@/lib/whatsapp";
 
-export default function Home() {
+export const metadata = buildMetadata({
+  title: siteConfig.seo.defaultTitle,
+  description: siteConfig.seo.defaultDescription,
+  path: "/",
+  absoluteTitle: true,
+});
+
+const homeFaqs = faqs.slice(0, 6);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Hero />
+
+      {/* Services */}
+      <Section id="services" labelledBy="services-title" tone="paper">
+        <SectionHeading
+          id="services-title"
+          eyebrow="What we do"
+          title="Complete audit, tax & accounting services under one roof"
+          text="From day-to-day bookkeeping to statutory audits and board-level financial strategy, our services are designed to work together as your business grows."
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+        <ServicesGrid services={services} />
+      </Section>
+
+      {/* About teaser + stats */}
+      <Section labelledBy="about-title">
+        <div className="grid items-center gap-14 lg:grid-cols-2">
+          <Reveal direction="right" className="relative">
+            <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] shadow-lift">
+              <Image src={images.teamBoardroom.src} alt={images.teamBoardroom.alt} fill placeholder="blur" sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
+            </div>
+            <div className="absolute -right-3 -bottom-8 hidden rounded-3xl bg-navy-900 p-6 text-white shadow-lift sm:block lg:-right-8">
+              <Illustration name="compliance" className="size-16" />
+              <p className="mt-3 max-w-[12rem] font-display text-lg leading-snug font-semibold">Confidential, compliance-driven work</p>
+            </div>
+          </Reveal>
+          <div>
+            <SectionHeading
+              id="about-title"
+              align="left"
+              eyebrow={`About ${siteConfig.companyName}`}
+              title="A trusted financial partner for ambitious businesses"
+              text={`${siteConfig.companyName} brings together audit, accounting, tax and advisory professionals who combine technical rigour with practical, plain-English advice.`}
+              className="mb-8"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Reveal>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {["Qualified, experienced professionals", "Clear scope and agreed fees", "Secure, confidential processes", "Modern cloud-based workflows"].map((t) => (
+                  <li key={t} className="flex items-start gap-2.5 font-medium text-ink">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold-500" aria-hidden="true" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <ButtonLink href="/about">
+                  More about us <ArrowRight aria-hidden="true" />
+                </ButtonLink>
+                <ButtonLink href="/book-consultation" variant="outline">
+                  Book a consultation
+                </ButtonLink>
+              </div>
+            </Reveal>
+          </div>
         </div>
-      </main>
-    </div>
+        <Stats className="mt-24" />
+      </Section>
+
+      {/* Why choose us */}
+      <Section labelledBy="why-title" tone="paper">
+        <SectionHeading
+          id="why-title"
+          eyebrow="Why choose us"
+          title="Expertise you can trust. Service you can rely on."
+          text="We combine professional standards with a responsive, personal service — so you always know where you stand."
+        />
+        <Advantages />
+      </Section>
+
+      {/* Process */}
+      <Section labelledBy="process-title" tone="navy" className="overflow-hidden">
+        <div className="bg-grid-dark pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_70%)]" aria-hidden="true" />
+        <div className="relative">
+          <SectionHeading id="process-title" light eyebrow="How we work" title="A clear, four-step process" text="Straightforward from the first conversation to ongoing support." />
+          <Process light />
+        </div>
+      </Section>
+
+      {/* Industries */}
+      <Section labelledBy="industries-title">
+        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading
+            id="industries-title"
+            align="left"
+            eyebrow="Industries we serve"
+            title="Sector knowledge that makes a difference"
+            text="Every industry has its own accounting, tax and compliance challenges. We tailor our approach to yours."
+            className="mb-0"
+          />
+          <Reveal>
+            <ButtonLink href="/industries" variant="outline" className="shrink-0">
+              All industries <ArrowRight aria-hidden="true" />
+            </ButtonLink>
+          </Reveal>
+        </div>
+        <IndustriesGrid limit={8} />
+      </Section>
+
+      {/* Quote CTA */}
+      <section aria-labelledby="quote-cta-title" className="bg-paper pb-4">
+        <div className="container-page">
+          <Reveal direction="scale">
+            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#122c50,#0b1f3a_60%)] px-6 py-12 sm:px-12 lg:px-16 lg:py-14">
+              <div className="bg-grid-dark absolute inset-0 -z-10" aria-hidden="true" />
+              <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+                <div>
+                  <p className="eyebrow text-gold-400">Instant quote</p>
+                  <h2 id="quote-cta-title" className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
+                    Get your tailored quotation in minutes
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-lg text-white/70">
+                    Answer a few quick questions and send your request straight to us on WhatsApp — or submit it online. No obligation.
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <ButtonLink href="/quote" variant="gold" size="lg">
+                      Get Your Instant Quote <ArrowRight aria-hidden="true" />
+                    </ButtonLink>
+                    <ButtonLink href={generalWhatsappUrl()} variant="whatsapp" size="lg" external>
+                      <WhatsAppIcon /> Chat on WhatsApp
+                    </ButtonLink>
+                  </div>
+                </div>
+                <div className="hidden gap-4 lg:flex" aria-hidden="true">
+                  <Illustration name="vat" className="size-28 animate-float" />
+                  <Illustration name="reporting" className="size-28 translate-y-8 animate-float-slow" />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      {siteConfig.features.showTestimonials ? (
+        <Section labelledBy="testimonials-title" tone="paper">
+          <SectionHeading id="testimonials-title" eyebrow="Client feedback" title="What our clients say" />
+          <Testimonials />
+        </Section>
+      ) : null}
+
+      {/* Resources */}
+      <Section labelledBy="resources-title">
+        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading id="resources-title" align="left" eyebrow="Resources" title="Insights & practical guides" className="mb-0" />
+          <Reveal>
+            <ButtonLink href="/resources" variant="outline" className="shrink-0">
+              View all articles <ArrowRight aria-hidden="true" />
+            </ButtonLink>
+          </Reveal>
+        </div>
+        <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sortedPosts.slice(0, 3).map((p) => (
+            <StaggerItem key={p.slug}>
+              <PostCard post={p} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
+
+      {/* FAQ */}
+      <Section labelledBy="faq-title" tone="paper">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <SectionHeading id="faq-title" align="left" eyebrow="FAQs" title="Frequently asked questions" text="Quick answers to the questions we hear most often." className="mb-8" />
+            <Reveal>
+              <ButtonLink href="/faqs" variant="outline">
+                See all FAQs <ArrowRight aria-hidden="true" />
+              </ButtonLink>
+            </Reveal>
+          </div>
+          <Reveal>
+            <FaqList items={homeFaqs} schema />
+          </Reveal>
+        </div>
+      </Section>
+
+      <CtaBand />
+    </>
   );
 }
