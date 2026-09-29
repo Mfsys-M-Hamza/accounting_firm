@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
+// Static export for GitHub Pages / static hosts (npm run build:pages). No server: no API routes, headers or redirects.
+const isStatic = process.env.STATIC_EXPORT === "true";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 // Content Security Policy. If you add third-party services (analytics, chat widgets,
 // captcha, a different map provider) add their origins to the matching directive.
@@ -33,28 +36,34 @@ const nextConfig: NextConfig = {
   // Pin the project root so a lockfile in a parent folder is not picked up.
   turbopack: { root: process.cwd() },
   poweredByHeader: false,
+  ...(isStatic ? { output: "export" as const, trailingSlash: true, basePath } : {}),
   reactStrictMode: true,
   images: {
+    // Static hosts cannot resize images on request; the source files are already optimised WebP.
+    unoptimized: isStatic,
     formats: ["image/avif", "image/webp"],
     qualities: [70, 75, 85],
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
-  async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
-  },
-  async redirects() {
-    return [
-      { source: "/about-us", destination: "/about", permanent: true },
-      { source: "/blog", destination: "/resources", permanent: true },
-      { source: "/blog/:slug", destination: "/resources/:slug", permanent: true },
-      { source: "/contact-us", destination: "/contact", permanent: true },
-      { source: "/get-a-quote", destination: "/quote", permanent: true },
-      { source: "/privacy", destination: "/privacy-policy", permanent: true },
-      { source: "/terms", destination: "/terms-and-conditions", permanent: true },
-    ];
-  },
+  ...(isStatic ? {} : { headers, redirects }),
 };
+
+async function headers() {
+  return [{ source: "/:path*", headers: securityHeaders }];
+}
+
+async function redirects() {
+  return [
+    { source: "/about-us", destination: "/about", permanent: true },
+    { source: "/blog", destination: "/resources", permanent: true },
+    { source: "/blog/:slug", destination: "/resources/:slug", permanent: true },
+    { source: "/contact-us", destination: "/contact", permanent: true },
+    { source: "/get-a-quote", destination: "/quote", permanent: true },
+    { source: "/privacy", destination: "/privacy-policy", permanent: true },
+    { source: "/terms", destination: "/terms-and-conditions", permanent: true },
+  ];
+}
 
 export default nextConfig;

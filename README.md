@@ -21,6 +21,11 @@ npm run build
 npm start
 ```
 
+## Hosting options
+
+- **Full site (recommended for production):** any Node.js host such as Vercel, Netlify or a VPS, using `npm run build` and `npm start`. Everything works, including online form submission.
+- **GitHub Pages (static preview):** `.github/workflows/deploy-pages.yml` runs `npm run build:pages` on every push to `main` and publishes to `https://<owner>.github.io/<repo>/`. One-time setup: repository **Settings → Pages → Source: GitHub Actions**. Static hosting has no server, so the online **Submit** buttons show a message pointing visitors to WhatsApp, phone or email; the WhatsApp quote, all pages and visuals work normally.
+
 ## Customising for a new client
 
 | What | Where |
@@ -44,7 +49,7 @@ Rules the template enforces:
 - **Testimonials** and **team profiles** with `placeholder: true` show a visible "Sample" label. Only publish reviews you have permission to use. Testimonials are never added to structured data.
 - **Certifications** are empty by default — list only memberships the firm actually holds.
 - **WhatsApp**: set `contact.whatsapp` to the international number, digits only (e.g. `447700900123`). Until then, links open WhatsApp without a recipient.
-- **Logo**: set `logo` to `{ src: "/brand/logo.svg", alt, width, height }` (file in `public/brand/`). While `null`, a monogram wordmark is used. Replace `src/app/icon.tsx` / `apple-icon.tsx` with PNG icons if desired.
+- **Logo**: set `logo` to `{ src: "/brand/logo.svg", alt, width, height }` (file in `public/brand/`). While `null`, a monogram wordmark is used. Replace `public/icon.png` (64×64) and `public/apple-icon.png` (180×180) with the firm's own icons.
 - **Legal pages** (`/privacy-policy`, `/terms-and-conditions`) are templates — replace placeholders and have them reviewed for your jurisdiction.
 
 ## Forms and lead delivery

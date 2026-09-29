@@ -1,0 +1,58 @@
+name: Deploy to GitHub Pages
+
+# Builds the static version of the site (npm run build:pages) and publishes it
+# to https://<owner>.github.io/<repo>/ on every push to main.
+# One-time setup: repository Settings → Pages → Source: "GitHub Actions".
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Project sites live at https://<owner>.github.io/<repo>. For a custom domain, set the
+      # repository variable SITE_URL (e.g. https://www.yourfirm.com) and leave BASE_PATH empty.
+      - name: Work out site URL and base path
+        run: |
+          if [ -n "${{ vars.SITE_URL }}" ]; then
+            echo "NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASE_PATH=${{ vars.BASE_PATH }}" >> "$GITHUB_ENV"
+          else
+            OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+            REPO="${GITHUB_REPOSITORY#*/}"
+            echo "NEXT_PUBLIC_SITE_URL=https://${OWNER}.github.io/${REPO}" >> "$GITHUB_ENV"
+            echo "NEXT_PUBLIC_BASE_PATH=/${REPO}" >> "$GITHUB_ENV"
+          fi
+      - run: npm run lint
+      - run: npm run build:pages
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

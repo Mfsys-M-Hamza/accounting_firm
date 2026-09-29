@@ -21,6 +21,14 @@ export function useFormSubmit<T extends FieldValues>(kind: FormKind, setError: U
   };
 
   async function submit(data: T): Promise<boolean> {
+    // Static builds (GitHub Pages) have no server to receive submissions.
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "true") {
+      setStatus({
+        state: "error",
+        message: "Online submission isn't available on this preview site. Please send your request via WhatsApp or contact us by phone or email.",
+      });
+      return false;
+    }
     setStatus({ state: "submitting" });
     try {
       const res = await fetch(`/api/${kind}`, {

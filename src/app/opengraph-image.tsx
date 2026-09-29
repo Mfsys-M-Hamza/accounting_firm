@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/config/site";
 
+// Generated once at build time (also required for the static GitHub Pages export).
+export const dynamic = "force-static";
+
 export const alt = `${siteConfig.companyName} — Audit, Tax & Accounting`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

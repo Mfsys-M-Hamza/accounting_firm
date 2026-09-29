@@ -4,6 +4,9 @@ import { posts } from "@/content/posts";
 import { publishedLocations } from "@/content/locations";
 import { absoluteUrl } from "@/lib/config-utils";
 
+// Generated once at build time (also required for the static GitHub Pages export).
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
     { path: "/", priority: 1, changeFrequency: "weekly" },

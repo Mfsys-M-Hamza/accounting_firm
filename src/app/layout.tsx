@@ -11,6 +11,9 @@ import { MotionProvider } from "@/components/motion/motion";
 import { IllustrationDefs } from "@/components/icons/illustrations";
 import { JsonLd } from "@/components/ui/json-ld";
 
+// Static files in public/ are not prefixed automatically when the site lives under a sub-path (GitHub Pages).
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-serif", display: "swap", weight: ["500", "600", "700"] });
 
@@ -22,6 +25,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.companyName,
   authors: [{ name: siteConfig.companyName }],
   creator: siteConfig.companyName,
+  icons: { icon: `${basePath}/icon.png`, apple: `${basePath}/apple-icon.png` },
   formatDetection: { telephone: false, email: false, address: false },
   alternates: { canonical: "/" },
   openGraph: {
