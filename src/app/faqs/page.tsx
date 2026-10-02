@@ -13,7 +13,7 @@ import { WhatsAppIcon } from "@/components/icons/brand-icons";
 export const metadata = buildMetadata({
   title: "Frequently Asked Questions",
   description:
-    "Answers to common questions about our accounting, audit, tax, payroll and company formation services, getting a quote, booking a consultation and switching accountants.",
+    "Answers to common questions about our accounting, bookkeeping, VAT, tax, payroll and company registration services, getting a quote, booking a consultation and switching accountants.",
   path: "/faqs",
 });
 

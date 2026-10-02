@@ -119,7 +119,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
               {service.benefits.map((b) => (
                 <StaggerItem key={b.title}>
                   <div className="flex gap-5 rounded-3xl border border-line p-6">
-                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#35659f,#0b1f3a)] text-gold-400 shadow-[0_4px_0_#061328]">
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#5a58d0,#1c1b6b)] text-gold-400 shadow-[0_4px_0_#0c0b36]">
                       <Check className="size-6" aria-hidden="true" />
                     </span>
                     <div>

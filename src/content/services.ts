@@ -4,8 +4,9 @@
  * structured data. Add a new service by appending an object — no other file
  * needs editing.
  *
- * Copy is intentionally jurisdiction-neutral. Before launch, have the firm
- * review wording against its own regulatory obligations.
+ * Copy is written for UK clients (HMRC, Companies House, Making Tax Digital)
+ * and reflects the services UK Accountax advertises. Have the firm
+ * review figures and wording before launch, as UK thresholds change.
  */
 import type { IllustrationName } from "@/components/icons/illustrations";
 import type { ImageKey } from "./images";
@@ -44,177 +45,49 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    slug: "audit-assurance",
-    title: "Audit & Assurance",
-    shortTitle: "Audit",
-    illustration: "audit",
-    image: "auditDocumentReview",
-    summary: "Independent, standards-based audits that give owners, lenders and regulators confidence in your numbers.",
-    headline: "Audit & Assurance Services You Can Rely On",
-    intro:
-      "Independent audit and assurance engagements that test the accuracy of your financial statements, strengthen internal controls and give stakeholders confidence in your reporting.",
-    metaTitle: "Audit & Assurance Services",
-    metaDescription:
-      "Statutory, internal and external audits, financial statement audits, compliance reviews and internal controls assessments delivered by an experienced audit team.",
-    overview: [
-      "An audit is more than a compliance exercise. Done well, it gives directors, shareholders, lenders and investors an independent view of whether the financial statements present a true and fair picture — and it highlights weaknesses in controls before they become costly problems.",
-      "Our audit approach is risk-based. We spend time understanding how your business earns revenue, where judgement is involved and which processes carry the most risk, so that testing is focused where it matters and disruption to your team is kept to a minimum.",
-      "Engagements are planned in advance with a clear timetable, a document request list and a named point of contact, so you always know what is needed and when.",
-    ],
-    included: [
-      { title: "Statutory Audit", description: "Annual audits for entities required by law or their constitution to have audited financial statements." },
-      { title: "Internal Audit", description: "Outsourced or co-sourced internal audit reviewing processes, controls and operational risk." },
-      { title: "External Audit", description: "Independent examination of financial statements for shareholders, lenders or other third parties." },
-      { title: "Financial Statement Audit", description: "Testing balances, transactions and disclosures against the applicable reporting framework." },
-      { title: "Compliance Review", description: "Assessment of adherence to regulatory, contractual or grant-funding requirements." },
-      { title: "Internal Controls Review", description: "Walk-throughs and testing of key controls with practical recommendations for improvement." },
-      { title: "Risk Assessment", description: "Identification and prioritisation of financial and operational risks across the business." },
-    ],
-    idealFor: [
-      "Companies that meet statutory audit thresholds",
-      "Businesses seeking bank finance or investment",
-      "Groups, subsidiaries and holding companies",
-      "Non-profits and grant-funded organisations",
-      "Owners wanting an independent view of controls",
-    ],
-    benefits: [
-      { title: "Stakeholder confidence", description: "Audited statements carry weight with banks, investors, customers and regulators." },
-      { title: "Stronger controls", description: "Management letters identify control gaps with clear, prioritised recommendations." },
-      { title: "Fewer surprises", description: "Early planning and regular communication mean issues are raised before deadlines." },
-    ],
-    deliverables: [
-      "Audit planning memorandum and timetable",
-      "Independent auditor's report",
-      "Management letter with control observations",
-      "Summary of adjustments and key findings",
-    ],
-    faqs: [
-      {
-        question: "How long does an audit usually take?",
-        answer:
-          "Timing depends on the size and complexity of the business and how ready the records are. We agree a timetable at the planning stage, and most of the fieldwork can be completed within a few weeks once the requested information is available.",
-      },
-      {
-        question: "What will you need from us before the audit starts?",
-        answer:
-          "We provide a tailored document request list — typically the trial balance, bank statements, key contracts, fixed asset and inventory records, payroll reports and supporting schedules for significant balances.",
-      },
-      {
-        question: "Can you perform an internal audit if we already have an external auditor?",
-        answer:
-          "Yes. Internal audit focuses on processes and controls for management's benefit and can run alongside your external audit, subject to independence requirements.",
-      },
-    ],
-    related: ["accounting-bookkeeping", "cfo-services", "business-advisory"],
-  },
-  {
-    slug: "taxation",
-    title: "Taxation",
-    shortTitle: "Tax",
-    illustration: "tax",
-    image: "taxForms",
-    summary: "Corporate, personal and indirect tax compliance and planning — filed accurately and on time.",
-    headline: "Tax Compliance & Advisory Without the Stress",
-    intro:
-      "From registration and returns to forward-looking tax planning, we help businesses and individuals meet their obligations accurately, on time and in the most efficient lawful way.",
-    metaTitle: "Tax Consultants — Corporate, Personal & VAT / Sales Tax",
-    metaDescription:
-      "Corporate tax, personal tax, VAT / sales tax, tax registration, return preparation, tax planning and advisory services for businesses and individuals.",
-    overview: [
-      "Tax rules change frequently and the cost of getting them wrong — penalties, interest and time spent resolving queries — can be significant. Our tax team keeps track of deadlines and developments so you don't have to.",
-      "We combine compliance work with practical advice. As we prepare your returns we look for legitimate reliefs, allowances and structuring opportunities, and we explain the implications of business decisions before you make them.",
-      "Where a tax authority raises a query or enquiry, we can help prepare responses and supporting information on your behalf.",
-    ],
-    included: [
-      { title: "Corporate Tax", description: "Computation and filing of company tax returns, including provisions and payment planning." },
-      { title: "Personal Tax", description: "Individual returns for directors, sole traders, landlords and high-net-worth individuals." },
-      { title: "VAT / Sales Tax", description: "Registration, periodic returns, reconciliations and advice on indirect tax treatment." },
-      { title: "Tax Registration", description: "Registering new businesses and individuals with the relevant tax authorities." },
-      { title: "Tax Return Preparation", description: "Accurate preparation and submission of returns with a clear summary of liabilities." },
-      { title: "Tax Planning", description: "Forward-looking planning around profit extraction, investment and business changes." },
-      { title: "Tax Compliance", description: "A managed calendar of deadlines, filings and payments so nothing is missed." },
-      { title: "Tax Advisory", description: "Advice on transactions, restructuring, cross-border activity and tax authority queries." },
-    ],
-    idealFor: [
-      "Limited companies and partnerships",
-      "Sole traders and freelancers",
-      "Directors and shareholders",
-      "VAT / sales-tax registered businesses",
-      "Property owners and investors",
-    ],
-    benefits: [
-      { title: "Deadlines managed", description: "A compliance calendar and reminders mean filings and payments are never late." },
-      { title: "Lawful efficiency", description: "We identify reliefs and allowances you are entitled to claim." },
-      { title: "Clear explanations", description: "You'll understand what you owe, why, and when it needs to be paid." },
-    ],
-    deliverables: [
-      "Prepared and filed tax returns",
-      "Tax computation and liability summary",
-      "Annual tax deadline calendar",
-      "Written planning recommendations where relevant",
-    ],
-    faqs: [
-      {
-        question: "Can you take over our tax filings mid-year?",
-        answer:
-          "Yes. We review prior filings and current records, confirm upcoming deadlines and take over from the next available filing period.",
-      },
-      {
-        question: "Do you help with VAT / sales tax registration?",
-        answer:
-          "Yes. We assess whether and when registration is required, handle the registration process and can prepare your ongoing periodic returns.",
-      },
-      {
-        question: "Do you provide tax advice for individuals as well as companies?",
-        answer:
-          "Yes. We prepare personal tax returns and advise directors, shareholders, sole traders and individuals with rental or investment income.",
-      },
-    ],
-    related: ["accounting-bookkeeping", "company-formation", "business-advisory"],
-  },
-  {
     slug: "accounting-bookkeeping",
     title: "Accounting & Bookkeeping",
     shortTitle: "Accounting",
     illustration: "accounting",
     image: "accountingDocuments",
-    summary: "Accurate books, timely reconciliations and clear financial statements you can actually use.",
-    headline: "Accounting & Bookkeeping That Keeps You in Control",
+    summary: "Complete monthly and yearly accounting — accurate books, reconciled accounts and year-end accounts filed on time.",
+    headline: "Accounting & Bookkeeping That Takes the Headache Away",
     intro:
-      "Reliable day-to-day bookkeeping, month-end reporting and year-end accounts — so you always know where your business stands and your compliance work is simple.",
-    metaTitle: "Accounting & Bookkeeping Services",
+      "Is bookkeeping a headache when all you want to do is run your business? We provide complete monthly and yearly accounting support so your finances stay accurate, compliant and stress-free.",
+    metaTitle: "Accounting & Bookkeeping Services for UK Small Businesses",
     metaDescription:
-      "Monthly bookkeeping, bank reconciliation, accounts payable and receivable, management accounts, annual accounts and financial statements for growing businesses.",
+      "Monthly bookkeeping, bank reconciliations, expense schedules, debtor and creditor reconciliations and year-end accounts for UK small businesses, sole traders and limited companies.",
     overview: [
-      "Good decisions depend on accurate, up-to-date numbers. We take care of the routine recording, reconciling and reporting so that your books are always current and your year-end is straightforward.",
-      "We work with your existing accounting software or help you move to a cloud platform, and agree a monthly routine that fits the volume and complexity of your transactions.",
-      "Each month you receive clear reports and a short commentary, not just a set of numbers.",
+      "Running a business is already challenging — your accounting shouldn't be. We take care of the routine recording, reconciling and reporting so your books are always current and your year-end is straightforward.",
+      "We work in Xero, QuickBooks and other popular packages, and agree a simple monthly routine for sending us your documents. Your records are kept Making Tax Digital-ready, so VAT and tax returns flow straight from your books.",
+      "At year end we prepare your annual accounts, file them with Companies House where required and use them for your Corporation Tax or Self Assessment return — all handled by your dedicated accountant.",
     ],
     included: [
-      { title: "Bookkeeping", description: "Recording sales, purchases, expenses and receipts in your accounting system." },
-      { title: "Annual Accounts", description: "Year-end financial statements prepared in line with the applicable framework." },
-      { title: "Management Accounts", description: "Monthly or quarterly profit and loss, balance sheet and KPI reporting." },
-      { title: "Financial Statements", description: "Presentation-ready statements for owners, lenders and investors." },
-      { title: "Bank Reconciliation", description: "Regular matching of bank and card transactions to the ledger." },
-      { title: "Accounts Payable", description: "Supplier invoice processing, payment scheduling and statement reconciliation." },
-      { title: "Accounts Receivable", description: "Customer invoicing support, credit control reporting and debtor tracking." },
+      { title: "Bookkeeping", description: "Recording sales, purchases, expenses and receipts in your accounting software." },
+      { title: "Bank Reconciliations", description: "Regular matching of bank and card transactions to your ledger." },
+      { title: "Expense Schedules", description: "Organised expense tracking, so every allowable cost is claimed." },
+      { title: "Debtors & Creditors Reconciliation", description: "Monthly reconciliation of what customers owe you and what you owe suppliers." },
+      { title: "Annual Accounts", description: "Year-end statutory accounts prepared and filed with Companies House." },
+      { title: "Sole Trader & Partnership Accounts", description: "Clear year-end accounts that feed straight into your tax return." },
+      { title: "Catch-Up Bookkeeping", description: "Bringing late or incomplete records up to date, then onto a monthly routine." },
     ],
     idealFor: [
-      "Startups building their first finance function",
-      "SMEs without an in-house accountant",
-      "Businesses with a growing transaction volume",
-      "Owners who want monthly visibility",
+      "Small businesses without an in-house bookkeeper",
+      "Limited companies, sole traders and partnerships",
+      "Amazon, eBay and e-commerce sellers",
+      "Startups setting up their first finance routine",
+      "Businesses whose books have fallen behind",
     ],
     benefits: [
-      { title: "Always up to date", description: "Books reconciled monthly, so reports reflect reality." },
+      { title: "Always up to date", description: "Books reconciled monthly, so your numbers reflect reality." },
       { title: "Easier year-end", description: "Clean records reduce accounts preparation time and cost." },
-      { title: "Better decisions", description: "Management accounts show margins, trends and cash position." },
+      { title: "Better decisions", description: "Know your profit, cash and tax position at any point in the year." },
     ],
     deliverables: [
-      "Reconciled ledgers and bank accounts",
-      "Monthly or quarterly management accounts",
+      "Reconciled bank accounts and ledgers",
       "Aged debtor and creditor reports",
-      "Year-end financial statements",
+      "Year-end statutory accounts",
+      "Companies House filing where applicable",
     ],
     faqs: [
       {
@@ -224,112 +97,348 @@ export const services: Service[] = [
       },
       {
         question: "Which accounting software do you work with?",
-        answer:
-          "We work with the major cloud and desktop accounting platforms and can advise on the right one for your business if you are starting out or migrating.",
+        answer: "We work with Xero, QuickBooks Online and other popular cloud packages, and can help you choose and set one up if you are starting out.",
       },
       {
         question: "Our books are behind. Can you help us catch up?",
-        answer:
-          "Yes. We can bring historic records up to date, reconcile accounts and then move you onto a regular monthly routine.",
+        answer: "Yes. We can bring historic records up to date, reconcile your accounts and then move you onto a regular monthly routine.",
       },
     ],
-    related: ["taxation", "payroll", "cloud-accounting"],
+    related: ["vat-services", "taxation", "cloud-accounting"],
   },
   {
-    slug: "payroll",
-    title: "Payroll",
-    shortTitle: "Payroll",
-    illustration: "payroll",
-    image: "payrollTeam",
-    summary: "Accurate, confidential payroll processing with the reporting and compliance support to match.",
-    headline: "Accurate, Confidential Payroll — Every Pay Run",
+    slug: "vat-services",
+    title: "VAT Registration & Returns",
+    shortTitle: "VAT",
+    illustration: "vat",
+    image: "auditDocumentReview",
+    summary: "VAT registration, Making Tax Digital returns and scheme advice — accurate and always on time.",
+    headline: "VAT Registration & Making Tax Digital Returns",
     intro:
-      "We process payroll accurately and on schedule, keep employee records secure and handle the statutory reporting that comes with employing people.",
-    metaTitle: "Payroll Services",
+      "From deciding when to register to filing every quarterly return through Making Tax Digital software, we handle your VAT so you stay compliant with HMRC and never pay more than you should.",
+    metaTitle: "VAT Registration & VAT Returns (Making Tax Digital)",
     metaDescription:
-      "Outsourced payroll processing, payslips, employee records, payroll reporting and payroll compliance support for businesses of all sizes.",
+      "VAT registration, quarterly MTD VAT returns, VAT scheme advice, e-commerce and Amazon seller VAT and HMRC correspondence for UK businesses.",
     overview: [
-      "Payroll has to be right every time. Mistakes affect your people directly and can lead to penalties from the authorities. Outsourcing payroll gives you accuracy, confidentiality and one less monthly task.",
-      "We handle weekly, fortnightly or monthly pay runs, starters and leavers, deductions and statutory filings, and provide reports that feed straight into your accounts.",
-      "Payroll information is handled on a strict need-to-know basis using secure systems.",
+      "VAT is one of the easiest places for a small business to make costly mistakes. You must register once your taxable turnover passes the VAT threshold, keep digital records and file returns through Making Tax Digital-compatible software.",
+      "We monitor your turnover against the threshold, handle the registration with HMRC and then prepare and submit your returns from your books, checking that every claim is supported and every sale is treated correctly.",
+      "We also advise on whether the Flat Rate, Cash Accounting or Annual Accounting schemes could save you time or money, and on the VAT rules that apply to online and marketplace sellers.",
     ],
     included: [
-      { title: "Payroll Processing", description: "Calculation of gross-to-net pay, deductions and employer contributions each pay period." },
-      { title: "Payslips", description: "Clear electronic payslips delivered securely to employees." },
-      { title: "Employee Records", description: "Maintenance of starter, leaver and change details in a secure payroll system." },
-      { title: "Payroll Reporting", description: "Payroll journals, cost reports and year-end summaries for your accounts." },
-      { title: "Compliance Support", description: "Statutory submissions and payments calendar for payroll-related obligations." },
+      { title: "VAT Registration", description: "Checking whether and when you need to register, and handling the HMRC registration." },
+      { title: "MTD VAT Returns", description: "Preparing and submitting quarterly or monthly returns through Making Tax Digital software." },
+      { title: "VAT Reconciliations", description: "Reconciling your VAT control account to your returns and payments." },
+      { title: "VAT Scheme Advice", description: "Assessing the Flat Rate, Cash Accounting and Annual Accounting schemes for your business." },
+      { title: "E-commerce VAT", description: "Support for Amazon, eBay and online sellers, including marketplace and import VAT rules." },
+      { title: "HMRC Correspondence", description: "Dealing with HMRC VAT queries and checks on your behalf." },
+      { title: "VAT Deregistration", description: "Cancelling your VAT registration when it is no longer needed." },
     ],
     idealFor: [
-      "Businesses hiring their first employees",
-      "Growing teams with changing headcount",
-      "Companies wanting payroll kept confidential from internal staff",
-      "Employers with multiple pay frequencies",
+      "Businesses approaching the VAT registration threshold",
+      "VAT-registered small businesses and limited companies",
+      "Amazon, eBay and e-commerce sellers",
+      "Owners who want returns filed without the stress",
     ],
     benefits: [
-      { title: "On time, every time", description: "A fixed payroll calendar with clear cut-off dates." },
-      { title: "Confidentiality", description: "Salary information stays with a small, professional team." },
-      { title: "Compliance handled", description: "Statutory reports and deadlines are tracked for you." },
+      { title: "Never miss a deadline", description: "Returns prepared ahead of HMRC's filing and payment dates." },
+      { title: "Fully MTD-compliant", description: "Digital records and submissions that meet Making Tax Digital rules." },
+      { title: "Pay the right amount", description: "Correct treatment of sales and purchases, and the right scheme for you." },
     ],
-    deliverables: [
-      "Payslips for every employee",
-      "Payroll summary and journal each period",
-      "Statutory submissions and payment schedule",
-      "Year-end payroll reports",
-    ],
+    deliverables: ["HMRC VAT registration", "Filed MTD VAT returns", "VAT reconciliation for each period", "VAT payment reminders"],
     faqs: [
       {
-        question: "Do you offer payroll services for small teams?",
-        answer: "Yes. We run payroll for businesses with one employee through to larger teams, with pricing based on headcount and pay frequency.",
+        question: "When do I need to register for VAT?",
+        answer:
+          "You must register if your VAT-taxable turnover for the previous 12 months goes over the registration threshold (£90,000 from 1 April 2024), or if you expect to go over it in the next 30 days alone. You can also register voluntarily below the threshold. We'll check your position and handle the registration.",
       },
       {
-        question: "How do we send you changes each month?",
-        answer: "We agree a monthly cut-off date and a simple, secure way to send starters, leavers, overtime and other changes.",
+        question: "When are VAT returns due?",
+        answer:
+          "Most businesses file quarterly. The return and payment are normally due one calendar month and seven days after the end of each VAT period. We prepare your return in good time and remind you of the payment date.",
+      },
+      {
+        question: "Do you help Amazon and eBay sellers with VAT?",
+        answer:
+          "Yes. We work with online and marketplace sellers on VAT registration, returns and the rules on marketplace-collected VAT, so your figures match your sales reports.",
       },
     ],
     related: ["accounting-bookkeeping", "taxation", "cloud-accounting"],
   },
   {
-    slug: "business-advisory",
-    title: "Business Advisory",
-    shortTitle: "Advisory",
-    illustration: "advisory",
-    image: "advisoryPlanning",
-    summary: "Planning, budgeting and financial analysis that turn your numbers into better decisions.",
-    headline: "Business Advisory for Confident Growth",
+    slug: "taxation",
+    title: "Tax Returns & Planning",
+    shortTitle: "Tax",
+    illustration: "tax",
+    image: "taxForms",
+    summary: "Self Assessment, Corporation Tax and tax planning — filed accurately and on time with HMRC.",
+    headline: "Tax Returns & Tax Planning Without the Stress",
     intro:
-      "Practical, numbers-led advice on planning, budgeting, forecasting and cash flow — helping owners make informed decisions about where to take the business next.",
-    metaTitle: "Business Advisory Services",
+      "We prepare and file your Self Assessment and Corporation Tax returns, keep track of every HMRC deadline and review your affairs regularly to make sure you claim every relief you're entitled to.",
+    metaTitle: "Tax Returns — Self Assessment, Corporation Tax & Tax Planning",
     metaDescription:
-      "Business planning, budgeting, forecasting, financial analysis, cash flow management and growth advisory for owner-managed businesses.",
+      "Self Assessment tax returns, Corporation Tax returns, tax planning, Making Tax Digital for Income Tax and HMRC enquiry support for UK individuals, sole traders and limited companies.",
     overview: [
-      "Every business reaches points where the decisions get bigger: hiring, expanding, raising finance, launching a new product or entering a new market. Our advisory service gives you a financially grounded view before you commit.",
-      "We start with your goals, then build the budgets, forecasts and analysis needed to test them. The result is a plan you understand and can measure progress against.",
+      "Tax rules change frequently, and getting them wrong means penalties, interest and time spent dealing with HMRC. We keep track of your deadlines and the latest rules so you don't have to.",
+      "As we prepare your returns we look for legitimate reliefs and allowances, and explain the tax impact of decisions — like how to take money out of your company — before you make them.",
+      "Making Tax Digital for Income Tax now applies to many sole traders and landlords, with quarterly updates to HMRC. We can set up the right software and handle the submissions for you.",
     ],
     included: [
-      { title: "Business Planning", description: "Structured business plans with financial projections for lenders, investors or internal use." },
-      { title: "Budgeting", description: "Annual budgets built with your team and tracked against actual results." },
-      { title: "Forecasting", description: "Rolling profit, balance sheet and cash forecasts with scenario analysis." },
-      { title: "Financial Analysis", description: "Margin, cost and profitability analysis by product, customer or location." },
-      { title: "Business Growth Advisory", description: "Advice on pricing, expansion, funding options and operational efficiency." },
-      { title: "Cash Flow Management", description: "Working-capital review and practical steps to improve cash conversion." },
+      { title: "Self Assessment", description: "Personal tax returns for sole traders, directors, landlords and individuals." },
+      { title: "Corporation Tax", description: "Company tax computations and CT600 returns, with payment planning." },
+      { title: "Tax Planning", description: "Planning around profit extraction, salary and dividends, investment and business changes." },
+      { title: "Tax Efficiency Reviews", description: "Regular reviews to ensure your business runs in the most tax-efficient way." },
+      { title: "MTD for Income Tax", description: "Software setup and quarterly updates for sole traders and landlords within scope." },
+      { title: "Capital Gains Tax", description: "Calculations and reporting on the sale of property, shares and business assets." },
+      { title: "HMRC Enquiries", description: "Help responding to HMRC questions, checks and compliance enquiries." },
     ],
     idealFor: [
-      "Owner-managed businesses planning growth",
-      "Companies preparing to raise finance",
-      "Businesses facing cash flow pressure",
-      "Management teams wanting clearer KPIs",
+      "Limited companies and their directors",
+      "Sole traders and freelancers",
+      "Landlords with rental income",
+      "Individuals with untaxed or investment income",
     ],
     benefits: [
-      { title: "Clarity", description: "Understand the financial impact of decisions before you make them." },
-      { title: "Accountability", description: "Budgets and KPIs give a clear measure of progress." },
-      { title: "Resilience", description: "Scenario planning prepares you for both upside and downside." },
+      { title: "Deadlines managed", description: "Reminders mean returns and payments are never late." },
+      { title: "Lawful efficiency", description: "We identify reliefs and allowances you are entitled to claim." },
+      { title: "Clear explanations", description: "You'll understand what you owe, why, and when it needs to be paid." },
     ],
-    deliverables: ["Business plan and financial model", "Annual budget", "Cash flow forecast", "Advisory report with recommendations"],
+    deliverables: ["Filed Self Assessment or Corporation Tax return", "Tax computation and liability summary", "Payment and deadline reminders", "Written planning recommendations where relevant"],
     faqs: [
       {
-        question: "Is business advisory only for large companies?",
-        answer: "No. Most of our advisory work is with small and medium-sized, owner-managed businesses where clear financial insight makes a big difference.",
+        question: "When is the Self Assessment deadline?",
+        answer:
+          "Online Self Assessment returns and any tax owed are due by 31 January following the end of the tax year (which ends on 5 April). We aim to file well before the deadline so you know your bill in advance.",
+      },
+      {
+        question: "Can you take over our tax filings mid-year?",
+        answer: "Yes. We review your previous returns and current records, confirm upcoming deadlines and take over from the next filing.",
+      },
+      {
+        question: "Does Making Tax Digital for Income Tax apply to me?",
+        answer:
+          "It applies to sole traders and landlords whose qualifying income is above HMRC's thresholds, which are being phased in from April 2026. We'll check whether you are in scope and when, and set you up with compatible software.",
+      },
+    ],
+    related: ["accounting-bookkeeping", "vat-services", "business-advisory"],
+  },
+  {
+    slug: "payroll",
+    title: "Payroll Services",
+    shortTitle: "Payroll",
+    illustration: "payroll",
+    image: "payrollTeam",
+    summary: "Accurate PAYE payroll, payslips, RTI submissions and pension auto-enrolment — every pay run.",
+    headline: "Accurate, Confidential Payroll — Every Pay Run",
+    intro:
+      "We run your payroll accurately and on schedule, submit Real Time Information to HMRC and handle workplace pension duties, so your team is paid correctly and you stay compliant.",
+    metaTitle: "Payroll Services — PAYE, RTI & Auto-Enrolment",
+    metaDescription:
+      "Outsourced UK payroll: PAYE calculations, payslips, RTI submissions to HMRC, workplace pension auto-enrolment, P60s and P11Ds, and CIS returns.",
+    overview: [
+      "Payroll has to be right every time. Mistakes affect your people directly and can lead to HMRC penalties. Outsourcing payroll gives you accuracy, confidentiality and one less monthly task.",
+      "We handle weekly, fortnightly or monthly pay runs, starters and leavers, statutory pay, PAYE and National Insurance, and the Full Payment Submissions HMRC needs on or before each payday.",
+      "We also manage workplace pension auto-enrolment and year-end forms, and can file monthly CIS returns for construction businesses.",
+    ],
+    included: [
+      { title: "Payroll Processing", description: "PAYE tax, National Insurance, student loans and statutory pay calculated each period." },
+      { title: "Payslips", description: "Clear electronic payslips delivered securely to employees." },
+      { title: "RTI Submissions", description: "Full Payment and Employer Payment Submissions filed with HMRC on time." },
+      { title: "Pension Auto-Enrolment", description: "Assessing staff, calculating contributions and handling pension duties." },
+      { title: "Year-End Forms", description: "P60s, P45s and P11D benefits reporting." },
+      { title: "CIS Returns", description: "Monthly Construction Industry Scheme returns and subcontractor verification." },
+    ],
+    idealFor: [
+      "Businesses hiring their first employees",
+      "Directors running a payroll for themselves",
+      "Growing teams with changing headcount",
+      "Construction businesses using subcontractors",
+    ],
+    benefits: [
+      { title: "On time, every time", description: "A fixed payroll calendar with clear cut-off dates." },
+      { title: "Confidentiality", description: "Salary information stays with a small, professional team." },
+      { title: "HMRC-compliant", description: "RTI, pension and year-end obligations tracked for you." },
+    ],
+    deliverables: ["Payslips for every employee", "Payroll summary and journal each period", "RTI submissions and PAYE payment schedule", "P60s and year-end reports"],
+    faqs: [
+      {
+        question: "Do you offer payroll for small teams?",
+        answer: "Yes. We run payroll for one-person director payrolls through to larger teams, with pricing based on headcount and pay frequency.",
+      },
+      {
+        question: "Do you handle workplace pensions?",
+        answer: "Yes. We assess employees for auto-enrolment, calculate contributions and help you meet your ongoing duties with your pension provider.",
+      },
+    ],
+    related: ["accounting-bookkeeping", "taxation", "cloud-accounting"],
+  },
+  {
+    slug: "company-formation",
+    title: "Company Registration & Start-Up",
+    shortTitle: "Company Registration",
+    illustration: "formation",
+    image: "companyFormationCity",
+    summary: "Register your UK company and start right — Companies House, HMRC registrations and accounting set up for you.",
+    headline: "Register a Company in the UK and Start on the Right Footing",
+    intro:
+      "Want to register a company in the UK? We help you choose the right structure, form your company with Companies House and set up your HMRC registrations and accounting from day one.",
+    metaTitle: "Company Registration & Business Start-Up Support (UK)",
+    metaDescription:
+      "UK company registration with Companies House, HMRC registrations for Corporation Tax, PAYE and VAT, accounting setup and start-up advice for new businesses.",
+    overview: [
+      "The decisions you make at the start — sole trader or limited company, share structure, registrations and accounting setup — have long-term tax and legal consequences. Getting them right early saves time and money later.",
+      "We guide you through each step, prepare and file your incorporation with Companies House, register you with HMRC for the taxes that apply and set up your bookkeeping, so you can start trading with confidence.",
+      "You'll also get a clear first-year calendar covering your confirmation statement, accounts, Corporation Tax and any VAT or payroll deadlines.",
+    ],
+    included: [
+      { title: "Company Formation", description: "Incorporating your private limited company with Companies House." },
+      { title: "Structure Advice", description: "Sole trader, partnership or limited company — advice on what suits your plans." },
+      { title: "HMRC Registrations", description: "Corporation Tax, Self Assessment, PAYE and VAT registrations where required." },
+      { title: "Accounting Setup", description: "Xero or QuickBooks set up with bank feeds from day one." },
+      { title: "Compliance Calendar", description: "Your first-year Companies House and HMRC deadlines, all in one place." },
+    ],
+    idealFor: ["First-time founders", "Sole traders moving to a limited company", "Overseas founders starting a UK company", "Amazon and e-commerce sellers launching a business"],
+    benefits: [
+      { title: "Right structure", description: "Advice on the structure that suits your plans and tax position." },
+      { title: "Faster setup", description: "Registrations and accounting prepared in one coordinated process." },
+      { title: "Compliant from day one", description: "A clear list of obligations and deadlines from the start." },
+    ],
+    deliverables: ["Certificate of incorporation", "HMRC registration confirmations", "Accounting software setup", "First-year compliance calendar"],
+    faqs: [
+      {
+        question: "Can you register a UK limited company for me?",
+        answer:
+          "Yes. We advise on structure, prepare and file the incorporation with Companies House, arrange your HMRC registrations and set up your accounting so you can start trading.",
+      },
+      {
+        question: "What information do you need to register a company?",
+        answer:
+          "Typically the proposed company name, registered office address, details of directors and shareholders (who will also need to verify their identity with Companies House), the share structure and the business activity.",
+      },
+    ],
+    related: ["accounting-bookkeeping", "taxation", "business-advisory"],
+  },
+  {
+    slug: "cfo-services",
+    title: "Management Accounts & Remote Finance Director",
+    shortTitle: "Management Accounts",
+    illustration: "cfo",
+    image: "cfoDashboard",
+    summary: "Monthly management accounts and part-time finance director support — senior insight without a full-time hire.",
+    headline: "Management Accounts & Remote Finance Director",
+    intro:
+      "Making decisions with the right, real-time information is key to growth. We provide monthly or quarterly management accounts and remote finance director support to help you increase profits and improve cash flow.",
+    metaTitle: "Management Accounts & Remote Finance Director Services",
+    metaDescription:
+      "Monthly and quarterly management accounts, KPI reporting, cash flow forecasting and remote finance director support for growing UK businesses.",
+    overview: [
+      "Getting the right information about your business is key to helping it grow. Management accounts show you profit, margins and cash month by month, not just once a year.",
+      "Our remote finance director service gives you senior financial guidance on a flexible basis — when there's a lot on the line, we help you stay compliant, reduce risk and plan ahead.",
+    ],
+    included: [
+      { title: "Management Accounts", description: "Monthly or quarterly profit and loss, balance sheet and commentary." },
+      { title: "Remote Finance Director", description: "Part-time senior finance support tailored to your stage and needs." },
+      { title: "KPI Reporting", description: "The metrics that drive your business, tracked and explained." },
+      { title: "Cash Flow Forecasting", description: "Rolling cash forecasts so you can plan ahead with confidence." },
+      { title: "Budgeting", description: "Annual budgets tracked against actual results." },
+    ],
+    idealFor: ["Growing small and medium-sized businesses", "Owners who need a finance sounding board", "Businesses preparing for finance or investment", "Companies between finance hires"],
+    benefits: [
+      { title: "Real-time insight", description: "Up-to-date numbers for smarter, faster decisions." },
+      { title: "Senior expertise", description: "Finance director experience at a fraction of a full-time cost." },
+      { title: "Flexible", description: "Scale support up or down as your business changes." },
+    ],
+    deliverables: ["Monthly or quarterly management accounts", "KPI dashboard", "Rolling cash flow forecast", "Annual budget"],
+    faqs: [
+      {
+        question: "How often will I receive management accounts?",
+        answer: "Monthly or quarterly — whichever suits your business. Each pack includes a short commentary on what the numbers mean.",
+      },
+      {
+        question: "Do you work with our existing bookkeeper?",
+        answer: "Yes. We can review and support an in-house bookkeeper, or combine management reporting with our own bookkeeping service.",
+      },
+    ],
+    related: ["business-advisory", "accounting-bookkeeping", "cloud-accounting"],
+  },
+  {
+    slug: "cloud-accounting",
+    title: "Xero & QuickBooks Accounting",
+    shortTitle: "Cloud Accounting",
+    illustration: "cloud",
+    image: "cloudAnalytics",
+    summary: "The right accounting software, set up properly — Xero, QuickBooks Online, bank feeds and automation.",
+    headline: "Xero & QuickBooks Setup, Migration and Support",
+    intro:
+      "It's important to choose software that meets your business's needs. We help you pick, set up and get the most from Xero or QuickBooks Online, so your records are accurate and Making Tax Digital-ready.",
+    metaTitle: "Xero & QuickBooks Accountants — Cloud Accounting Setup",
+    metaDescription:
+      "Xero and QuickBooks Online setup, migration, bank feeds, receipt capture, e-commerce integrations and training for UK small businesses.",
+    overview: [
+      "Cloud accounting gives you real-time numbers, secure access from anywhere and far less manual work — but only with a good setup: the right chart of accounts, sensible bank rules and clean opening balances.",
+      "We handle software selection, migration and configuration, connect bank feeds and apps such as Amazon, eBay, Shopify and payment providers, and show you how to use the system day to day.",
+    ],
+    included: [
+      { title: "QuickBooks Online", description: "Setup, clean-up and ongoing bookkeeping in QuickBooks." },
+      { title: "Xero", description: "Setup, migration and ongoing bookkeeping in Xero." },
+      { title: "Bank Feeds & Rules", description: "Automated bank and credit card feeds with rules to cut manual entry." },
+      { title: "Receipt Capture", description: "Paperless expense capture with secure document storage." },
+      { title: "E-commerce Integrations", description: "Connecting marketplaces, online stores and payment platforms to your ledger." },
+      { title: "Training", description: "Practical training so you and your team use the software with confidence." },
+    ],
+    idealFor: ["Businesses still using spreadsheets or desktop software", "Amazon, eBay and multi-channel sellers", "Businesses that need to be MTD-ready", "Owners who want real-time reporting"],
+    benefits: [
+      { title: "Real-time visibility", description: "See your financial position whenever you need it." },
+      { title: "Less manual work", description: "Automation removes repetitive data entry and errors." },
+      { title: "MTD-ready", description: "Digital records that meet HMRC's Making Tax Digital requirements." },
+    ],
+    deliverables: ["Configured Xero or QuickBooks account", "Migrated opening balances", "Connected bank feeds and apps", "Training session"],
+    faqs: [
+      {
+        question: "Should I use Xero or QuickBooks?",
+        answer: "Both are excellent and both are Making Tax Digital-compatible. We'll recommend one based on how you trade, the apps you use and your budget.",
+      },
+      {
+        question: "Will moving software disrupt my business?",
+        answer: "We plan migrations around a period-end cut-over date and check opening balances, so day-to-day trading carries on smoothly.",
+      },
+    ],
+    related: ["accounting-bookkeeping", "vat-services", "payroll"],
+  },
+  {
+    slug: "business-advisory",
+    title: "Finance & Business Consulting",
+    shortTitle: "Consulting",
+    illustration: "advisory",
+    image: "advisoryPlanning",
+    summary: "Financial analysis, business planning and profit growth advice that turn your numbers into better decisions.",
+    headline: "Finance & Business Consulting for Confident Growth",
+    intro:
+      "Expert financial guidance when there's a lot on the line. We help owners analyse performance, plan ahead and grow profit — with clear, practical advice.",
+    metaTitle: "Finance & Business Consulting",
+    metaDescription:
+      "Financial analysis, profit growth analysis, business planning, budgeting, cash flow management and growth advice for UK small businesses and startups.",
+    overview: [
+      "Every business reaches points where the decisions get bigger: hiring, expanding, raising finance or launching something new. Our consulting gives you a financially grounded view before you commit.",
+      "We start with your goals, then build the analysis, plans and forecasts needed to test them — so you have a plan you understand and can measure progress against.",
+    ],
+    included: [
+      { title: "Financial Analysis", description: "A clear analysis of your company's finances, margins and costs." },
+      { title: "Profit Growth Analysis", description: "Finding where profit is made and lost — by product, customer or channel." },
+      { title: "Business Planning", description: "Business plans with financial projections for lenders, investors or your own use." },
+      { title: "Receivables & Payables Control", description: "Tighter credit control and supplier management to protect cash." },
+      { title: "Cash Flow Management", description: "Practical steps to improve cash flow and working capital." },
+    ],
+    idealFor: ["Owner-managed businesses planning growth", "Startups preparing to raise finance", "Businesses facing cash flow pressure", "Owners wanting clearer numbers"],
+    benefits: [
+      { title: "Clarity", description: "Understand the financial impact of decisions before you make them." },
+      { title: "Stronger cash flow", description: "Better control of receivables and payables." },
+      { title: "Growth", description: "A clear, measurable plan for increasing profit." },
+    ],
+    deliverables: ["Financial analysis report", "Business plan and projections", "Cash flow forecast", "Recommendations and action plan"],
+    faqs: [
+      {
+        question: "Is business consulting only for larger companies?",
+        answer: "No. Most of our consulting work is with small, owner-managed businesses, where clear financial insight makes the biggest difference.",
       },
       {
         question: "Can you help us prepare for a bank or investor meeting?",
@@ -337,138 +446,6 @@ export const services: Service[] = [
       },
     ],
     related: ["cfo-services", "accounting-bookkeeping", "company-formation"],
-  },
-  {
-    slug: "company-formation",
-    title: "Company Formation",
-    shortTitle: "Formation",
-    illustration: "formation",
-    image: "companyFormationCity",
-    summary: "Start on the right footing — registration, tax setup and compliance foundations handled for you.",
-    headline: "Company Formation & Startup Setup",
-    intro:
-      "We help founders choose the right structure, register the business and put tax, accounting and compliance foundations in place from day one.",
-    metaTitle: "Company Formation & Business Registration",
-    metaDescription:
-      "Business registration, company formation, tax registration, compliance setup and startup advisory for new businesses and founders.",
-    overview: [
-      "The decisions made at formation — legal structure, share arrangements, registrations and accounting setup — have long-term consequences. Getting them right early saves time and cost later.",
-      "We guide you through each step, prepare and file the registration documents, set up your tax registrations and accounting system, and give you a clear compliance calendar for the first year.",
-    ],
-    included: [
-      { title: "Business Registration", description: "Registration with the relevant company or business registry." },
-      { title: "Company Formation", description: "Preparation of incorporation documents and initial statutory records." },
-      { title: "Tax Registration", description: "Registration for applicable taxes, including VAT / sales tax where required." },
-      { title: "Compliance Setup", description: "First-year compliance calendar covering filings and deadlines." },
-      { title: "Startup Advisory", description: "Guidance on structure, founder remuneration and early financial planning." },
-    ],
-    idealFor: ["First-time founders", "Sole traders moving to a company structure", "Overseas businesses establishing a local entity", "Joint ventures and new subsidiaries"],
-    benefits: [
-      { title: "Right structure", description: "Advice on the structure that suits your plans and risk profile." },
-      { title: "Faster setup", description: "Registrations and accounting prepared in one coordinated process." },
-      { title: "Compliant from day one", description: "A clear list of obligations and deadlines from the start." },
-    ],
-    deliverables: ["Registration documents", "Tax registration confirmations", "Accounting system setup", "First-year compliance calendar"],
-    faqs: [
-      {
-        question: "Can you help with company formation?",
-        answer:
-          "Yes. We advise on structure, prepare and file the registration, arrange tax registrations and set up your accounting so you can start trading with confidence.",
-      },
-      {
-        question: "What information do you need to register a company?",
-        answer:
-          "Typically the proposed company name, registered address, details of directors and shareholders, share structure and business activity. We confirm the exact requirements for your jurisdiction.",
-      },
-    ],
-    related: ["taxation", "accounting-bookkeeping", "business-advisory"],
-  },
-  {
-    slug: "cfo-services",
-    title: "CFO & Financial Advisory",
-    shortTitle: "CFO Services",
-    illustration: "cfo",
-    image: "cfoDashboard",
-    summary: "Senior financial leadership on a flexible basis — strategy, reporting and KPIs without a full-time hire.",
-    headline: "Virtual CFO & Financial Advisory",
-    intro:
-      "Access senior finance expertise when you need it: strategic planning, board-level reporting, KPI design and cash flow forecasting, without the cost of a full-time CFO.",
-    metaTitle: "Virtual CFO & Financial Advisory Services",
-    metaDescription:
-      "Virtual CFO services including financial strategy, management reporting, KPI analysis, cash flow forecasting and financial planning for growing companies.",
-    overview: [
-      "Growing companies often need CFO-level thinking long before they can justify a full-time CFO. Our virtual CFO service provides that expertise on a flexible basis — a few days a month, or more intensively around key events.",
-      "We work alongside owners and management to set financial strategy, improve reporting, build forecasting models and prepare for funding rounds, acquisitions or board meetings.",
-    ],
-    included: [
-      { title: "Virtual CFO", description: "Part-time senior finance leadership tailored to your stage and needs." },
-      { title: "Financial Strategy", description: "Capital allocation, pricing, funding and long-term financial planning." },
-      { title: "Management Reporting", description: "Board packs and monthly reporting designed around decision-making." },
-      { title: "KPI Analysis", description: "Defining, tracking and interpreting the metrics that drive your business." },
-      { title: "Cash Flow Forecasting", description: "13-week and 12-month cash models with scenario planning." },
-      { title: "Financial Planning", description: "Budgets and multi-year plans aligned with business goals." },
-    ],
-    idealFor: ["Scaling startups and SMEs", "Businesses preparing for investment", "Owners who need a finance sounding board", "Companies between finance hires"],
-    benefits: [
-      { title: "Senior expertise", description: "Experienced financial leadership at a fraction of a full-time cost." },
-      { title: "Investor-ready", description: "Reporting and models that stand up to scrutiny." },
-      { title: "Flexible", description: "Scale involvement up or down as the business changes." },
-    ],
-    deliverables: ["Monthly board or management pack", "KPI dashboard", "Rolling cash flow forecast", "Annual financial plan"],
-    faqs: [
-      {
-        question: "How much time does a virtual CFO spend with us?",
-        answer: "That is agreed up front. Many clients start with a few days per month, increasing around year-end, fundraising or major projects.",
-      },
-      {
-        question: "Do you work with our existing bookkeeper or finance team?",
-        answer: "Yes. We can oversee and support an in-house team, or combine the CFO role with our own accounting service.",
-      },
-    ],
-    related: ["business-advisory", "audit-assurance", "cloud-accounting"],
-  },
-  {
-    slug: "cloud-accounting",
-    title: "Cloud Accounting",
-    shortTitle: "Cloud Accounting",
-    illustration: "cloud",
-    image: "cloudAnalytics",
-    summary: "Modern accounting systems, automation and integrations that save time and improve accuracy.",
-    headline: "Cloud Accounting Setup & Automation",
-    intro:
-      "Move your finance function to the cloud. We select, set up and integrate accounting software and automate routine processes so your team spends less time on data entry.",
-    metaTitle: "Cloud Accounting Setup & Automation",
-    metaDescription:
-      "Cloud accounting system setup, migration, automation, app integrations and digital bookkeeping for modern businesses.",
-    overview: [
-      "Cloud accounting gives you real-time numbers, secure access from anywhere and far less manual processing. The benefits depend on a good setup: the right chart of accounts, sensible integrations and clean opening balances.",
-      "We handle system selection, migration and configuration, connect bank feeds and business apps, and train your team so the new system is adopted properly.",
-    ],
-    included: [
-      { title: "Accounting System Setup", description: "Configuration of chart of accounts, tax settings, users and permissions." },
-      { title: "Data Migration", description: "Transfer of opening balances and history from your previous system." },
-      { title: "Accounting Automation", description: "Bank rules, receipt capture and approval workflows to cut manual work." },
-      { title: "Software Integration", description: "Connecting e-commerce, payments, payroll and CRM tools to your ledger." },
-      { title: "Digital Bookkeeping", description: "Paperless record-keeping with secure document storage." },
-    ],
-    idealFor: ["Businesses still using spreadsheets or desktop software", "E-commerce and multi-channel sellers", "Teams working across multiple locations", "Companies wanting real-time reporting"],
-    benefits: [
-      { title: "Real-time visibility", description: "See your financial position whenever you need it." },
-      { title: "Less manual work", description: "Automation removes repetitive data entry and errors." },
-      { title: "Secure access", description: "Role-based access and cloud backups protect your data." },
-    ],
-    deliverables: ["Configured accounting platform", "Migrated opening balances", "Connected bank feeds and apps", "Team training session"],
-    faqs: [
-      {
-        question: "Will moving to cloud accounting disrupt our business?",
-        answer: "We plan migrations around a period-end cut-over date and run checks on opening balances so day-to-day operations continue smoothly.",
-      },
-      {
-        question: "Is cloud accounting secure?",
-        answer: "Reputable platforms use encryption, access controls and regular backups. We set up user permissions so people only see what they need to.",
-      },
-    ],
-    related: ["accounting-bookkeeping", "payroll", "cfo-services"],
   },
 ];
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Source_Serif_4 } from "next/font/google";
+import { Lexend, Manrope } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { siteUrl } from "@/lib/config-utils";
@@ -15,7 +15,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-serif", display: "swap", weight: ["500", "600", "700"] });
+const heading = Lexend({ subsets: ["latin"], variable: "--font-heading", display: "swap", weight: ["500", "600", "700"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1f3a",
+  themeColor: "#1c1b6b",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={siteConfig.locale} className={`${manrope.variable} ${serif.variable}`} data-scroll-behavior="smooth">
+    <html lang={siteConfig.locale} className={`${manrope.variable} ${heading.variable}`} data-scroll-behavior="smooth">
       <body className="min-h-dvh antialiased">
         <a
           href="#main"

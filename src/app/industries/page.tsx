@@ -14,7 +14,7 @@ import { CtaBand } from "@/components/sections/cta-band";
 export const metadata = buildMetadata({
   title: "Industries We Serve",
   description:
-    "Accounting, audit, tax and advisory services tailored to startups, SMEs, corporations, e-commerce, construction, real estate, healthcare, retail, hospitality, technology, manufacturing, freelancers and nonprofits.",
+    "Accounting, VAT, payroll and tax services tailored to small businesses, startups, e-commerce sellers, sole traders, contractors, construction, landlords, retail, hospitality, healthcare, professional services, technology, freelancers and nonprofits.",
   path: "/industries",
 });
 
@@ -24,7 +24,7 @@ export default function IndustriesPage() {
       <PageHero
         eyebrow="Industries"
         title="Specialist support for your sector"
-        intro="Every industry has its own revenue models, cost structures, regulations and reporting expectations. We tailor our audit, accounting and tax work to fit."
+        intro="Every industry has its own revenue models, cost structures, regulations and reporting expectations. We tailor our accounting, VAT and tax work to fit."
         crumbs={[{ name: "Industries", href: "/industries" }]}
         illustration="formation"
       />

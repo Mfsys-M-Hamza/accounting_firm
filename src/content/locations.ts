@@ -33,13 +33,13 @@ export const locations: LocationPage[] = [
     published: false, // Example only — replace the content, then set to true.
     city: "[CITY]",
     headline: "Accountants in [CITY]",
-    metaDescription: "Audit, tax and accounting services for businesses in [CITY]. [Replace with a unique description.]",
+    metaDescription: "Accounting, VAT and tax services for businesses in [CITY]. [Replace with a unique description.]",
     intro: "[Unique introduction describing the firm's presence and experience in [CITY].]",
     sections: [
       { heading: "Supporting [CITY] businesses", body: "[Describe local industries you serve and how.]" },
       { heading: "Visiting our [CITY] office", body: "[Directions, parking, meeting options.]" },
     ],
-    services: ["accounting-bookkeeping", "taxation", "audit-assurance"],
+    services: ["accounting-bookkeeping", "taxation", "vat-services"],
     faqs: [],
   },
 ];

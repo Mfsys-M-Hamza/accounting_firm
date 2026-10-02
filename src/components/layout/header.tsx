@@ -69,7 +69,7 @@ export function Header() {
       <div
         className={cn(
           "border-b transition-all duration-300",
-          solid ? "border-line bg-white/95 shadow-[0_8px_30px_-12px_rgb(11_31_58/0.18)] backdrop-blur-md" : "border-white/10 bg-transparent",
+          solid ? "border-line bg-white/95 shadow-[0_8px_30px_-12px_rgb(28_27_107/0.18)] backdrop-blur-md" : "border-white/10 bg-transparent",
         )}
       >
         <div className={cn("container-page flex items-center justify-between gap-4 transition-[height] duration-300", scrolled ? "h-16 lg:h-[4.5rem]" : "h-[4.5rem] lg:h-20")}>

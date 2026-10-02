@@ -15,17 +15,18 @@ import { Team } from "@/components/sections/team";
 import { Advantages } from "@/components/sections/advantages";
 import { Testimonials } from "@/components/sections/testimonials";
 import { CtaBand } from "@/components/sections/cta-band";
+import { SocialFeed } from "@/components/sections/social-feed";
 
 export const metadata = buildMetadata({
   title: "About Us",
-  description: `Learn about ${siteConfig.companyName}: our mission, values, professional approach and the team behind our audit, accounting, tax and advisory services.`,
+  description: `Learn about ${siteConfig.companyName}: a UK-based accountancy firm of qualified accountants providing accounting, bookkeeping, VAT, payroll and tax services to small businesses.`,
   path: "/about",
 });
 
 const approach = [
   { title: "Understand", text: "We start by learning how your business works, what you want to achieve and where the risks lie.", illustration: "consultation" as const },
   { title: "Plan", text: "Every engagement has an agreed scope, timetable, fee and named contact — before work begins.", illustration: "reporting" as const },
-  { title: "Deliver", text: "Work is carried out systematically, reviewed by senior professionals and documented to a high standard.", illustration: "audit" as const },
+  { title: "Deliver", text: "Work is carried out systematically, reviewed carefully and filed on time with HMRC and Companies House.", illustration: "audit" as const },
   { title: "Advise", text: "We explain what the numbers mean and recommend practical next steps, not just deliver reports.", illustration: "advisory" as const },
 ];
 
@@ -34,8 +35,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="Professional expertise, personal service"
-        intro={`${siteConfig.companyName} is an audit, accounting, taxation and business advisory firm helping businesses stay compliant, understand their numbers and grow with confidence.`}
+        title="Your trusted partner in financial success"
+        intro={`${siteConfig.companyName} is a UK-based accountancy firm of qualified accountants, helping small businesses grow with accurate accounting, practical advice and stress-free tax.`}
         crumbs={[{ name: "About Us", href: "/about" }]}
         illustration="compliance"
       />
@@ -53,16 +54,16 @@ export default function AboutPage() {
             />
             <Reveal className="space-y-5 text-lg leading-relaxed">
               <p>
-                [Company introduction — describe when and why the firm was founded, where it is based ({siteConfig.contact.address.city}, {siteConfig.contact.address.country}) and
-                the kinds of clients it serves.]
+                Founded in 2021 and headquartered in {siteConfig.contact.address.city}, {siteConfig.companyName} is a UK-based accountancy firm with qualified accountants
+                helping small businesses to grow — offering accounting advice while saving you money on tax, in a very timely manner.
               </p>
               <p>
-                We provide audit and assurance, accounting and bookkeeping, taxation, payroll, business advisory, company formation and CFO services — giving clients a single,
-                coordinated team for all of their financial and compliance needs.
+                We provide accounting and bookkeeping, VAT, Self Assessment and Corporation Tax, payroll, management accounts, company registration and Xero and QuickBooks
+                support — working with sole traders, startups, e-commerce sellers and limited companies across the UK, fully online.
               </p>
               <p>
-                Our professionals combine technical knowledge with a genuine interest in our clients&apos; businesses. We communicate clearly, agree scope and fees up front, and treat
-                every piece of client information with strict confidentiality.
+                Our team is competent, experienced, professional and friendly. With a dedicated accountant looking after you, your accountancy needs are in safe hands and
+                will be completed in a professional and legal way — with clear fees agreed up front and every piece of information kept strictly confidential.
               </p>
             </Reveal>
           </div>
@@ -85,8 +86,7 @@ export default function AboutPage() {
               <IconBadge icon={Compass} tone="gold" size="lg" />
               <h3 className="mt-8 text-3xl font-semibold text-white">Our Mission</h3>
               <p className="mt-4 text-lg leading-relaxed text-white/75">
-                To give every client accurate, compliant and insightful financial support — delivered with integrity, clarity and care — so they can make better decisions
-                and grow with confidence.
+                Empowering businesses with accurate accounting, strategic planning and stress-free tax solutions — because your financial well-being is our priority.
               </p>
             </div>
           </StaggerItem>
@@ -95,8 +95,8 @@ export default function AboutPage() {
               <IconBadge icon={Eye} tone="navy" size="lg" />
               <h3 className="mt-8 text-3xl font-semibold">Our Vision</h3>
               <p className="mt-4 text-lg leading-relaxed text-body">
-                To be the most trusted financial partner for the businesses we serve, recognised for professional excellence, modern ways of working and advice that makes
-                a real difference.
+                To be the trusted partner in financial success for small businesses across the UK, recognised for low-cost, high-quality service, modern online ways of
+                working and advice that makes a real difference.
               </p>
             </div>
           </StaggerItem>
@@ -171,6 +171,17 @@ export default function AboutPage() {
           <Testimonials />
         </Section>
       ) : null}
+
+      {/* Social feed */}
+      <Section labelledBy="social-title">
+        <SectionHeading
+          id="social-title"
+          eyebrow="Follow us"
+          title="Tips, updates and offers from our team"
+          text="See our latest posts on LinkedIn, Instagram and Facebook — and send us a message any time."
+        />
+        <SocialFeed limit={4} />
+      </Section>
 
       <CtaBand title="Let's talk about your business" />
     </>

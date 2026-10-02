@@ -22,6 +22,15 @@ export function mailtoHref(email = siteConfig.contact.email): string | undefined
   return isConfigured(email) ? `mailto:${email}` : undefined;
 }
 
+/** WhatsApp number for display: reuses the formatted phone when it is the same number, else "+<digits>". */
+export function whatsappDisplay(): string {
+  const { whatsapp, phone } = siteConfig.contact;
+  if (!isConfigured(whatsapp)) return whatsapp;
+  const digits = whatsapp.replace(/\D/g, "");
+  if (isConfigured(phone) && phone.replace(/\D/g, "") === digits) return phone;
+  return `+${digits}`;
+}
+
 export function formattedAddress(): string {
   const a = siteConfig.contact.address;
   return [a.street, a.city, a.region, a.postalCode, a.country].filter((v) => v && v.trim()).join(", ");

@@ -1,4 +1,4 @@
-/** Copy blocks shared by the home and about pages. All claims are general and configurable. */
+/** Copy blocks shared by the home and about pages. Messaging adapted from UK Accountax's own LinkedIn/Instagram posts. */
 import type { LucideIcon } from "lucide-react";
 import {
   Award,
@@ -15,27 +15,27 @@ import {
 } from "lucide-react";
 
 export const hero = {
-  eyebrow: "Audit · Tax · Accounting · Advisory",
-  title: "Audit, Tax & Accounting Expertise That Moves Your Business Forward",
-  text: "Professional audit, accounting, taxation and advisory solutions designed to help businesses remain compliant, make informed decisions and grow with confidence.",
+  eyebrow: "Accounting · Bookkeeping · VAT · Tax · Payroll",
+  title: "Your Trusted Partner in Financial Success",
+  text: "UK-based qualified accountants helping small businesses, startups and online sellers keep accurate books, stay HMRC-compliant and save tax — so you can focus on growing your business.",
 };
 
 export const trustIndicators: { label: string; icon: LucideIcon }[] = [
-  { label: "Professional Expertise", icon: Award },
-  { label: "Confidential & Secure", icon: LockKeyhole },
-  { label: "Client-Focused Service", icon: UserRoundCheck },
-  { label: "Compliance Driven", icon: ShieldCheck },
+  { label: "Qualified Accountants", icon: Award },
+  { label: "HMRC Compliant", icon: ShieldCheck },
+  { label: "Fully Online, UK-wide", icon: MonitorSmartphone },
+  { label: "Low-Cost, Clear Fees", icon: BadgeDollarSign },
 ];
 
 export const advantages: { title: string; description: string; icon: LucideIcon }[] = [
-  { title: "Experienced Professionals", description: "Qualified accountants and advisers who understand both the rules and the realities of running a business.", icon: Award },
-  { title: "Personalized Advice", description: "Recommendations based on your goals, sector and stage of growth — not generic templates.", icon: UserRoundCheck },
-  { title: "Transparent Pricing", description: "Clear, agreed fees before work starts, with no surprise bills.", icon: BadgeDollarSign },
-  { title: "Confidential Service", description: "Strict confidentiality and secure handling of every document you share.", icon: LockKeyhole },
-  { title: "Timely Delivery", description: "Agreed timetables and proactive reminders so deadlines are always met.", icon: Clock3 },
-  { title: "Compliance Focus", description: "Work carried out with care against the applicable standards and regulations.", icon: ShieldCheck },
-  { title: "Modern Accounting Solutions", description: "Cloud platforms, automation and digital workflows that save you time.", icon: MonitorSmartphone },
-  { title: "Dedicated Support", description: "A named point of contact who knows your business and responds promptly.", icon: Headset },
+  { title: "Qualified, Experienced Team", description: "Qualified accountants who understand UK tax rules and the realities of running a small business.", icon: Award },
+  { title: "Your Dedicated Accountant", description: "No 'account managers' — a dedicated UK-based accountant who gets to know you and your business in detail.", icon: UserRoundCheck },
+  { title: "Unlimited Expert Advice", description: "Ask questions whenever you need to — by email, phone, WhatsApp or in a meeting.", icon: Headset },
+  { title: "All Filing Included", description: "Annual accounts and the tax returns you need are prepared and submitted for you — no hidden costs.", icon: BadgeDollarSign },
+  { title: "Regular Deadline Reminders", description: "Automated reminders tell you when accounts and returns are due, so you never miss an HMRC or Companies House deadline.", icon: Clock3 },
+  { title: "Tax Efficiency Reviews", description: "Regular reviews to make sure your business runs in the most tax-efficient way, claiming every relief available.", icon: Target },
+  { title: "Real-Time Information", description: "Cloud bookkeeping in Xero and QuickBooks gives you up-to-date numbers for better, faster decisions.", icon: MonitorSmartphone },
+  { title: "Confidential & Secure", description: "Strict confidentiality and secure handling of every document you share with us.", icon: LockKeyhole },
 ];
 
 export const processSteps = [
@@ -45,15 +45,15 @@ export const processSteps = [
   },
   {
     title: "Requirement Assessment",
-    description: "We identify the audit, accounting, tax or advisory services you need and agree a clear scope and fee.",
+    description: "We identify the accounting, VAT, tax or payroll services you need and agree a clear scope and a transparent fee.",
   },
   {
     title: "Professional Execution",
-    description: "Assigned professionals handle the engagement securely and systematically, keeping you informed.",
+    description: "Your dedicated accountant handles the work securely and on time, keeping you informed at every step.",
   },
   {
     title: "Ongoing Support",
-    description: "We provide reporting, compliance assistance and ongoing advisory support where applicable.",
+    description: "Deadline reminders, up-to-date reports and unlimited advice whenever you need it.",
   },
 ];
 

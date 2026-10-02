@@ -10,7 +10,15 @@ import { cn } from "@/lib/config-utils";
 export function Stats({ light = false, className }: { light?: boolean; className?: string }) {
   if (!siteConfig.features.showStatistics) return null;
   return (
-    <Stagger as="ul" className={cn("grid grid-cols-2 gap-px overflow-hidden rounded-3xl lg:grid-cols-4", light ? "bg-white/10" : "bg-line", className)}>
+    <Stagger
+      as="ul"
+      className={cn(
+        "grid gap-px overflow-hidden rounded-3xl",
+        siteConfig.statistics.length === 3 ? "sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4",
+        light ? "bg-white/10" : "bg-line",
+        className,
+      )}
+    >
       {siteConfig.statistics.map((s) => (
         <StaggerItem as="li" key={s.label} className={cn("px-6 py-8 text-center", light ? "bg-navy-900" : "bg-white")}>
           <p className={cn("font-display text-4xl font-semibold sm:text-5xl", light ? "text-white" : "text-navy-900")}>

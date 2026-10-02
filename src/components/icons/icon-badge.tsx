@@ -4,9 +4,9 @@ import { cn } from "@/lib/config-utils";
 type Tone = "navy" | "gold" | "light";
 
 const tones: Record<Tone, string> = {
-  navy: "bg-[linear-gradient(145deg,#35659f_0%,#12305a_55%,#0b1f3a_100%)] text-white shadow-[0_5px_0_#061328,0_14px_24px_-8px_rgb(11_31_58/0.55)]",
-  gold: "bg-[linear-gradient(145deg,#f1d48c_0%,#cfa64c_55%,#a8822f_100%)] text-navy-950 shadow-[0_5px_0_#7a5e1f,0_14px_24px_-8px_rgb(156_122_44/0.55)]",
-  light: "bg-[linear-gradient(145deg,#ffffff_0%,#e6ecf4_100%)] text-navy-800 shadow-[0_5px_0_#b9c6d8,0_14px_24px_-8px_rgb(11_31_58/0.3)]",
+  navy: "bg-[linear-gradient(145deg,#35659f_0%,#12305a_55%,#0b1f3a_100%)] text-white shadow-[0_5px_0_#0c0b36,0_14px_24px_-8px_rgb(28_27_107/0.55)]",
+  gold: "bg-[linear-gradient(145deg,#f1d48c_0%,#cfa64c_55%,#a8822f_100%)] text-navy-950 shadow-[0_5px_0_#0d6e5e,0_14px_24px_-8px_rgb(23_138_119/0.55)]",
+  light: "bg-[linear-gradient(145deg,#ffffff_0%,#e6ecf4_100%)] text-navy-800 shadow-[0_5px_0_#c2c2e0,0_14px_24px_-8px_rgb(28_27_107/0.3)]",
 };
 
 const sizes = {

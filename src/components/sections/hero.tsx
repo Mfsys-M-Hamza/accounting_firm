@@ -73,7 +73,7 @@ export function Hero() {
           {/* Floating 3D cards */}
           <Parallax offset={24} className="absolute -top-6 -left-4 sm:-left-10">
             <div aria-hidden="true" className="animate-float rounded-2xl bg-white/95 p-3 shadow-lift backdrop-blur sm:p-4">
-              <Illustration name="audit" className="size-16 sm:size-20" />
+              <Illustration name="vat" className="size-16 sm:size-20" />
             </div>
           </Parallax>
 
@@ -92,7 +92,7 @@ export function Hero() {
                 </span>
               </div>
               <ul className="mt-3 space-y-2 text-sm font-medium text-ink">
-                {["Books reconciled", "Tax return prepared", "Audit file reviewed"].map((t) => (
+                {["Books reconciled", "Tax return prepared", "VAT return filed"].map((t) => (
                   <li key={t} className="flex items-center gap-2">
                     <CheckCircle2 className="size-4 text-success" aria-hidden="true" />
                     {t}

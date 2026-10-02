@@ -10,6 +10,11 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+// The huge top margin also counts content that is already above the viewport as "in view",
+// so a section skipped by a fast scroll or an anchor jump is revealed instead of staying hidden.
+const REVEAL_MARGIN_80 = "100000px 0px -80px 0px";
+const REVEAL_MARGIN_60 = "100000px 0px -60px 0px";
+
 export function MotionProvider({ children }: { children: ReactNode }) {
   return (
     <LazyMotion features={domAnimation} strict>
@@ -48,7 +53,7 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, ...offsets[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
+      viewport={{ once: true, margin: REVEAL_MARGIN_80 }}
       transition={{ duration: 0.7, delay, ease }}
     >
       {children}
@@ -64,7 +69,7 @@ export function Stagger({ children, className, gap = 0.08, as = "div" }: { child
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+      viewport={{ once: true, margin: REVEAL_MARGIN_60 }}
       variants={{ hidden: {}, show: { transition: { staggerChildren: gap } } }}
     >
       {children}

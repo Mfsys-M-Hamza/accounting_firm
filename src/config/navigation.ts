@@ -15,18 +15,17 @@ export const mainNav: NavItem[] = [
 export const footerNav = {
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Our Team", href: "/about#team" },
     { label: "Industries", href: "/industries" },
     { label: "Contact", href: "/contact" },
     { label: "Book a Consultation", href: "/book-consultation" },
   ],
   services: [
-    { label: "Audit & Assurance", href: "/services/audit-assurance" },
-    { label: "Accounting", href: "/services/accounting-bookkeeping" },
-    { label: "Taxation", href: "/services/taxation" },
-    { label: "Bookkeeping", href: "/services/accounting-bookkeeping#included" },
+    { label: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
+    { label: "VAT Returns", href: "/services/vat-services" },
+    { label: "Tax Returns", href: "/services/taxation" },
     { label: "Payroll", href: "/services/payroll" },
-    { label: "Business Advisory", href: "/services/business-advisory" },
+    { label: "Company Registration", href: "/services/company-formation" },
+    { label: "Xero & QuickBooks", href: "/services/cloud-accounting" },
   ],
   resources: [
     { label: "Blog & Guides", href: "/resources" },

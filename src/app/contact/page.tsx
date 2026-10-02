@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from "react";
 import { CalendarCheck, Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
-import { formattedAddress, isConfigured, mailtoHref, telHref } from "@/lib/config-utils";
+import { formattedAddress, isConfigured, mailtoHref, telHref, whatsappDisplay } from "@/lib/config-utils";
 import { generalWhatsappUrl } from "@/lib/whatsapp";
 import { PageHero } from "@/components/ui/page-hero";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -14,14 +14,14 @@ import { Illustration } from "@/components/icons/illustrations";
 
 export const metadata = buildMetadata({
   title: "Contact Us",
-  description: `Contact ${siteConfig.companyName} for audit, accounting, tax and advisory services. Call, email, WhatsApp or send us a message online.`,
+  description: `Contact ${siteConfig.companyName} for accounting, bookkeeping, VAT, payroll and tax services. Call, email, WhatsApp or send us a message online.`,
   path: "/contact",
 });
 
 function InfoCard({ icon: Icon, title, href, external, children }: { icon: ComponentType<{ className?: string }>; title: string; href?: string; external?: boolean; children: ReactNode }) {
   const body = (
     <>
-      <span className="flex size-12 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#35659f,#0b1f3a)] text-gold-400 shadow-[0_4px_0_#061328]">
+      <span className="flex size-12 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#5a58d0,#1c1b6b)] text-gold-400 shadow-[0_4px_0_#0c0b36]">
         <Icon className="size-5" />
       </span>
       <h2 className="mt-5 font-sans text-sm font-bold tracking-[0.14em] text-muted uppercase">{title}</h2>
@@ -67,7 +67,7 @@ export default function ContactPage() {
           </StaggerItem>
           <StaggerItem>
             <InfoCard icon={WhatsAppIcon} title="WhatsApp" href={generalWhatsappUrl()} external>
-              {contact.whatsapp}
+              {whatsappDisplay()}
             </InfoCard>
           </StaggerItem>
           <StaggerItem>

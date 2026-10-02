@@ -8,17 +8,17 @@ export const faqs: FaqItem[] = [
   {
     question: "What accounting services do you provide?",
     answer:
-      "We provide bookkeeping, management accounts, annual accounts and financial statements, bank reconciliation, accounts payable and receivable, payroll, cloud accounting setup and CFO-level financial advisory. Services can be combined into a single monthly package.",
+      "We provide bookkeeping, bank reconciliations, expense schedules, debtor and creditor reconciliations, management accounts, year-end accounts, VAT returns, payroll, Self Assessment and Corporation Tax returns, company registration and Xero / QuickBooks setup. Services can be combined into a single monthly package.",
   },
   {
-    question: "What is included in your audit services?",
+    question: "Can you handle our VAT registration and returns?",
     answer:
-      "Our audit and assurance services include statutory and external audits, financial statement audits, internal audit, compliance reviews, internal controls reviews and risk assessments. Each engagement includes planning, fieldwork, a reported opinion where applicable and a management letter with practical recommendations.",
+      "Yes. We check whether you need to register, handle your VAT registration with HMRC, and prepare and submit your returns through Making Tax Digital-compatible software. We also advise on VAT schemes and the rules for Amazon, eBay and other online sellers.",
   },
   {
     question: "Do you work with small businesses?",
     answer:
-      "Yes. We work with freelancers, startups and small and medium-sized businesses as well as larger companies. Our services and pricing are scaled to the size and complexity of each client.",
+      "Yes — small businesses are our focus. We work with sole traders, freelancers, startups, e-commerce sellers and limited companies across the UK, with low-cost packages scaled to the size and complexity of each client.",
   },
   {
     question: "Can you manage monthly bookkeeping?",
@@ -28,17 +28,17 @@ export const faqs: FaqItem[] = [
   {
     question: "Do you provide tax advisory services?",
     answer:
-      "Yes. Alongside tax compliance and return preparation, we advise on tax planning, VAT / sales tax, business changes, transactions and queries from tax authorities.",
+      "Yes. Alongside Self Assessment and Corporation Tax returns, we carry out regular tax efficiency reviews and advise on tax planning, VAT, profit extraction, business changes and HMRC enquiries.",
   },
   {
     question: "Can you help with company formation?",
     answer:
-      "Yes. We advise on the right structure, handle registration and tax registrations, set up your accounting system and provide a first-year compliance calendar.",
+      "Yes. We advise on the right structure, register your company with Companies House, arrange your HMRC registrations, set up your accounting software and give you a first-year compliance calendar.",
   },
   {
     question: "Do you offer payroll services?",
     answer:
-      "Yes. We process payroll on weekly, fortnightly or monthly schedules, provide payslips, maintain employee records and handle payroll reporting and compliance submissions.",
+      "Yes. We run weekly, fortnightly or monthly payroll, provide payslips, file RTI submissions with HMRC and handle workplace pension auto-enrolment and year-end forms.",
   },
   {
     question: "How do I request a quotation?",
@@ -53,7 +53,7 @@ export const faqs: FaqItem[] = [
   {
     question: "What documents are needed to get started?",
     answer:
-      "It depends on the service. Typically we ask for business registration details, recent financial statements or tax returns, access to your accounting records and bank statements. We send a tailored checklist after the initial consultation — please don't send sensitive documents through the website forms.",
+      "It depends on the service. Typically we ask for your Companies House and HMRC details (such as your UTR), recent accounts or tax returns, access to your accounting records and bank statements. We send a tailored checklist after the initial consultation — please don't send sensitive documents through the website forms.",
   },
   {
     question: "How is client information protected?",

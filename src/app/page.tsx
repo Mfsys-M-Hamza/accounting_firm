@@ -16,6 +16,7 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { PostCard } from "@/components/sections/post-card";
 import { FaqList } from "@/components/sections/faq-list";
 import { CtaBand } from "@/components/sections/cta-band";
+import { SocialFeed } from "@/components/sections/social-feed";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/motion";
@@ -42,8 +43,8 @@ export default function HomePage() {
         <SectionHeading
           id="services-title"
           eyebrow="What we do"
-          title="Complete audit, tax & accounting services under one roof"
-          text="From day-to-day bookkeeping to statutory audits and board-level financial strategy, our services are designed to work together as your business grows."
+          title="Complete accounting, VAT & tax services under one roof"
+          text="From monthly bookkeeping and VAT returns to payroll, tax returns and company registration, our services work together as your business grows."
         />
         <ServicesGrid services={services} />
       </Section>
@@ -57,7 +58,7 @@ export default function HomePage() {
             </div>
             <div className="absolute -right-3 -bottom-8 hidden rounded-3xl bg-navy-900 p-6 text-white shadow-lift sm:block lg:-right-8">
               <Illustration name="compliance" className="size-16" />
-              <p className="mt-3 max-w-[12rem] font-display text-lg leading-snug font-semibold">Confidential, compliance-driven work</p>
+              <p className="mt-3 max-w-[12rem] font-display text-lg leading-snug font-semibold">HMRC-compliant, stress-free accounting</p>
             </div>
           </Reveal>
           <div>
@@ -65,13 +66,13 @@ export default function HomePage() {
               id="about-title"
               align="left"
               eyebrow={`About ${siteConfig.companyName}`}
-              title="A trusted financial partner for ambitious businesses"
-              text={`${siteConfig.companyName} brings together audit, accounting, tax and advisory professionals who combine technical rigour with practical, plain-English advice.`}
+              title="Low-cost accounting. High-quality service."
+              text={`${siteConfig.companyName} is a UK-based accountancy firm with qualified accountants helping small businesses grow — offering practical advice while saving you money on tax.`}
               className="mb-8"
             />
             <Reveal>
               <ul className="grid gap-3 sm:grid-cols-2">
-                {["Qualified, experienced professionals", "Clear scope and agreed fees", "Secure, confidential processes", "Modern cloud-based workflows"].map((t) => (
+                {["Qualified, experienced accountants", "Your own dedicated accountant", "All filing included — no hidden costs", "Xero & QuickBooks experts"].map((t) => (
                   <li key={t} className="flex items-start gap-2.5 font-medium text-ink">
                     <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold-500" aria-hidden="true" />
                     {t}
@@ -97,8 +98,8 @@ export default function HomePage() {
         <SectionHeading
           id="why-title"
           eyebrow="Why choose us"
-          title="Expertise you can trust. Service you can rely on."
-          text="We combine professional standards with a responsive, personal service — so you always know where you stand."
+          title="Focus on the big picture — we've got your back office"
+          text="We take care of your bookkeeping, accounting and tax compliance, so you can focus on growth, strategy and success."
         />
         <Advantages />
       </Section>
@@ -136,7 +137,7 @@ export default function HomePage() {
       <section aria-labelledby="quote-cta-title" className="bg-paper pb-4">
         <div className="container-page">
           <Reveal direction="scale">
-            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#122c50,#0b1f3a_60%)] px-6 py-12 sm:px-12 lg:px-16 lg:py-14">
+            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#29288e,#0b1f3a_60%)] px-6 py-12 sm:px-12 lg:px-16 lg:py-14">
               <div className="bg-grid-dark absolute inset-0 -z-10" aria-hidden="true" />
               <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
                 <div>
@@ -175,7 +176,7 @@ export default function HomePage() {
       ) : null}
 
       {/* Resources */}
-      <Section labelledBy="resources-title">
+      <Section labelledBy="resources-title" tone="paper">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading id="resources-title" align="left" eyebrow="Resources" title="Insights & practical guides" className="mb-0" />
           <Reveal>
@@ -191,6 +192,17 @@ export default function HomePage() {
             </StaggerItem>
           ))}
         </Stagger>
+      </Section>
+
+      {/* Social feed */}
+      <Section labelledBy="social-title">
+        <SectionHeading
+          id="social-title"
+          eyebrow="Follow us"
+          title="Tips, updates and offers from our team"
+          text="See our latest posts on LinkedIn, Instagram and Facebook — and send us a message any time."
+        />
+        <SocialFeed />
       </Section>
 
       {/* FAQ */}

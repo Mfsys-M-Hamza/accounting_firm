@@ -28,29 +28,29 @@ export function IllustrationDefs() {
     <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
       <defs>
         <linearGradient id="i3-navy" x1="0" y1="0" x2="0.4" y2="1">
-          <stop offset="0" stopColor="#35659f" />
-          <stop offset="1" stopColor="#0f2848" />
+          <stop offset="0" stopColor="#5a58d0" />
+          <stop offset="1" stopColor="#1d1c6e" />
         </linearGradient>
         <linearGradient id="i3-navy-side" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#0d2240" />
-          <stop offset="1" stopColor="#051024" />
+          <stop offset="0" stopColor="#141357" />
+          <stop offset="1" stopColor="#0a0930" />
         </linearGradient>
         <linearGradient id="i3-paper" x1="0" y1="0" x2="0.3" y2="1">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#e2e8f1" />
+          <stop offset="1" stopColor="#e6e6f4" />
         </linearGradient>
         <linearGradient id="i3-paper-side" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#c3cedd" />
-          <stop offset="1" stopColor="#9fb0c7" />
+          <stop offset="0" stopColor="#c8c8e3" />
+          <stop offset="1" stopColor="#a9a9cf" />
         </linearGradient>
         <linearGradient id="i3-gold" x1="0" y1="0" x2="0.5" y2="1">
-          <stop offset="0" stopColor="#f1d48c" />
-          <stop offset="0.55" stopColor="#cfa64c" />
-          <stop offset="1" stopColor="#a8822f" />
+          <stop offset="0" stopColor="#8de3d1" />
+          <stop offset="0.55" stopColor="#33c4aa" />
+          <stop offset="1" stopColor="#1c9c87" />
         </linearGradient>
         <linearGradient id="i3-gold-side" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#94702a" />
-          <stop offset="1" stopColor="#6d511c" />
+          <stop offset="0" stopColor="#178a77" />
+          <stop offset="1" stopColor="#0b5f51" />
         </linearGradient>
         <linearGradient id="i3-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#9fcbff" />
@@ -62,8 +62,8 @@ export function IllustrationDefs() {
           <stop offset="1" stopColor="#a9c8ef" stopOpacity="0.8" />
         </radialGradient>
         <radialGradient id="i3-shadow" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#0b1f3a" stopOpacity="0.28" />
-          <stop offset="1" stopColor="#0b1f3a" stopOpacity="0" />
+          <stop offset="0" stopColor="#1c1b6b" stopOpacity="0.28" />
+          <stop offset="1" stopColor="#1c1b6b" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>
@@ -98,7 +98,7 @@ function Bar({ x, base, w, h, d = 7, face, side, top }: { x: number; base: numbe
   );
 }
 
-function Lines({ x, y, widths, gap = 8, color = "#0b1f3a", opacity = 0.22 }: { x: number; y: number; widths: number[]; gap?: number; color?: string; opacity?: number }) {
+function Lines({ x, y, widths, gap = 8, color = "#1c1b6b", opacity = 0.22 }: { x: number; y: number; widths: number[]; gap?: number; color?: string; opacity?: number }) {
   return (
     <g fill={color} opacity={opacity}>
       {widths.map((w, i) => (
@@ -139,7 +139,7 @@ const art = {
       <circle cx={74} cy={71} r={20} fill={G.goldSide} />
       <circle cx={72} cy={69} r={20} fill={G.gold} />
       <circle cx={72} cy={69} r={14} fill={G.glass} />
-      <Check d="M64 69.5 L70 75.5 L80.5 63.5" width={4.5} color="#0f2848" />
+      <Check d="M64 69.5 L70 75.5 L80.5 63.5" width={4.5} color="#1d1c6e" />
     </>
   ),
   tax: (
@@ -171,12 +171,12 @@ const art = {
       <path d="M20 36 L76 26 L82 72 L26 84 Z" fill={G.navy} />
       <path d="M20 36 L28 34.6 L34 82.3 L26 84 Z" fill={G.gold} opacity={0.95} />
       <path d="M44 42 L66 38 L67.5 50 L45.5 54 Z" fill="#fff" opacity={0.92} />
-      <path d="M48 45.4 L63 42.8 M48.8 49.6 L60 47.6" stroke="#0b1f3a" strokeOpacity={0.35} strokeWidth={2} strokeLinecap="round" />
+      <path d="M48 45.4 L63 42.8 M48.8 49.6 L60 47.6" stroke="#1c1b6b" strokeOpacity={0.35} strokeWidth={2} strokeLinecap="round" />
       {/* pencil */}
       <g transform="rotate(-28 64 88)">
         <rect x={40} y={85} width={40} height={6} rx={1.5} fill={G.gold} />
-        <path d="M80 85 L88 88 L80 91 Z" fill="#f3e3c1" />
-        <rect x={37} y={85} width={4} height={6} rx={1} fill="#9fb0c7" />
+        <path d="M80 85 L88 88 L80 91 Z" fill="#c9f1e8" />
+        <rect x={37} y={85} width={4} height={6} rx={1} fill="#a9a9cf" />
       </g>
       <Coin cx={94} cy={82} r={11} />
       <Coin cx={94} cy={74} r={11} />
@@ -209,8 +209,8 @@ const art = {
       {[0, 1, 2, 3].map((i) => (
         <g key={i}>
           <circle cx={39} cy={35 + i * 9} r={2.6} fill={G.gold} />
-          <rect x={45} y={33.4 + i * 9} width={20} height={3.2} rx={1.6} fill="#0b1f3a" opacity={0.22} />
-          <rect x={69} y={33.4 + i * 9} width={10} height={3.2} rx={1.6} fill="#0b1f3a" opacity={0.35} />
+          <rect x={45} y={33.4 + i * 9} width={20} height={3.2} rx={1.6} fill="#1c1b6b" opacity={0.22} />
+          <rect x={69} y={33.4 + i * 9} width={10} height={3.2} rx={1.6} fill="#1c1b6b" opacity={0.35} />
         </g>
       ))}
       {/* people */}
@@ -234,7 +234,7 @@ const art = {
       <path d="M31 19 H81 V95 L75 90 L69 95 L63 90 L57 95 L51 90 L45 95 L39 90 L31 95 Z" fill={G.paperSide} transform="translate(5 5)" />
       <path d="M26 16 H76 V92 L70 87 L64 92 L58 87 L52 92 L46 87 L40 92 L34 87 L26 92 Z" fill={G.paper} />
       <Lines x={34} y={28} widths={[30, 22, 26, 18]} gap={9} />
-      <rect x={34} y={68} width={34} height={4} rx={2} fill="#0b1f3a" opacity={0.5} />
+      <rect x={34} y={68} width={34} height={4} rx={2} fill="#1c1b6b" opacity={0.5} />
       <circle cx={84} cy={70} r={19} fill={G.goldSide} />
       <circle cx={82} cy={68} r={19} fill={G.gold} />
       <g fill="#fff">
@@ -248,10 +248,10 @@ const art = {
     <>
       <Shadow rx={44} />
       <path d="M14 98 L94 98 L106 90 L26 90 Z" fill={G.paperSide} />
-      <Bar x={24} base={96} w={14} h={22} face={G.navy} side={G.navySide} top="#4d7ab4" />
-      <Bar x={44} base={96} w={14} h={36} face={G.navy} side={G.navySide} top="#4d7ab4" />
-      <Bar x={64} base={96} w={14} h={52} face={G.gold} side={G.goldSide} top="#f3dc9f" />
-      <path d="M22 62 L42 50 L58 56 L88 24" fill="none" stroke="#0b1f3a" strokeOpacity={0.18} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" transform="translate(2 3)" />
+      <Bar x={24} base={96} w={14} h={22} face={G.navy} side={G.navySide} top="#6f6dd9" />
+      <Bar x={44} base={96} w={14} h={36} face={G.navy} side={G.navySide} top="#6f6dd9" />
+      <Bar x={64} base={96} w={14} h={52} face={G.gold} side={G.goldSide} top="#a6eadb" />
+      <path d="M22 62 L42 50 L58 56 L88 24" fill="none" stroke="#1c1b6b" strokeOpacity={0.18} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" transform="translate(2 3)" />
       <path d="M22 62 L42 50 L58 56 L88 24" fill="none" stroke={G.gold} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
       <path d="M76 22 L91 21 L90 36 Z" fill={G.gold} />
     </>
@@ -260,9 +260,9 @@ const art = {
     <>
       <Shadow rx={42} />
       {/* building: left + right faces with roof */}
-      <path d="M22 40 L58 28 L94 40 L58 50 Z" fill="#4d7ab4" />
+      <path d="M22 40 L58 28 L94 40 L58 50 Z" fill="#6f6dd9" />
       <path d="M22 40 L58 50 L58 100 L22 94 Z" fill={G.navy} />
-      <path d="M58 50 L94 40 L94 94 L58 100 Z" fill="#0f2848" />
+      <path d="M58 50 L94 40 L94 94 L58 100 Z" fill="#1d1c6e" />
       <g fill={G.sky}>
         {[0, 1, 2, 3].map((r) =>
           [0, 1, 2].map((c) => (
@@ -270,7 +270,7 @@ const art = {
           )),
         )}
       </g>
-      <g fill="#8fb6e6" opacity={0.75}>
+      <g fill="#b0aff0" opacity={0.75}>
         {[0, 1, 2, 3].map((r) =>
           [0, 1, 2].map((c) => (
             <path key={`r${r}${c}`} d={`M${63 + c * 10} ${56 + r * 9} l6 -1.6 v5 l-6 1.6 Z`} transform={`translate(0 ${-c * 2.8})`} />
@@ -279,7 +279,7 @@ const art = {
       </g>
       <path d="M52 89 l10 -1.5 v12 l-10 1.5 Z" fill={G.gold} transform="translate(-3 0)" />
       {/* flag */}
-      <path d="M58 28 V12" stroke="#0b1f3a" strokeWidth={2} />
+      <path d="M58 28 V12" stroke="#1c1b6b" strokeWidth={2} />
       <path d="M58 12 L72 16 L58 20 Z" fill={G.gold} />
     </>
   ),
@@ -289,11 +289,11 @@ const art = {
       <Slab x={14} y={20} w={88} h={58} r={7} face={G.navy} side={G.navySide} />
       <rect x={19} y={25} width={78} height={48} rx={4} fill={G.paper} />
       {/* donut */}
-      <circle cx={38} cy={49} r={12} fill="none" stroke="#c9d5e6" strokeWidth={7} />
+      <circle cx={38} cy={49} r={12} fill="none" stroke="#d0d0ec" strokeWidth={7} />
       <circle cx={38} cy={49} r={12} fill="none" stroke={G.gold} strokeWidth={7} strokeDasharray="47 76" transform="rotate(-90 38 49)" />
-      <circle cx={38} cy={49} r={12} fill="none" stroke="#27528a" strokeWidth={7} strokeDasharray="18 76" strokeDashoffset={-47} transform="rotate(-90 38 49)" />
+      <circle cx={38} cy={49} r={12} fill="none" stroke="#4644bf" strokeWidth={7} strokeDasharray="18 76" strokeDashoffset={-47} transform="rotate(-90 38 49)" />
       {/* line chart */}
-      <path d="M58 62 L66 54 L73 57 L82 43 L90 38" fill="none" stroke="#27528a" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M58 62 L66 54 L73 57 L82 43 L90 38" fill="none" stroke="#4644bf" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
       <circle cx={90} cy={38} r={3} fill={G.gold} />
       <Lines x={58} y={32} widths={[18, 12]} gap={6} opacity={0.25} />
       {/* stand */}
@@ -310,10 +310,10 @@ const art = {
         transform="translate(4 5)"
       />
       <path d="M36 78 C22 78 16 68 18 60 C20 52 27 48 34 49 C36 36 47 28 60 30 C71 31 78 39 80 47 C90 46 99 53 99 63 C99 72 92 78 84 78 Z" fill={G.paper} />
-      <Bar x={40} base={70} w={8} h={12} d={5} face={G.navy} side={G.navySide} top="#4d7ab4" />
-      <Bar x={53} base={70} w={8} h={20} d={5} face={G.navy} side={G.navySide} top="#4d7ab4" />
-      <Bar x={66} base={70} w={8} h={28} d={5} face={G.gold} side={G.goldSide} top="#f3dc9f" />
-      <path d="M60 82 V92" stroke="#27528a" strokeWidth={3} strokeDasharray="3 3" />
+      <Bar x={40} base={70} w={8} h={12} d={5} face={G.navy} side={G.navySide} top="#6f6dd9" />
+      <Bar x={53} base={70} w={8} h={20} d={5} face={G.navy} side={G.navySide} top="#6f6dd9" />
+      <Bar x={66} base={70} w={8} h={28} d={5} face={G.gold} side={G.goldSide} top="#a6eadb" />
+      <path d="M60 82 V92" stroke="#4644bf" strokeWidth={3} strokeDasharray="3 3" />
       <Coin cx={60} cy={96} r={10} />
     </>
   ),
@@ -323,7 +323,7 @@ const art = {
       <path d="M64 16 L96 28 V54 C96 76 82 92 64 100 C46 92 32 76 32 54 V28 Z" fill={G.navySide} transform="translate(-1 3)" />
       <path d="M60 14 L92 26 V52 C92 74 78 90 60 98 C42 90 28 74 28 52 V26 Z" fill={G.gold} />
       <path d="M60 21 L86 31 V52 C86 70 75 83 60 90 C45 83 34 70 34 52 V31 Z" fill={G.navy} />
-      <path d="M60 21 L86 31 V52 C86 70 75 83 60 90 Z" fill="#0b1f3a" opacity={0.25} />
+      <path d="M60 21 L86 31 V52 C86 70 75 83 60 90 Z" fill="#1c1b6b" opacity={0.25} />
       <Check d="M47 55 L57 65 L75 45" width={7} />
     </>
   ),
@@ -334,10 +334,10 @@ const art = {
       <rect x={16} y={18} width={84} height={13} rx={8} fill={G.navy} />
       <rect x={16} y={25} width={84} height={6} fill={G.navy} />
       <circle cx={24} cy={24.5} r={2} fill={G.gold} />
-      <Bar x={26} base={78} w={9} h={16} d={5} face="#27528a" side={G.navySide} top="#6b93c8" />
-      <Bar x={40} base={78} w={9} h={26} d={5} face="#27528a" side={G.navySide} top="#6b93c8" />
-      <Bar x={54} base={78} w={9} h={34} d={5} face={G.gold} side={G.goldSide} top="#f3dc9f" />
-      <circle cx={84} cy={52} r={10} fill="none" stroke="#c9d5e6" strokeWidth={6} />
+      <Bar x={26} base={78} w={9} h={16} d={5} face="#4644bf" side={G.navySide} top="#8e8ce4" />
+      <Bar x={40} base={78} w={9} h={26} d={5} face="#4644bf" side={G.navySide} top="#8e8ce4" />
+      <Bar x={54} base={78} w={9} h={34} d={5} face={G.gold} side={G.goldSide} top="#a6eadb" />
+      <circle cx={84} cy={52} r={10} fill="none" stroke="#d0d0ec" strokeWidth={6} />
       <circle cx={84} cy={52} r={10} fill="none" stroke={G.gold} strokeWidth={6} strokeDasharray="42 63" transform="rotate(-90 84 52)" />
       <Lines x={74} y={70} widths={[20, 14]} gap={6} />
     </>

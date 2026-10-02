@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { footerNav } from "@/config/navigation";
-import { configuredSocialLinks, formattedAddress, mailtoHref, telHref } from "@/lib/config-utils";
+import { configuredSocialLinks, formattedAddress, mailtoHref, telHref, whatsappDisplay } from "@/lib/config-utils";
 import { generalWhatsappUrl } from "@/lib/whatsapp";
 import { Logo } from "@/components/ui/logo";
 import { SocialIcon, WhatsAppIcon, socialLabels } from "@/components/icons/brand-icons";
@@ -97,7 +97,7 @@ export function Footer() {
                 {siteConfig.contact.phone}
               </ContactRow>
               <ContactRow icon={WhatsAppIcon} href={generalWhatsappUrl()} external>
-                WhatsApp: {siteConfig.contact.whatsapp}
+                WhatsApp: {whatsappDisplay()}
               </ContactRow>
               <ContactRow icon={Mail} href={mailtoHref()}>
                 {siteConfig.contact.email}

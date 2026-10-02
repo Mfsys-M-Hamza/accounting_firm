@@ -7,7 +7,7 @@ import { IconBadge } from "@/components/icons/icon-badge";
 
 export const metadata = buildMetadata({
   title: "Book a Consultation",
-  description: "Book a phone call, video meeting or office meeting with our audit, accounting and tax professionals at a time that suits you.",
+  description: "Book a phone call, video meeting or office meeting with our UK accountants at a time that suits you.",
   path: "/book-consultation",
 });
 

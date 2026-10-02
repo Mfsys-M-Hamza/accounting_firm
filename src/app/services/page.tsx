@@ -14,7 +14,7 @@ import { Stagger, StaggerItem } from "@/components/motion/motion";
 export const metadata = buildMetadata({
   title: "Our Services",
   description:
-    "Audit & assurance, taxation, accounting & bookkeeping, payroll, business advisory, company formation, CFO services and cloud accounting — all from one professional team.",
+    "Accounting & bookkeeping, VAT returns, Self Assessment & Corporation Tax, payroll, company registration, management accounts, Xero & QuickBooks and business consulting — all from one UK team.",
   path: "/services",
 });
 
@@ -23,7 +23,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Audit, tax, accounting & advisory services"
+        title="Accounting, VAT, tax & payroll services"
         intro="Choose a single service or combine several into one coordinated engagement. Every service is scoped to your business, with clear deliverables and agreed fees."
         crumbs={[{ name: "Services", href: "/services" }]}
         illustration="reporting"

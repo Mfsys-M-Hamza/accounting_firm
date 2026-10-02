@@ -13,7 +13,7 @@ export function Team() {
       {siteConfig.team.map((p, i) => (
         <StaggerItem key={`${p.name}-${i}`}>
           <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-            <div className="relative aspect-[4/3.6] overflow-hidden bg-[linear-gradient(160deg,#27528a,#0b1f3a)]">
+            <div className="relative aspect-[4/3.6] overflow-hidden bg-[linear-gradient(160deg,#4644bf,#1c1b6b)]">
               {p.photo ? (
                 <Image src={p.photo} alt={`Portrait of ${p.name}`} fill sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (

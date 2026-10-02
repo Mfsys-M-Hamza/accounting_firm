@@ -29,3 +29,10 @@ attribution required). They were resized and converted to WebP locally.
 
 Before launch, consider replacing stock photos of people with genuine photos of
 the firm's own team and office.
+
+## Client artwork
+
+`social/*.webp` are UK Accountax's own social media post designs, taken from
+https://www.instagram.com/uk_accountax/ and resized to 720×900 WebP. The brand
+mark in `src/components/ui/logo.tsx`, `public/brand/mark.svg`, `public/icon.png`
+and `public/apple-icon.png` is traced from the UK Accountax logo.

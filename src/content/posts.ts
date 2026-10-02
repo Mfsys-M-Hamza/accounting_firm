@@ -3,12 +3,12 @@
  * The listing, category filters, search, sitemap, related posts and Article
  * structured data update automatically.
  *
- * Articles are general guidance, not advice for a specific jurisdiction —
- * each page carries a disclaimer to that effect.
+ * Articles are general guidance for UK businesses, not advice for a specific
+ * situation — each page carries a disclaimer to that effect.
  */
 import type { ImageKey } from "./images";
 
-export const categories = ["Accounting", "Audit", "Tax", "Business", "Compliance", "Finance", "Startup Guides"] as const;
+export const categories = ["Accounting", "VAT", "Tax", "Business", "Compliance", "Finance", "Startup Guides"] as const;
 export type Category = (typeof categories)[number];
 
 export type Block =
@@ -72,32 +72,35 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "preparing-for-your-first-statutory-audit",
-    title: "Preparing for Your First Statutory Audit: What to Expect",
+    slug: "vat-registration-uk-small-business-guide",
+    title: "VAT Registration in the UK: When You Need to Register and What Comes Next",
     excerpt:
-      "A first audit can feel daunting. Knowing how the process works and what auditors will ask for makes it faster, smoother and less disruptive.",
-    category: "Audit",
+      "Crossing the VAT threshold changes how you price, invoice and report. Here's how to know when you must register, and how to stay on top of VAT returns under Making Tax Digital.",
+    category: "VAT",
     image: "blogGrowthChart",
     publishedAt: "2026-08-25",
-    readingMinutes: 7,
+    readingMinutes: 6,
     body: [
-      { type: "p", text: "Businesses usually become subject to a statutory audit as they grow past size thresholds set by local law, take on external investment or join a group. Whatever the trigger, the first audit is where good preparation pays off most." },
-      { type: "h2", text: "What an audit is — and isn't" },
-      { type: "p", text: "An external audit is an independent examination of your financial statements. The auditor gathers evidence to form an opinion on whether the statements are free from material misstatement and prepared in line with the applicable reporting framework. It is not a line-by-line check of every transaction, and it is not designed specifically to detect fraud — although weaknesses the auditor finds will be reported to management." },
-      { type: "h2", text: "The main stages" },
-      { type: "ul", items: ["Planning — the auditor learns about your business, assesses risk and agrees a timetable.", "Interim work (for some engagements) — testing controls and transactions before year-end.", "Final fieldwork — testing year-end balances and disclosures.", "Completion — review, discussion of adjustments and signing of the auditor's report.", "Management letter — written observations on control weaknesses and recommendations."] },
-      { type: "h2", text: "What auditors will usually ask for" },
-      { type: "ul", items: ["A final trial balance and draft financial statements", "Bank statements and bank confirmation authorities", "Fixed asset register with purchase invoices for additions", "Inventory count records and valuation workings", "Aged receivables and payables with supporting documents", "Payroll reports and tax filings", "Key contracts, loan agreements and leases", "Board minutes and details of related-party transactions"] },
-      { type: "callout", text: "Opening balances matter. In a first-year audit, the auditor must also gain comfort over the balances brought forward from the prior year, so allow extra time and keep prior-year records to hand." },
-      { type: "h2", text: "How to make the audit smoother" },
-      { type: "h3", text: "Get the books right first" },
-      { type: "p", text: "Reconcile bank accounts, control accounts and intercompany balances before the audit begins. Unreconciled differences are the single biggest cause of delay." },
-      { type: "h3", text: "Nominate one point of contact" },
-      { type: "p", text: "Requests go faster when one person coordinates them, tracks what has been provided and chases internal colleagues." },
-      { type: "h3", text: "Document your judgements" },
-      { type: "p", text: "Where you've made estimates — bad debt provisions, inventory write-downs, accruals — write down how you arrived at the figure. Auditors need to understand and challenge the reasoning, not just the number." },
-      { type: "h2", text: "After the audit" },
-      { type: "p", text: "Treat the management letter as a free improvement plan. Agree actions and owners for each point, and your second audit will be quicker and cheaper than the first." },
+      { type: "p", text: "For many small businesses, registering for VAT is the first big compliance milestone. Register too late and HMRC can charge the VAT you should have collected plus a penalty; register without planning and your prices or margins can take a hit. A little preparation avoids both." },
+      { type: "h2", text: "When you must register" },
+      { type: "p", text: "You must register for VAT if your VAT-taxable turnover for any rolling 12-month period goes over the registration threshold — £90,000 since 1 April 2024. You must also register if you expect your taxable turnover to go over the threshold in the next 30 days alone." },
+      { type: "ul", items: ["Check your turnover at the end of every month, looking back over the previous 12 months — not just your financial year.", "If you go over the threshold, you must register within 30 days of the end of that month.", "Exempt sales don't count towards the threshold, but zero-rated sales do."] },
+      { type: "callout", text: "Thresholds change. Always check the current figure on GOV.UK, or ask us to monitor your turnover for you." },
+      { type: "h2", text: "Should you register voluntarily?" },
+      { type: "p", text: "You can register below the threshold. It can make sense if most of your customers are VAT-registered businesses (they can reclaim the VAT you charge) or if you make zero-rated sales and want to reclaim VAT on your costs. If you sell mainly to consumers, registering early usually means either raising prices or absorbing the VAT." },
+      { type: "h2", text: "Making Tax Digital for VAT" },
+      { type: "p", text: "All VAT-registered businesses must keep digital records and file VAT returns using Making Tax Digital-compatible software, such as Xero or QuickBooks. Most businesses file quarterly, and the return and payment are normally due one calendar month and seven days after the end of each VAT period." },
+      { type: "h2", text: "Schemes that can make VAT simpler" },
+      { type: "h3", text: "Flat Rate Scheme" },
+      { type: "p", text: "You pay a fixed percentage of your VAT-inclusive turnover instead of calculating VAT on every sale and purchase. It can save time for smaller businesses with few costs, but it isn't always cheaper — run the numbers first." },
+      { type: "h3", text: "Cash Accounting Scheme" },
+      { type: "p", text: "You account for VAT when customers pay you and reclaim it when you pay suppliers, rather than on invoice dates — helpful if customers pay slowly." },
+      { type: "h3", text: "Annual Accounting Scheme" },
+      { type: "p", text: "You file one VAT return a year and make advance payments during the year, which can make budgeting easier." },
+      { type: "h2", text: "Online and marketplace sellers" },
+      { type: "p", text: "If you sell through Amazon, eBay or other online marketplaces, some VAT may be collected by the marketplace itself, depending on where you and your goods are based. Make sure your records separate marketplace-collected VAT from the VAT you're responsible for, and reconcile your marketplace reports to your returns." },
+      { type: "h2", text: "Getting it right from day one" },
+      { type: "p", text: "Once registered, you'll need to charge VAT at the right rate, issue valid VAT invoices, keep digital records and file on time. If you're approaching the threshold, talk to us — we can register you, set up your software and file your returns so you never miss a deadline." },
     ],
   },
   {

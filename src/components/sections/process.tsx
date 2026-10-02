@@ -18,7 +18,7 @@ export function Process({ light = false }: { light?: boolean }) {
           <span
             className={cn(
               "relative z-10 flex size-16 shrink-0 items-center justify-center rounded-2xl font-display text-xl font-semibold transition-transform duration-500 group-hover:-translate-y-1",
-              "bg-[linear-gradient(145deg,#35659f,#0b1f3a)] text-gold-400 shadow-[0_5px_0_#061328,0_16px_28px_-10px_rgb(11_31_58/0.6)]",
+              "bg-[linear-gradient(145deg,#5a58d0,#1c1b6b)] text-gold-400 shadow-[0_5px_0_#0c0b36,0_16px_28px_-10px_rgb(28_27_107/0.6)]",
             )}
           >
             {String(i + 1).padStart(2, "0")}

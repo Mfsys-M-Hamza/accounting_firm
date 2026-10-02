@@ -5,24 +5,25 @@ import { industries } from "./industries";
 export const serviceOptions = [...services.map((s) => s.title), "Other"];
 
 export const quoteServiceOptions = [
-  "Audit",
-  "Taxation",
   "Bookkeeping",
   "Annual Accounts",
+  "VAT Registration / Returns",
+  "Self Assessment",
+  "Corporation Tax",
   "Payroll",
-  "VAT / Sales Tax",
-  "Company Formation",
-  "Business Advisory",
-  "CFO Services",
-  "Cloud Accounting",
+  "Management Accounts",
+  "Company Registration",
+  "Xero / QuickBooks Setup",
+  "Business Consulting",
   "Other",
 ];
 
 export const businessTypeOptions = [
   "Sole Trader / Freelancer",
   "Partnership",
-  "Private Limited Company",
-  "Public Company",
+  "Private Limited Company (Ltd)",
+  "Limited Liability Partnership (LLP)",
+  "Landlord / Property",
   "Startup (not yet registered)",
   "Nonprofit / Charity",
   "Other",
@@ -31,7 +32,7 @@ export const businessTypeOptions = [
 export const industryOptions = [...industries.map((i) => i.name), "Other"];
 
 // Ranges are deliberately broad — the quote form never asks for exact financials.
-export const turnoverOptions = ["Pre-revenue", "Up to 100,000", "100,000 – 500,000", "500,000 – 1 million", "1 – 5 million", "5 million +", "Prefer not to say"];
+export const turnoverOptions = ["Pre-revenue", "Up to £90,000", "£90,000 – £250,000", "£250,000 – £1 million", "£1 – £5 million", "£5 million +", "Prefer not to say"];
 
 export const employeeOptions = ["Just me", "2 – 10", "11 – 50", "51 – 250", "250 +"];
 

@@ -6,8 +6,8 @@ type Variant = "primary" | "gold" | "outline" | "outline-light" | "ghost" | "wha
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-navy-900 text-white hover:bg-navy-700 shadow-[0_10px_24px_-10px_rgb(11_31_58/0.6)]",
-  gold: "bg-gold-500 text-navy-950 hover:bg-gold-400 shadow-[0_10px_24px_-10px_rgb(156_122_44/0.7)]",
+  primary: "bg-navy-900 text-white hover:bg-navy-700 shadow-[0_10px_24px_-10px_rgb(28_27_107/0.6)]",
+  gold: "bg-gold-500 text-navy-950 hover:bg-gold-400 shadow-[0_10px_24px_-10px_rgb(23_138_119/0.7)]",
   outline: "border border-navy-900/20 text-navy-900 hover:border-navy-900 hover:bg-navy-900 hover:text-white",
   "outline-light": "border border-white/30 text-white hover:bg-white hover:text-navy-900",
   ghost: "text-navy-900 hover:bg-navy-50",

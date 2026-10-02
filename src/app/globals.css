@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Rebrand a client by editing these values; components only
+ * Design tokens (UK Accountax brand: "navy" = brand indigo #29288e, "gold" =
+ * brand teal #25bba2). Rebrand a client by editing these values; components only
  * reference the token names (bg-navy-900, text-gold-500, font-display ...).
  */
 @theme {
-  --color-navy-950: #06142a;
-  --color-navy-900: #0b1f3a;
-  --color-navy-800: #122c50;
-  --color-navy-700: #1b3d6b;
-  --color-navy-600: #27528a;
-  --color-navy-100: #e3eaf4;
-  --color-navy-50: #f2f5fa;
+  --color-navy-950: #0f0e3d;
+  --color-navy-900: #1c1b6b;
+  --color-navy-800: #29288e;
+  --color-navy-700: #3634a8;
+  --color-navy-600: #4644bf;
+  --color-navy-100: #e4e4f6;
+  --color-navy-50: #f3f3fb;
 
-  --color-gold-600: #85661f;
-  --color-gold-500: #c29b45;
-  --color-gold-400: #d6b566;
-  --color-gold-100: #f5edd9;
+  --color-gold-600: #0e7a68;
+  --color-gold-500: #25bba2;
+  --color-gold-400: #4fd1b9;
+  --color-gold-100: #d7f4ee;
 
   --color-ink: #1d2533;
   --color-body: #475467;
@@ -28,10 +29,10 @@
   --color-whatsapp: #15803d;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 
   --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -8px rgb(16 24 40 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(16 24 40 / 0.05), 0 22px 44px -16px rgb(11 31 58 / 0.22);
+  --shadow-lift: 0 2px 4px rgb(16 24 40 / 0.05), 0 22px 44px -16px rgb(28 27 107 / 0.22);
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 9s ease-in-out infinite;
@@ -167,8 +168,8 @@
   }
   .bg-grid-light {
     background-image:
-      linear-gradient(rgb(11 31 58 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(11 31 58 / 0.05) 1px, transparent 1px);
+      linear-gradient(rgb(28 27 107 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(28 27 107 / 0.05) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 

@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/sections/cta-band";
 
 export const metadata = buildMetadata({
   title: "Resources & Insights",
-  description: "Practical guides on accounting, audit, tax, compliance, finance and starting a business — written by our professional team.",
+  description: "Practical guides on accounting, VAT, tax, compliance, finance and starting a business — written by our professional team.",
   path: "/resources",
 });
 

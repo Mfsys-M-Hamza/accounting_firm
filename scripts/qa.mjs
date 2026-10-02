@@ -181,7 +181,7 @@ for (const vp of ["desktop", "mobile"]) {
     report.pages.push({ vp, path, title: info.title, jsonLd: types, problems });
     problems.length ? fail(`${path} — ${problems.join(" · ")}`) : pass(`${path} [${types.join(", ")}]`);
 
-    if (["/", "/quote", "/services/audit-assurance", "/resources/month-end-close-checklist-small-business", "/contact", "/about"].includes(path)) {
+    if (["/", "/quote", "/services/vat-services", "/resources/month-end-close-checklist-small-business", "/contact", "/about"].includes(path)) {
       const name = path === "/" ? "home" : path.slice(1).replace(/\//g, "_");
       await page.screenshot({ path: `${SHOTS}/${vp}-${name}.png`, fullPage: true });
     }
@@ -304,9 +304,9 @@ section("Quote form + WhatsApp");
   await fill(page, "Phone", "+44 7700 900123");
   await fill(page, "Country", "United Kingdom");
   await fill(page, "City", "Leeds");
-  await fill(page, "Business type", "Private Limited Company");
+  await fill(page, "Business type", "Private Limited Company (Ltd)");
   await fill(page, "Industry", "Retail");
-  await fill(page, "Annual turnover range", "100,000 – 500,000");
+  await fill(page, "Annual turnover range", "£90,000 – £250,000");
   await fill(page, "Number of employees", "2 – 10");
   await choose(page, "No");
   await choose(page, "Bookkeeping");
@@ -322,7 +322,7 @@ section("Quote form + WhatsApp");
   if (opened.length === 1) {
     const u = new URL(opened[0]);
     const text = u.searchParams.get("text") ?? "";
-    const expect = ["I would like to request a quotation.", "Jane Tester", "Tester Ltd", "United Kingdom", "Private Limited Company", "Bookkeeping, Payroll", "100,000 – 500,000", "2 – 10", "WhatsApp — Any time", "200 transactions", "Please contact me regarding the quotation."];
+    const expect = ["I would like to request a quotation.", "Jane Tester", "Tester Ltd", "United Kingdom", "Private Limited Company (Ltd)", "Bookkeeping, Payroll", "£90,000 – £250,000", "2 – 10", "WhatsApp — Any time", "200 transactions", "Please contact me regarding the quotation."];
     const missing = expect.filter((e) => !text.includes(e));
     u.hostname === "wa.me" && !missing.length ? pass("WhatsApp quote message generated with all fields") : fail(`WhatsApp message missing: ${missing.join(", ")}`);
     writeFileSync(`${SHOTS}/whatsapp-message.txt`, text);
@@ -381,7 +381,7 @@ section("Consultation form");
   await fill(page, "Name", "Alex Owner");
   await fill(page, "Email", "alex@example.com");
   await fill(page, "Phone", "+1 555 010 2000");
-  await fill(page, "Service", "Taxation");
+  await fill(page, "Service", "Tax Returns & Planning");
   await choose(page, "Video Meeting");
   await fill(page, "Preferred time", "10:00");
   await page.$eval('input[name="consent"]', (i) => i.click());
@@ -421,7 +421,7 @@ section("Callback form");
   const { page } = await openPage("mobile");
   await page.goto(`${BASE}/services/payroll`, { waitUntil: "networkidle0" });
   const svc = await page.$eval("#cta-title", (h) => h.closest("section").querySelector("select:last-of-type") && [...h.closest("section").querySelectorAll("select")].pop().value);
-  svc === "Payroll" ? pass("callback form pre-selects the page's service") : fail(`callback preselect was "${svc}"`);
+  svc === "Payroll Services" ? pass("callback form pre-selects the page's service") : fail(`callback preselect was "${svc}"`);
   const form = "section[aria-labelledby=cta-title] form";
   await page.$eval(form, (f) => f.scrollIntoView());
   await page.type(`${form} input[autocomplete=name]`, "Pat Caller");

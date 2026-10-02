@@ -11,9 +11,7 @@ import {
   UtensilsCrossed,
   Briefcase,
   Cpu,
-  Factory,
   Laptop,
-  HandHeart,
 } from "lucide-react";
 
 export interface Industry {
@@ -23,18 +21,16 @@ export interface Industry {
 }
 
 export const industries: Industry[] = [
-  { name: "Startups", icon: Rocket, description: "Formation, investor-ready reporting and scalable finance processes from day one." },
-  { name: "SMEs", icon: Store, description: "Bookkeeping, tax and advisory support sized for owner-managed businesses." },
-  { name: "Corporations", icon: Building2, description: "Statutory audit, group reporting and internal controls for larger entities." },
-  { name: "E-commerce", icon: ShoppingCart, description: "Multi-channel reconciliation, marketplace fees and indirect tax on online sales." },
-  { name: "Construction", icon: HardHat, description: "Job costing, retentions, subcontractor payments and project profitability." },
-  { name: "Real Estate", icon: House, description: "Property accounts, rental income reporting and transaction tax advice." },
+  { name: "Small Businesses", icon: Store, description: "Bookkeeping, VAT, payroll and tax support sized for owner-managed UK businesses." },
+  { name: "Startups", icon: Rocket, description: "Company registration, HMRC setup and simple finance routines from day one." },
+  { name: "E-commerce & Online Sellers", icon: ShoppingCart, description: "Amazon, eBay and Shopify reconciliations, marketplace fees and online-sales VAT." },
+  { name: "Sole Traders & Freelancers", icon: Laptop, description: "Self Assessment, expense tracking and Making Tax Digital for Income Tax." },
+  { name: "Contractors", icon: Briefcase, description: "Limited company accounts, salary and dividend planning and IR35 awareness." },
+  { name: "Construction", icon: HardHat, description: "CIS returns, subcontractor payments, VAT domestic reverse charge and job costing." },
+  { name: "Landlords & Property", icon: House, description: "Rental income accounts, property tax returns and capital gains reporting." },
+  { name: "Retail", icon: ShoppingBag, description: "Stock, point-of-sale reconciliation, margins and seasonal cash planning." },
+  { name: "Hospitality", icon: UtensilsCrossed, description: "Shift-based payroll, tips and service charge, cost of sales and cash management." },
   { name: "Healthcare", icon: HeartPulse, description: "Practice accounts, payroll for clinical teams and cost management." },
-  { name: "Retail", icon: ShoppingBag, description: "Inventory, point-of-sale reconciliation, margins and seasonal cash planning." },
-  { name: "Hospitality", icon: UtensilsCrossed, description: "Shift-based payroll, service-charge handling, cost of sales control and cash management." },
-  { name: "Professional Services", icon: Briefcase, description: "Work-in-progress, partner profit allocation and utilisation reporting." },
-  { name: "Technology", icon: Cpu, description: "Revenue recognition, R&D considerations and SaaS metrics." },
-  { name: "Manufacturing", icon: Factory, description: "Product costing, inventory valuation and capital expenditure planning." },
-  { name: "Freelancers", icon: Laptop, description: "Personal tax, expense tracking and simple, affordable bookkeeping." },
-  { name: "Nonprofit Organizations", icon: HandHeart, description: "Fund accounting, grant compliance, independent examination and audit." },
+  { name: "Professional Services", icon: Building2, description: "Work-in-progress, profit allocation and cash flow for consultancies and agencies." },
+  { name: "Technology", icon: Cpu, description: "SaaS metrics, R&D tax relief considerations and investor-ready reporting." },
 ];

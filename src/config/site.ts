@@ -11,58 +11,56 @@
  */
 import type { SiteConfig } from "./types";
 
-const companyName = "[COMPANY NAME]";
+const companyName = "UK Accountax";
 
 export const siteConfig: SiteConfig = {
   companyName,
   legalName: companyName,
   shortName: companyName,
-  tagline: "[TAGLINE]",
+  tagline: "UK Based Accountancy Firm",
   description:
-    "Professional audit, accounting, taxation and business advisory services that help businesses stay compliant, make informed decisions and grow with confidence.",
-  siteUrl: "https://www.example.com",
-  // Set to { src: "/brand/logo.svg", alt: "...", width: 180, height: 40 } once a logo
-  // is supplied. While null, a typographic wordmark is rendered instead.
+    "UK Accountax is a UK-based accountancy firm helping small businesses, startups, sole traders and online sellers with accounting, bookkeeping, VAT, payroll and tax — accurate, HMRC-compliant and stress-free.",
+  siteUrl: "https://uk-accountax.com",
+  // While null, the brand mark + typographic wordmark in components/ui/logo.tsx is rendered.
   logo: null,
-  locale: "en",
+  locale: "en-GB",
 
   contact: {
-    phone: "[PHONE]",
-    whatsapp: "[WHATSAPP NUMBER]",
-    email: "[EMAIL]",
+    phone: "+44 7456 437305",
+    whatsapp: "447456437305",
+    email: "info@uk-accountax.com",
     address: {
-      street: "[ADDRESS]",
-      city: "[CITY]",
+      street: "",
+      city: "London",
       region: "",
       postalCode: "",
-      country: "[COUNTRY]",
+      country: "United Kingdom",
     },
     mapEmbedUrl: "",
+    // TODO(client): confirm opening hours — not published on LinkedIn, Instagram or uk-accountax.com.
     businessHours: [
-      { days: "Monday – Friday", hours: "[BUSINESS HOURS]" },
-      { days: "Saturday", hours: "[BUSINESS HOURS]" },
+      { days: "Monday – Friday", hours: "9:00 am – 6:00 pm" },
+      { days: "Saturday", hours: "By appointment" },
       { days: "Sunday", hours: "Closed" },
     ],
   },
 
   regulatoryBody: "[REGULATORY BODY]",
-  yearsOfExperience: "[YEARS OF EXPERIENCE]",
+  yearsOfExperience: "5+",
   numberOfClients: "[NUMBER OF CLIENTS]",
-  teamSize: "[TEAM SIZE]",
+  teamSize: "2–10",
 
   socialLinks: [
-    { platform: "linkedin", url: "[SOCIAL MEDIA LINKS]" },
-    { platform: "facebook", url: "[SOCIAL MEDIA LINKS]" },
-    { platform: "x", url: "[SOCIAL MEDIA LINKS]" },
-    { platform: "instagram", url: "[SOCIAL MEDIA LINKS]" },
+    { platform: "linkedin", url: "https://www.linkedin.com/company/uk-accountax/" },
+    { platform: "instagram", url: "https://www.instagram.com/uk_accountax/" },
+    { platform: "facebook", url: "https://www.facebook.com/profile.php?id=100092446571116" },
   ],
 
-  // Counters animate only once a real `value` is supplied.
+  // Counters animate only once a real `value` is supplied. Founded 2021 (LinkedIn).
   statistics: [
-    { label: "Years Experience", value: null, suffix: "+", placeholder: "[XX]" },
-    { label: "Clients Served", value: null, suffix: "+", placeholder: "[XXX]" },
-    { label: "Professionals", value: null, suffix: "+", placeholder: "[XX]" },
-    { label: "Industries Supported", value: null, suffix: "+", placeholder: "[XX]" },
+    { label: "Years in Business", value: 5, suffix: "+", placeholder: "[XX]" },
+    { label: "Core Services", value: 8, placeholder: "[X]" },
+    { label: "Sectors Supported", value: 12, placeholder: "[XX]" },
   ],
 
   team: [
@@ -78,7 +76,7 @@ export const siteConfig: SiteConfig = {
     },
     {
       name: "[TEAM MEMBER NAME]",
-      position: "[POSITION, e.g. Audit Director]",
+      position: "[POSITION, e.g. Senior Accountant]",
       qualification: "[QUALIFICATION]",
       specialization: "[SPECIALIZATION]",
       bio: "[Short professional biography — two or three sentences about experience and focus areas.]",
@@ -116,7 +114,7 @@ export const siteConfig: SiteConfig = {
       company: "[CLIENT COMPANY]",
       position: "[POSITION]",
       review:
-        "[Sample testimonial. Replace with a genuine client review, e.g. how the firm helped with their audit, tax filing or monthly bookkeeping.]",
+        "[Sample testimonial. Replace with a genuine client review, e.g. how the firm helped with their VAT, tax filing or monthly bookkeeping.]",
       rating: 5,
       placeholder: true,
     },
@@ -145,23 +143,28 @@ export const siteConfig: SiteConfig = {
 
   whatsappMessages: {
     general:
-      `Hello ${companyName}, I visited your website and would like information about your accounting, audit or taxation services.`,
+      `Hello ${companyName}, I visited your website and would like information about your accounting, VAT or tax services.`,
   },
 
   seo: {
     titleTemplate: `%s | ${companyName}`,
-    defaultTitle: `${companyName} | Audit, Tax & Accounting Firm`,
+    defaultTitle: `${companyName} | UK Accountants for Small Businesses`,
     defaultDescription:
-      "Audit, accounting, taxation, payroll and business advisory services for startups, SMEs and established companies. Request a free quote today.",
+      "UK-based accountants for small businesses, startups, sole traders and Amazon & eBay sellers. Bookkeeping, VAT returns, payroll, Self Assessment and Corporation Tax. Get a free quote today.",
     keywords: [
-      "audit firm",
-      "chartered accountants",
-      "tax consultants",
-      "bookkeeping services",
-      "payroll services",
-      "business advisory",
-      "virtual CFO",
-      "company formation",
+      "UK accountants",
+      "accountants London",
+      "small business accountant",
+      "bookkeeping services UK",
+      "VAT returns",
+      "Making Tax Digital",
+      "Self Assessment tax return",
+      "Corporation Tax",
+      "payroll services UK",
+      "Xero accountant",
+      "QuickBooks accountant",
+      "Amazon seller accountant",
+      "company registration UK",
     ],
     twitterHandle: "",
   },
@@ -174,8 +177,9 @@ export const siteConfig: SiteConfig = {
 
   features: {
     showStatistics: true,
-    showTestimonials: true,
-    showTeam: true,
+    // Off until genuine, permission-granted reviews and named team profiles are supplied.
+    showTestimonials: false,
+    showTeam: false,
     floatingWhatsApp: true,
   },
 };
