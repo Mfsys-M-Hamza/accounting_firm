@@ -171,7 +171,7 @@ export const siteConfig: SiteConfig = {
 
   developerCredit: {
     name: "WideWeb Technologies",
-    url: "https://botwebtechnologies.com",
+    url: "https://www.widewebtechnologies.site/",
     phone: "+92 3040500121",
   },
 
