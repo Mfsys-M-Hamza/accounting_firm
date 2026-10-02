@@ -43,7 +43,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How do I request a quotation?",
     answer:
-      "Use our Instant Quote form. You can send the details straight to us on WhatsApp or submit the form online, and we will come back to you with a tailored quotation.",
+      "Use our Instant Quote form. Your details are sent straight to us on WhatsApp, and we will come back to you with a tailored quotation.",
   },
   {
     question: "Can I book an online consultation?",

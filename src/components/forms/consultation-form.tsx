@@ -1,14 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarCheck, Loader2 } from "lucide-react";
-import { consultationSchema, type ConsultationInput } from "@/lib/forms/schemas";
+import { consultationSchema, type ConsultationData, type ConsultationInput } from "@/lib/forms/schemas";
+import { buildConsultationMessage } from "@/lib/forms/quote-message";
+import { openWhatsapp, whatsappUrl } from "@/lib/whatsapp";
 import { consultationTimeOptions, consultationTypeOptions, serviceOptions } from "@/content/form-options";
+import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { ChoiceGroup, ConsentField, FormAlert, Honeypot, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
-import { SuccessPanel } from "./success-panel";
-import { useFormSubmit } from "./use-form-submit";
+import { ChoiceGroup, ConsentField, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
 
 const defaults: Partial<ConsultationInput> = { name: "", company: "", email: "", phone: "", service: "", consultationType: "", date: "", time: "", message: "" };
 
@@ -25,43 +27,28 @@ function setDateBounds(e: React.FocusEvent<HTMLInputElement>) {
   e.currentTarget.max = localDate(180);
 }
 
+/** Consultation booking form. Sends the request via WhatsApp with the details pre-filled. */
 export function ConsultationForm({ defaultService }: { defaultService?: string }) {
   const {
     register,
     handleSubmit,
-    setError,
-    reset,
     formState: { errors },
-  } = useForm<ConsultationInput>({
+  } = useForm<ConsultationInput, unknown, ConsultationData>({
     resolver: zodResolver(consultationSchema),
     defaultValues: { ...defaults, service: defaultService ?? "" },
     mode: "onTouched",
   });
-  const { status, setStatus, submit, markStarted, honeypot } = useFormSubmit<ConsultationInput>("consultation", setError);
+  const [waLink, setWaLink] = useState<WhatsappLink | null>(null);
 
-  if (status.state === "success") {
-    return (
-      <SuccessPanel
-        title="Consultation requested"
-        text="Thank you. We'll confirm your appointment, or suggest the nearest available time, as soon as possible."
-        onReset={() => setStatus({ state: "idle" })}
-      />
-    );
-  }
+  const send = handleSubmit((data) => {
+    const text = buildConsultationMessage(data);
+    const url = whatsappUrl(text);
+    setWaLink({ url, text });
+    openWhatsapp(url);
+  }, focusFirstInvalid);
 
   return (
-    <form
-      noValidate
-      onFocus={markStarted}
-      onSubmit={handleSubmit(
-        async (data) => {
-          if (await submit(data)) reset(defaults);
-        },
-        focusFirstInvalid,
-      )}
-      className="relative space-y-5"
-    >
-      <Honeypot ref={honeypot} name="website" />
+    <form noValidate onSubmit={send} className="relative space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <TextField label="Name" required autoComplete="name" error={errors.name?.message} {...register("name")} />
         <TextField label="Company" autoComplete="organization" error={errors.company?.message} {...register("company")} />
@@ -77,10 +64,10 @@ export function ConsultationForm({ defaultService }: { defaultService?: string }
       <TextareaField label="What would you like to discuss?" error={errors.message?.message} {...register("message")} />
       <ConsentField error={errors.consent?.message} {...register("consent")} />
       <PrivacyNote />
-      {status.state === "error" ? <FormAlert tone="error">{status.message}</FormAlert> : null}
-      <Button type="submit" size="lg" disabled={status.state === "submitting"} className="w-full sm:w-auto">
-        {status.state === "submitting" ? <Loader2 className="animate-spin" aria-hidden="true" /> : <CalendarCheck aria-hidden="true" />}
-        {status.state === "submitting" ? "Sending…" : "Request Consultation"}
+      {waLink ? <WhatsappNotice key={waLink.url} link={waLink} what="your consultation request" /> : null}
+      <Button type="submit" variant="whatsapp" size="lg" className="w-full sm:w-auto">
+        <WhatsAppIcon />
+        Request Consultation via WhatsApp
       </Button>
     </form>
   );

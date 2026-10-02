@@ -127,7 +127,9 @@ export type QuoteData = z.output<typeof quoteSchema>;
 export type ContactInput = z.input<typeof contactSchema>;
 export type ContactData = z.output<typeof contactSchema>;
 export type ConsultationInput = z.input<typeof consultationSchema>;
+export type ConsultationData = z.output<typeof consultationSchema>;
 export type CallbackInput = z.input<typeof callbackSchema>;
+export type CallbackData = z.output<typeof callbackSchema>;
 
 export const formSchemas = {
   quote: quoteSchema,

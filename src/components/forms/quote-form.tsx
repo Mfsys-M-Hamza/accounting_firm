@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Copy, Loader2, Send } from "lucide-react";
 import { quoteSchema, type QuoteData, type QuoteInput } from "@/lib/forms/schemas";
 import { buildQuoteMessage } from "@/lib/forms/quote-message";
 import { openWhatsapp, whatsappUrl } from "@/lib/whatsapp";
@@ -18,9 +17,8 @@ import {
 } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { SuccessPanel } from "./success-panel";
-import { ChoiceGroup, ConsentField, FormAlert, Honeypot, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid, formOf } from "./fields";
-import { useFormSubmit } from "./use-form-submit";
+import { ChoiceGroup, ConsentField, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
 
 const defaults: Partial<QuoteInput> = {
   fullName: "",
@@ -52,17 +50,14 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   );
 }
 
+/** Quote requests are sent via WhatsApp only — there is no online submission (the site is statically hosted). */
 export function QuoteForm() {
   const {
     register,
     handleSubmit,
-    setError,
-    reset,
     formState: { errors },
   } = useForm<QuoteInput, unknown, QuoteData>({ resolver: zodResolver(quoteSchema), defaultValues: defaults, mode: "onTouched" });
-  const { status, setStatus, submit, markStarted, honeypot } = useFormSubmit<QuoteInput>("quote", setError);
-  const [waLink, setWaLink] = useState<{ url: string; text: string } | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [waLink, setWaLink] = useState<WhatsappLink | null>(null);
 
   const sendWhatsapp = handleSubmit((data) => {
     const text = buildQuoteMessage(data);
@@ -71,28 +66,8 @@ export function QuoteForm() {
     openWhatsapp(url);
   }, focusFirstInvalid);
 
-  const sendOnline = handleSubmit(async (data, e) => {
-    // The success panel replaces the form, so bring its container back into view.
-    const container = formOf(e)?.parentElement;
-    if (await submit(data)) {
-      reset(defaults);
-      container?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, focusFirstInvalid);
-
-  if (status.state === "success") {
-    return (
-      <SuccessPanel
-        title="Quote request received"
-        text="Thank you. A member of our team will review your requirements and contact you using your preferred method."
-        onReset={() => setStatus({ state: "idle" })}
-      />
-    );
-  }
-
   return (
-    <form noValidate onFocus={markStarted} onSubmit={sendOnline} className="relative space-y-8" aria-describedby="quote-required-note">
-      <Honeypot ref={honeypot} name="website" />
+    <form noValidate onSubmit={sendWhatsapp} className="relative space-y-8" aria-describedby="quote-required-note">
       <p id="quote-required-note" className="text-sm text-muted">
         Fields marked <span className="text-danger">*</span> are required. It takes about two minutes.
       </p>
@@ -150,47 +125,12 @@ export function QuoteForm() {
         <PrivacyNote />
       </div>
 
-      {status.state === "error" ? <FormAlert tone="error">{status.message}</FormAlert> : null}
+      {waLink ? <WhatsappNotice key={waLink.url} link={waLink} what="your quote details" /> : null}
 
-      {waLink ? (
-        <FormAlert tone="success">
-          <p className="font-semibold">WhatsApp has been opened with your quote details.</p>
-          <p className="mt-1 text-body">
-            Review the message and press <strong>Send</strong> in WhatsApp to deliver it — nothing is sent until you do. If WhatsApp didn&apos;t open,{" "}
-            <a href={waLink.url} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
-              open it here
-            </a>{" "}
-            or{" "}
-            <button
-              type="button"
-              className="inline-flex items-center gap-1 font-semibold underline"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(waLink.text);
-                  setCopied(true);
-                } catch {
-                  setCopied(false);
-                }
-              }}
-            >
-              <Copy className="size-3.5" aria-hidden="true" />
-              {copied ? "copied" : "copy the message"}
-            </button>
-            .
-          </p>
-        </FormAlert>
-      ) : null}
-
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <Button type="button" variant="whatsapp" size="lg" onClick={sendWhatsapp} className="sm:flex-1">
-          <WhatsAppIcon />
-          Send Quote Request via WhatsApp
-        </Button>
-        <Button type="submit" variant="primary" size="lg" disabled={status.state === "submitting"} className="sm:flex-1">
-          {status.state === "submitting" ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Send aria-hidden="true" />}
-          {status.state === "submitting" ? "Sending…" : "Submit Quote Request"}
-        </Button>
-      </div>
+      <Button type="submit" variant="whatsapp" size="lg" className="w-full">
+        <WhatsAppIcon />
+        Send Quote Request via WhatsApp
+      </Button>
     </form>
   );
 }

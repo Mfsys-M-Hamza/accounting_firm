@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import type { ContactData, QuoteData } from "./schemas";
+import type { CallbackData, ConsultationData, ContactData, QuoteData } from "./schemas";
 
 const line = (label: string, value?: string) => `*${label}:* ${value && value.trim() ? value.trim() : "—"}`;
 
@@ -48,3 +48,46 @@ export function buildContactMessage(c: ContactData): string {
     (c.message ?? "").trim(),
   ].join("\n");
 }
+
+/** Formats a validated callback request as a readable WhatsApp message. */
+export function buildCallbackMessage(c: CallbackData): string {
+  return [
+    `Hello ${siteConfig.companyName},`,
+    "",
+    "Please call me back.",
+    "",
+    line("Name", c.name),
+    line("Phone", c.phone),
+    line("Preferred Time", c.preferredTime),
+    line("Service", c.service),
+  ].join("\n");
+}
+
+/** YYYY-MM-DD → e.g. "Monday 5 October 2026" (parsed as UTC so the day never shifts). */
+function readableDate(iso: string): string {
+  const d = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+}
+
+/** Formats a validated consultation booking as a readable WhatsApp message. */
+export function buildConsultationMessage(c: ConsultationData): string {
+  return [
+    `Hello ${siteConfig.companyName},`,
+    "",
+    "I would like to book a consultation.",
+    "",
+    line("Name", c.name),
+    line("Company", c.company),
+    line("Email", c.email),
+    line("Phone", c.phone),
+    line("Service", c.service),
+    line("Consultation Type", c.consultationType),
+    line("Preferred Date", readableDate(c.date)),
+    line("Preferred Time", c.time),
+    line("Topics to Discuss", c.message),
+    "",
+    "Please confirm the appointment or suggest another time.",
+  ].join("\n");
+}
+

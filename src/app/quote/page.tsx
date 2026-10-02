@@ -10,13 +10,13 @@ import { WhatsAppIcon } from "@/components/icons/brand-icons";
 export const metadata = buildMetadata({
   title: "Get Your Instant Quote",
   description:
-    "Request a tailored quotation for accounting, bookkeeping, VAT, tax returns, payroll, company registration or business consulting. Send your details via WhatsApp or submit online.",
+    "Request a tailored quotation for accounting, bookkeeping, VAT, tax returns, payroll, company registration or business consulting. Send your details straight to us on WhatsApp.",
   path: "/quote",
 });
 
 const points = [
   { icon: WhatsAppIcon, title: "Send via WhatsApp", text: "Your details are formatted into a message — you review it and press send." },
-  { icon: MessageSquareText, title: "Or submit online", text: "Prefer email? Submit the form and we'll reply using your chosen method." },
+  { icon: MessageSquareText, title: "Reply your way", text: "We'll get back to you by phone, email or WhatsApp — whichever you choose." },
   { icon: Clock3, title: "Quick response", text: "We aim to respond within one business day." },
   { icon: LockKeyhole, title: "No sensitive data needed", text: "We only ask for broad ranges — never bank details or tax IDs." },
 ];

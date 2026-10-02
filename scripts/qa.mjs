@@ -30,6 +30,13 @@ const pass = (m) => (report.checks.push(m), console.log("  ✓", m));
 const fail = (m) => (report.failures.push(m), console.log("  ✗", m));
 const section = (t) => console.log(`\n── ${t}`);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Scroll first and let the layout settle (smooth scrolling and the header's on-scroll
+// change can shift content), otherwise page.click may hit the element's old position.
+const clickEl = async (page, sel) => {
+  await page.$eval(sel, (el) => el.scrollIntoView({ block: "center", behavior: "instant" }));
+  await sleep(400);
+  await page.click(sel);
+};
 
 const viewports = {
   desktop: { width: 1440, height: 900 },
@@ -290,7 +297,7 @@ section("Quote form + WhatsApp");
     window.__opened = [];
     window.open = (u) => (window.__opened.push(u), {});
   });
-  await page.click("button.bg-whatsapp");
+  await clickEl(page, "form button.bg-whatsapp");
   await sleep(500);
   const errCount = await page.$$eval('[aria-invalid="true"]', (e) => e.length);
   const focused = await page.evaluate(() => document.activeElement?.getAttribute("aria-invalid") === "true" || document.activeElement?.closest("fieldset")?.getAttribute("aria-invalid") === "true");
@@ -316,7 +323,7 @@ section("Quote form + WhatsApp");
   await fill(page, "Message / requirements", "About 200 transactions a month.");
   await page.$eval('input[name="consent"]', (i) => i.click());
   await sleep(2600); // time trap
-  await page.click("button.bg-whatsapp");
+  await clickEl(page, "form button.bg-whatsapp");
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);
   if (opened.length === 1) {
@@ -329,11 +336,9 @@ section("Quote form + WhatsApp");
   } else fail(`WhatsApp opened ${opened.length} times`);
   (await page.$eval("body", (b) => b.innerText.includes("WhatsApp has been opened"))) ? pass("WhatsApp confirmation + fallback link shown") : fail("no WhatsApp confirmation");
 
-  await page.click('button[type="submit"]');
-  await page.waitForFunction(() => document.body.innerText.includes("Quote request received") || document.querySelector('[role="alert"]'), { timeout: 10000 });
-  const ok = await page.$eval("body", (b) => b.innerText.includes("Quote request received"));
-  ok ? pass("quote submitted online → confirmation shown") : fail(`online quote failed: ${await page.$eval('[role="alert"]', (a) => a.innerText)}`);
-  await page.screenshot({ path: `${SHOTS}/mobile-quote-success.png` });
+  const submitButtons = await page.$$eval('form button[type="submit"]', (bs) => bs.map((b) => b.innerText.trim()));
+  submitButtons.length === 1 && submitButtons[0].includes("WhatsApp") ? pass("quote form has only the WhatsApp action") : fail(`unexpected quote submit buttons: ${submitButtons.join(" | ")}`);
+  await page.screenshot({ path: `${SHOTS}/mobile-quote-whatsapp.png` });
   errors.length ? fail(`quote console errors: ${errors[0]}`) : pass("no console errors during quote flow");
   await page.close();
 }
@@ -346,14 +351,14 @@ section("Contact form");
     window.__opened = [];
     window.open = (u) => (window.__opened.push(u), {});
   });
-  await page.click("main form button[type=submit]");
+  await clickEl(page, "main form button[type=submit]");
   await sleep(400);
   const n = await page.$$eval('main form [aria-invalid="true"]', (e) => e.length);
   const opened0 = await page.evaluate(() => window.__opened.length);
   n >= 5 && opened0 === 0 ? pass(`contact validation shows ${n} errors, WhatsApp not opened`) : fail(`contact validation showed ${n}, opened=${opened0}`);
   await fill(page, "Name", "Sam Client");
   await fill(page, "Email", "not-an-email");
-  await page.click("main form button[type=submit]");
+  await clickEl(page, "main form button[type=submit]");
   await sleep(300);
   (await page.$eval("main form", (f) => f.innerText.includes("valid email"))) ? pass("invalid email rejected") : fail("invalid email accepted");
   await fill(page, "Email", "sam@example.com");
@@ -361,7 +366,7 @@ section("Contact form");
   await fill(page, "Message", "We need help with our year-end accounts this year.");
   await choose(page, "Email");
   await page.$eval('main form input[name="consent"]', (i) => i.click());
-  await page.click("main form button[type=submit]");
+  await clickEl(page, "main form button[type=submit]");
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);
   if (opened.length === 1) {
@@ -395,7 +400,7 @@ section("Consultation form");
     i.dispatchEvent(new Event("input", { bubbles: true }));
     i.dispatchEvent(new Event("change", { bubbles: true }));
   });
-  await page.click("main form button[type=submit]");
+  await clickEl(page, "main form button[type=submit]");
   await sleep(400);
   (await page.$eval("main form", (f) => f.innerText.includes("from today onwards"))) ? pass("past date rejected") : fail("past date accepted");
   const future = new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10);
@@ -409,10 +414,17 @@ section("Consultation form");
     },
     future,
   );
-  await sleep(2600);
-  await page.click("main form button[type=submit]");
-  await page.waitForFunction(() => document.body.innerText.includes("Consultation requested") || document.querySelector('main [role="alert"]'), { timeout: 10000 });
-  (await page.$eval("body", (b) => b.innerText.includes("Consultation requested"))) ? pass("consultation submitted → confirmation shown") : fail("consultation submit failed");
+  await page.evaluate(() => {
+    window.__opened = [];
+    window.open = (u) => (window.__opened.push(u), {});
+  });
+  await clickEl(page, "main form button[type=submit]");
+  await sleep(600);
+  const opened = await page.evaluate(() => window.__opened);
+  const text = opened.length === 1 ? (new URL(opened[0]).searchParams.get("text") ?? "") : "";
+  const missing = ["I would like to book a consultation.", "Alex Owner", "Tax Returns & Planning", "Video Meeting", "10:00"].filter((e) => !text.includes(e));
+  opened.length === 1 && !missing.length ? pass("consultation opens WhatsApp with all details") : fail(`consultation WhatsApp: opened=${opened.length}, missing ${missing.join(", ")}`);
+  (await page.$eval("body", (b) => b.innerText.includes("WhatsApp has been opened"))) ? pass("consultation WhatsApp confirmation shown") : fail("no consultation WhatsApp confirmation");
   await page.close();
 }
 
@@ -428,10 +440,16 @@ section("Callback form");
   await page.type(`${form} input[type=tel]`, "0161 496 0000");
   await page.select(`${form} select`, "As soon as possible");
   await page.$eval(`${form} input[name=consent]`, (i) => i.click());
-  await sleep(2600);
-  await page.click(`${form} button[type=submit]`);
-  await page.waitForFunction(() => document.body.innerText.includes("we'll call you back") || document.querySelector('section [role="alert"]'), { timeout: 10000 });
-  (await page.$eval("body", (b) => b.innerText.includes("we'll call you back"))) ? pass("callback submitted → confirmation shown") : fail("callback submit failed");
+  await page.evaluate(() => {
+    window.__opened = [];
+    window.open = (u) => (window.__opened.push(u), {});
+  });
+  await clickEl(page, `${form} button[type=submit]`);
+  await sleep(600);
+  const opened = await page.evaluate(() => window.__opened);
+  const text = opened.length === 1 ? (new URL(opened[0]).searchParams.get("text") ?? "") : "";
+  const missing = ["Please call me back.", "Pat Caller", "0161 496 0000", "As soon as possible", "Payroll Services"].filter((e) => !text.includes(e));
+  opened.length === 1 && !missing.length ? pass("callback opens WhatsApp with all details") : fail(`callback WhatsApp: opened=${opened.length}, missing ${missing.join(", ")}`);
   await page.close();
 }
 

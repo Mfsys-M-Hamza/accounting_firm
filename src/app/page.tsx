@@ -146,7 +146,7 @@ export default function HomePage() {
                     Get your tailored quotation in minutes
                   </h2>
                   <p className="mt-4 max-w-2xl text-lg text-white/70">
-                    Answer a few quick questions and send your request straight to us on WhatsApp — or submit it online. No obligation.
+                    Answer a few quick questions and send your request straight to us on WhatsApp. No obligation.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <ButtonLink href="/quote" variant="gold" size="lg">
