@@ -14,7 +14,7 @@ function walk(dir) {
     if (!statSync(full).isDirectory()) continue;
     if (name.startsWith("__next.")) {
       for (const file of listFiles(full)) {
-        const flat = join(dir, `${name}.${relative(full, file).split(/[\/]/).join(".")}`);
+        const flat = join(dir, `${name}.${relative(full, file).split(/[\\/]/).join(".")}`);
         cpSync(file, flat);
         copied++;
       }
