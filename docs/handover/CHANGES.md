@@ -42,7 +42,8 @@ November 2026. Screenshots of the previous site are in `before/` and the new sit
 - The figures on the About page now display immediately instead of counting up from zero.
 
 **Technical**
-- Analytics and conversion tracking (quote, consultation, phone, email and WhatsApp clicks, and enquiries sent) are built in but switched off. They turn on when a Google Analytics ID is added, and only load after the visitor accepts cookies; the privacy policy updates automatically.
+- Analytics and conversion tracking (quote, consultation, phone, email and WhatsApp clicks, and enquiries sent) are built in but switched off. They turn on when a Google Analytics ID is added as the GitHub repository variable `GA_MEASUREMENT_ID` (no code change needed), and only load after the visitor accepts cookies; the privacy policy updates automatically.
+- Spam protection on all four enquiry forms: a hidden honeypot field (filled in only by bots, which are silently ignored) and a minimum fill time (a send within 2.5 seconds of first touching the form is held back and the visitor asked to press again). WhatsApp adds a further check, as nothing is sent until a person presses Send in their own app.
 - Tested on every page at desktop and mobile sizes in Chrome, Edge and Firefox: accessibility (WCAG 2.2 AA scan), keyboard navigation, menus, forms, links, page titles and descriptions, structured data and layout on small screens. All checks pass.
 - All phone, email, WhatsApp and social links checked and working.
 - Page speed tested with Google Lighthouse on a simulated mid-range phone over slow 4G, and improved: sections below the first screen are only laid out when scrolled to, the enquiry form loads when scrolled near, the animation library was replaced with lightweight CSS, and the main article image loads first. Mobile performance scores are now 88–95 (home page: 84 before), with accessibility, best practices and SEO at 100 on every page tested and no layout shift.
@@ -58,7 +59,7 @@ These items are ready to switch on or need confirming before launch:
 5. **Contact details**: office address and opening hours (the hours shown are a placeholder).
 6. **Logo**: keep the current indigo logo or recolour it to the new navy.
 7. **Pricing**: "from" prices or packages, if the firm wants them shown.
-8. **Analytics**: a Google Analytics 4 measurement ID, if tracking is wanted.
+8. **Analytics**: a Google Analytics 4 measurement ID, if tracking is wanted. Add it in GitHub under Settings → Secrets and variables → Actions → Variables as `GA_MEASUREMENT_ID`, then re-run the deploy.
 9. **Review**: the tax rules quoted on the audience pages (thresholds and deadlines) should be checked by an accountant before launch.
 
 ## Not included

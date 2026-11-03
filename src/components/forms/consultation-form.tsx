@@ -10,8 +10,9 @@ import { trackEvent } from "@/lib/analytics";
 import { consultationTimeOptions, consultationTypeOptions, serviceOptions } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { ChoiceGroup, ConsentField, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { ChoiceGroup, ConsentField, FormAlert, Honeypot, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
 import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
+import { useBotGuard } from "./use-bot-guard";
 
 const defaults: Partial<ConsultationInput> = { name: "", company: "", email: "", phone: "", service: "", consultationType: "", date: "", time: "", message: "" };
 
@@ -40,8 +41,10 @@ export function ConsultationForm({ defaultService }: { defaultService?: string }
     mode: "onTouched",
   });
   const [waLink, setWaLink] = useState<WhatsappLink | null>(null);
+  const { honeypot, markStarted, allow, error: guardError } = useBotGuard();
 
   const send = handleSubmit((data) => {
+    if (!allow()) return;
     const text = buildConsultationMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
@@ -50,7 +53,8 @@ export function ConsultationForm({ defaultService }: { defaultService?: string }
   }, focusFirstInvalid);
 
   return (
-    <form noValidate onSubmit={send} className="relative space-y-5">
+    <form noValidate onSubmit={send} onFocus={markStarted} className="relative space-y-5">
+      <Honeypot ref={honeypot} name="website" />
       <div className="grid gap-5 sm:grid-cols-2">
         <TextField label="Name" required autoComplete="name" error={errors.name?.message} {...register("name")} />
         <TextField label="Company" autoComplete="organization" error={errors.company?.message} {...register("company")} />
@@ -67,6 +71,7 @@ export function ConsultationForm({ defaultService }: { defaultService?: string }
       <ConsentField error={errors.consent?.message} {...register("consent")} />
       <PrivacyNote />
       {waLink ? <WhatsappNotice key={waLink.url} link={waLink} what="your consultation request" /> : null}
+      {guardError ? <FormAlert tone="error">{guardError}</FormAlert> : null}
       <Button type="submit" variant="whatsapp" size="lg" className="w-full sm:w-auto">
         <WhatsAppIcon />
         Request Consultation via WhatsApp

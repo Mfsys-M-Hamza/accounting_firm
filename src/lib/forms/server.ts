@@ -15,11 +15,10 @@ import "server-only";
  * FORMS_DEMO_MODE=true is set for a demo deployment.
  */
 import { NextResponse, type NextRequest } from "next/server";
-import { formSchemas, type FormKind } from "./schemas";
+import { MIN_FILL_MS, formSchemas, type FormKind } from "./schemas";
 import { rateLimit } from "./rate-limit";
 
 const MAX_BODY_BYTES = 16_384;
-const MIN_FILL_MS = 2_500;
 
 /** Strip control characters and HTML tags, normalise whitespace. */
 export function sanitize(value: unknown): unknown {

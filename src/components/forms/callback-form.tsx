@@ -11,8 +11,9 @@ import { trackEvent } from "@/lib/analytics";
 import { businessTypeOptions, serviceOptions } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { ConsentField, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { ConsentField, FormAlert, Honeypot, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
 import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
+import { useBotGuard } from "./use-bot-guard";
 
 const defaults: Partial<CallbackInput> = { name: "", email: "", phone: "", businessType: "", service: "", message: "" };
 
@@ -33,8 +34,10 @@ export function CallbackForm({ defaultService }: { defaultService?: string }) {
     mode: "onTouched",
   });
   const [sent, setSent] = useState<{ name: string; link: WhatsappLink } | null>(null);
+  const { honeypot, markStarted, allow, error: guardError } = useBotGuard();
 
   const send = handleSubmit((data) => {
+    if (!allow()) return;
     const text = buildCallbackMessage(data);
     const url = whatsappUrl(text);
     setSent({ name: data.name.split(" ")[0], link: { url, text } });
@@ -69,7 +72,8 @@ export function CallbackForm({ defaultService }: { defaultService?: string }) {
   }
 
   return (
-    <form noValidate onSubmit={send} className="space-y-4 rounded-xl bg-white p-5 shadow-lift sm:p-6">
+    <form noValidate onSubmit={send} onFocus={markStarted} className="space-y-4 rounded-xl bg-white p-5 shadow-lift sm:p-6">
+      <Honeypot ref={honeypot} name="website" />
       <div className="grid gap-4 sm:grid-cols-2">
         <TextField label="Name" required autoComplete="name" error={errors.name?.message} {...register("name")} />
         <TextField label="Email" type="email" required autoComplete="email" error={errors.email?.message} {...register("email")} />
@@ -79,6 +83,7 @@ export function CallbackForm({ defaultService }: { defaultService?: string }) {
         <TextareaField label="Message" rows={3} className="sm:col-span-2" error={errors.message?.message} {...register("message")} />
       </div>
       <ConsentField error={errors.consent?.message} {...register("consent")} />
+      {guardError ? <FormAlert tone="error">{guardError}</FormAlert> : null}
       <Button type="submit" variant="whatsapp" size="lg" className="w-full">
         <WhatsAppIcon />
         Send Enquiry via WhatsApp

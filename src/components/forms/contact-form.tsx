@@ -10,8 +10,9 @@ import { trackEvent } from "@/lib/analytics";
 import { contactMethodOptions, serviceOptions } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { ChoiceGroup, ConsentField, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { ChoiceGroup, ConsentField, FormAlert, Honeypot, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
 import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
+import { useBotGuard } from "./use-bot-guard";
 
 const defaults: Partial<ContactInput> = { name: "", email: "", phone: "", company: "", subject: "", service: "", message: "", contactMethod: "" };
 
@@ -27,8 +28,10 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<ContactInput, unknown, ContactData>({ resolver: zodResolver(contactSchema), defaultValues: defaults, mode: "onTouched" });
   const [waLink, setWaLink] = useState<WhatsappLink | null>(null);
+  const { honeypot, markStarted, allow, error: guardError } = useBotGuard();
 
   const send = handleSubmit((data) => {
+    if (!allow()) return;
     const text = buildContactMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
@@ -37,7 +40,8 @@ export function ContactForm() {
   }, focusFirstInvalid);
 
   return (
-    <form noValidate onSubmit={send} className="relative space-y-5">
+    <form noValidate onSubmit={send} onFocus={markStarted} className="relative space-y-5">
+      <Honeypot ref={honeypot} name="website" />
       <div className="grid gap-5 sm:grid-cols-2">
         <TextField label="Name" required autoComplete="name" error={errors.name?.message} {...register("name")} />
         <TextField label="Email" type="email" required autoComplete="email" inputMode="email" error={errors.email?.message} {...register("email")} />
@@ -52,6 +56,8 @@ export function ContactForm() {
       <PrivacyNote />
 
       {waLink ? <WhatsappNotice key={waLink.url} link={waLink} what="your message" /> : null}
+
+      {guardError ? <FormAlert tone="error">{guardError}</FormAlert> : null}
 
       <Button type="submit" variant="whatsapp" size="lg" className="w-full sm:w-auto">
         <WhatsAppIcon />

@@ -23,6 +23,9 @@ import {
 // the blocked probe shows up as a console error in Firefox on every page with a form.
 z.config({ jitless: true });
 
+/** Spam trap: minimum time between first touching a form and sending it (client and server). */
+export const MIN_FILL_MS = 2_500;
+
 const req = (label: string) => `Please enter your ${label}`;
 const choose = (label: string) => `Please select ${label}`;
 

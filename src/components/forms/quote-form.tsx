@@ -18,8 +18,9 @@ import {
 } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
-import { ChoiceGroup, ConsentField, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
+import { ChoiceGroup, ConsentField, FormAlert, Honeypot, PrivacyNote, SelectField, TextField, TextareaField, focusFirstInvalid } from "./fields";
 import { WhatsappNotice, type WhatsappLink } from "./whatsapp-notice";
+import { useBotGuard } from "./use-bot-guard";
 
 const defaults: Partial<QuoteInput> = {
   fullName: "",
@@ -59,8 +60,10 @@ export function QuoteForm() {
     formState: { errors },
   } = useForm<QuoteInput, unknown, QuoteData>({ resolver: zodResolver(quoteSchema), defaultValues: defaults, mode: "onTouched" });
   const [waLink, setWaLink] = useState<WhatsappLink | null>(null);
+  const { honeypot, markStarted, allow, error: guardError } = useBotGuard();
 
   const sendWhatsapp = handleSubmit((data) => {
+    if (!allow()) return;
     const text = buildQuoteMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
@@ -69,7 +72,8 @@ export function QuoteForm() {
   }, focusFirstInvalid);
 
   return (
-    <form noValidate onSubmit={sendWhatsapp} className="relative space-y-8" aria-describedby="quote-required-note">
+    <form noValidate onSubmit={sendWhatsapp} onFocus={markStarted} className="relative space-y-8" aria-describedby="quote-required-note">
+      <Honeypot ref={honeypot} name="website" />
       <p id="quote-required-note" className="text-sm text-muted">
         Fields marked <span className="text-danger">*</span> are required. It takes about two minutes.
       </p>
@@ -128,6 +132,8 @@ export function QuoteForm() {
       </div>
 
       {waLink ? <WhatsappNotice key={waLink.url} link={waLink} what="your quote details" /> : null}
+
+      {guardError ? <FormAlert tone="error">{guardError}</FormAlert> : null}
 
       <Button type="submit" variant="whatsapp" size="lg" className="w-full">
         <WhatsAppIcon />

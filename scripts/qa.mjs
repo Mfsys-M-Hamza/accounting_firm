@@ -30,6 +30,8 @@ const pass = (m) => (report.checks.push(m), console.log("  ✓", m));
 const fail = (m) => (report.failures.push(m), console.log("  ✗", m));
 const section = (t) => console.log(`\n── ${t}`);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Longer than the forms' minimum fill time (MIN_FILL_MS in src/lib/forms/schemas.ts).
+const FILL_DELAY = 2_700;
 // Scroll first and let the layout settle (smooth scrolling and the header's on-scroll
 // change can shift content), otherwise page.click may hit the element's old position.
 const clickEl = async (page, sel) => {
@@ -366,6 +368,7 @@ section("Contact form");
   await fill(page, "Message", "We need help with our year-end accounts this year.");
   await choose(page, "Email");
   await page.$eval('main form input[name="consent"]', (i) => i.click());
+  await sleep(FILL_DELAY); // the forms ignore sends faster than a person could type (spam guard)
   await clickEl(page, "main form button[type=submit]");
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);
@@ -418,6 +421,7 @@ section("Consultation form");
     window.__opened = [];
     window.open = (u) => (window.__opened.push(u), {});
   });
+  await sleep(FILL_DELAY); // the forms ignore sends faster than a person could type (spam guard)
   await clickEl(page, "main form button[type=submit]");
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);
@@ -449,6 +453,12 @@ section("Callback form");
     window.__opened = [];
     window.open = (u) => (window.__opened.push(u), {});
   });
+  // Spam guard: a send within 2.5s of first touching the form is held back with a prompt to press again.
+  await clickEl(page, `${form} button[type=submit]`);
+  await sleep(400);
+  const tooFast = await page.evaluate((f) => ({ opened: window.__opened.length, prompt: document.querySelector(f).innerText.includes("That was very quick") }), form);
+  tooFast.opened === 0 && tooFast.prompt ? pass("spam guard holds back an instant send and asks to press again") : fail(`spam guard: ${JSON.stringify(tooFast)}`);
+  await sleep(FILL_DELAY);
   await clickEl(page, `${form} button[type=submit]`);
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);

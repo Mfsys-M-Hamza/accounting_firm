@@ -42,7 +42,12 @@ jobs:
             echo "NEXT_PUBLIC_BASE_PATH=/${REPO}" >> "$GITHUB_ENV"
           fi
       - run: npm run lint
+      # Analytics stays off until the repository variable GA_MEASUREMENT_ID (e.g. G-XXXXXXXXXX)
+      # is set under Settings → Secrets and variables → Actions → Variables. Visitors are then
+      # asked for cookie consent before Google Analytics loads (see src/lib/analytics.ts).
       - run: npm run build:pages
+        env:
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
