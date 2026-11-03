@@ -117,7 +117,7 @@ export default function HomePage() {
       <Section labelledBy="about-title">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal className="relative aspect-photo overflow-hidden rounded-2xl">
-            <Image quality={85} src={images.teamBoardroom.src} alt={images.teamBoardroom.alt} fill placeholder="blur" sizes="(min-width:1200px) 34rem, (min-width:1024px) 45vw, 100vw" className="object-cover" />
+            <Image quality={85} src={images.teamMeeting.src} alt={images.teamMeeting.alt} fill placeholder="blur" sizes="(min-width:1200px) 34rem, (min-width:1024px) 45vw, 100vw" className="object-cover" />
           </Reveal>
           <div>
             <SectionHeading

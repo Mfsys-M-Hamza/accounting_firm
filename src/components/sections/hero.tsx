@@ -10,7 +10,7 @@ import { ButtonLink } from "@/components/ui/button";
  * paint immediately.
  */
 export function Hero() {
-  const photo = images.heroAdvisoryMeeting;
+  const photo = images.heroAdviceSession;
   return (
     <section aria-labelledby="hero-title" className="bg-paper">
       <div className="container-page grid items-center gap-12 py-12 sm:py-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-16">
@@ -41,7 +41,7 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative aspect-photo overflow-hidden rounded-2xl lg:aspect-portrait">
+          <div className="relative aspect-photo overflow-hidden rounded-2xl">
             <Image
               quality={85}
               src={photo.src}
@@ -50,7 +50,7 @@ export function Hero() {
               preload
               placeholder="blur"
               sizes="(min-width: 1024px) 40rem, 100vw"
-              className="object-cover object-[60%_center]"
+              className="object-cover"
             />
           </div>
           <div className="absolute -bottom-6 left-4 flex items-center gap-3 rounded-xl border border-line bg-white px-4 py-3 shadow-lift sm:left-6">

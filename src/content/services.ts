@@ -51,7 +51,7 @@ export const services: Service[] = [
     title: "Accounting & Bookkeeping",
     shortTitle: "Accounting",
     icon: BookOpenCheck,
-    image: "blogReports",
+    image: "financialCharts",
     summary: "Complete monthly and yearly accounting — accurate books, reconciled accounts and year-end accounts filed on time.",
     headline: "Accounting & Bookkeeping That Takes the Headache Away",
     intro:

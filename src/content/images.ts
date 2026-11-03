@@ -8,8 +8,9 @@
  * src/assets/images/social/ is the client's own (UK Accountax Instagram/LinkedIn).
  */
 import type { StaticImageData } from "next/image";
-import heroAdvisoryMeeting from "@/assets/images/hero-advisory-meeting.webp";
-import teamBoardroom from "@/assets/images/team-boardroom.webp";
+import heroAdviceSession from "@/assets/images/hero-advice-session.webp";
+import teamMeeting from "@/assets/images/team-meeting.webp";
+import financialCharts from "@/assets/images/financial-charts.webp";
 import auditDocumentReview from "@/assets/images/audit-document-review.webp";
 import payrollTeam from "@/assets/images/payroll-team.webp";
 import advisoryPlanning from "@/assets/images/advisory-planning.webp";
@@ -39,8 +40,9 @@ export interface SiteImage {
 }
 
 export const images = {
-  heroAdvisoryMeeting: { src: heroAdvisoryMeeting, alt: "Financial adviser reviewing figures with a business owner at a meeting table" },
-  teamBoardroom: { src: teamBoardroom, alt: "Colleagues in a meeting around a boardroom table with laptops" },
+  heroAdviceSession: { src: heroAdviceSession, alt: "Accountant going through notes with a business owner at an office desk" },
+  teamMeeting: { src: teamMeeting, alt: "Colleagues smiling around a meeting table with laptops" },
+  financialCharts: { src: financialCharts, alt: "Printed financial charts held over a desk with a calculator, notebook and laptop" },
   auditDocumentReview: { src: auditDocumentReview, alt: "Person signing a document with a pen" },
   payrollTeam: { src: payrollTeam, alt: "Team of employees collaborating at a shared office table" },
   advisoryPlanning: { src: advisoryPlanning, alt: "Business advisers planning with laptops and handwritten notes" },

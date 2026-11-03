@@ -7,8 +7,9 @@ Photos showing US tax forms were removed, as they are wrong for a UK firm.
 
 | File | Source |
 | --- | --- |
-| hero-advisory-meeting.webp | https://unsplash.com/photos/1551836022-d5d88e9218df |
-| team-boardroom.webp | https://unsplash.com/photos/1542744173-8e7e53415bb0 |
+| hero-advice-session.webp | https://unsplash.com/photos/M2lMs1qK54g (Vitaly Gariev) |
+| team-meeting.webp | https://unsplash.com/photos/ZT5v0puBjZI (Mapbox) |
+| financial-charts.webp | https://unsplash.com/photos/9PwLeZA-RGc (Jakub Żerdzicki) |
 | audit-document-review.webp | https://unsplash.com/photos/1450101499163-c8848c66ca85 |
 | payroll-team.webp | https://unsplash.com/photos/1522071820081-009f0129c71c |
 | advisory-planning.webp | https://unsplash.com/photos/1454165804606-c3d57bc86b40 |
