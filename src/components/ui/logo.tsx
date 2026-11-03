@@ -19,15 +19,15 @@ export function Mark({ className = "size-10" }: { className?: string }) {
 export function Logo({ light = false, className }: { light?: boolean; className?: string }) {
   const { logo, companyName, tagline } = siteConfig;
   return (
-    <Link href="/" className={cn("flex min-w-0 items-center gap-3", className)} aria-label={`${companyName} — home`}>
+    <Link href="/" className={cn("flex min-w-0 items-center gap-3", className)}>
       {logo ? (
-        <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} priority className="h-10 w-auto" />
+        <Image quality={85} src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} preload className="h-10 w-auto" />
       ) : (
         <>
           <Mark />
           <span className="flex min-w-0 flex-col leading-none">
             <span className={cn("truncate font-display text-lg font-semibold tracking-tight", light ? "text-white" : "text-navy-800")}>{companyName}</span>
-            <span className={cn("mt-1 truncate text-[0.6875rem] font-semibold tracking-[0.14em] uppercase", light ? "text-gold-400" : "text-gold-600")}>
+            <span className={cn("mt-1 hidden truncate text-[0.6875rem] min-[400px]:block font-semibold tracking-[0.14em] uppercase", light ? "text-teal-300" : "text-teal-600")}>
               {tagline}
             </span>
           </span>

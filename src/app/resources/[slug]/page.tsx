@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Clock, Info } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { getPost, posts, relatedPosts, slugify, type Block } from "@/content/posts";
+import { ArrowRight, Clock, Info, MessagesSquare } from "lucide-react";
+import { getPost, postAuthor, posts, relatedPosts, slugify, type Block } from "@/content/posts";
 import { images } from "@/content/images";
 import { buildMetadata } from "@/lib/seo";
 import { articleSchema } from "@/lib/schema";
@@ -15,7 +14,7 @@ import { Section, SectionHeading } from "@/components/ui/section";
 import { Stagger, StaggerItem } from "@/components/motion/motion";
 import { PostCard, formatDate } from "@/components/sections/post-card";
 import { ShareButtons } from "@/components/sections/share-buttons";
-import { Illustration } from "@/components/icons/illustrations";
+import { IconBadge } from "@/components/icons/icon-badge";
 
 export const dynamicParams = false;
 
@@ -58,7 +57,7 @@ function renderBlock(block: Block, i: number) {
       );
     case "callout":
       return (
-        <aside key={i} className="my-8 rounded-2xl border-l-4 border-gold-500 bg-gold-100/50 px-6 py-5 text-ink">
+        <aside key={i} className="my-8 rounded-2xl border-l-4 border-teal-500 bg-teal-100/50 px-6 py-5 text-ink">
           {block.text}
         </aside>
       );
@@ -73,7 +72,7 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
   if (!post) notFound();
 
   const img = images[post.image];
-  const author = post.author ?? `${siteConfig.companyName} Editorial Team`;
+  const author = postAuthor(post);
   const toc = post.body.filter((b): b is Extract<Block, { type: "h2" }> => b.type === "h2");
   const url = absoluteUrl(`/resources/${post.slug}`);
   // Place the in-article CTA roughly halfway through the body.
@@ -82,9 +81,8 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
   return (
     <>
       <article>
-        <header className="relative isolate overflow-hidden bg-navy-900 pt-32 pb-40 sm:pt-36">
-          <div className="bg-grid-dark absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" aria-hidden="true" />
-          <div className="container-page max-w-4xl animate-[fade-up_0.8s_cubic-bezier(0.22,1,0.36,1)_both]">
+        <header className="bg-navy-900 pt-14 pb-40 sm:pt-20">
+          <div className="container-page max-w-4xl">
             <Breadcrumbs
               light
               className="mb-6"
@@ -93,13 +91,21 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
                 { name: post.title, href: `/resources/${post.slug}` },
               ]}
             />
-            <p className="eyebrow text-gold-400">{post.category}</p>
+            <p className="eyebrow text-teal-300">{post.category}</p>
             <h1 className="mt-4 text-4xl leading-[1.12] font-semibold text-white sm:text-5xl">{post.title}</h1>
             <p className="mt-5 text-lg text-white/75">{post.excerpt}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/65">
+            <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/75">
               <span>
                 By <span className="font-semibold text-white">{author}</span>
               </span>
+              {post.reviewedBy ? (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>
+                    Reviewed by <span className="font-semibold text-white">{post.reviewedBy}</span>
+                  </span>
+                </>
+              ) : null}
               <span aria-hidden="true">·</span>
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
               {post.updatedAt ? (
@@ -119,8 +125,8 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
         </header>
 
         <div className="container-page -mt-28 max-w-5xl">
-          <div className="relative aspect-[16/8] overflow-hidden rounded-[2rem] shadow-lift">
-            <Image src={img.src} alt={img.alt} fill priority placeholder="blur" sizes="(min-width:1024px) 64rem, 100vw" className="object-cover" />
+          <div className="relative aspect-wide overflow-hidden rounded-2xl shadow-lift">
+            <Image quality={85} src={img.src} alt={img.alt} fill preload placeholder="blur" sizes="(min-width:1024px) 64rem, 100vw" className="object-cover" />
           </div>
         </div>
 
@@ -129,13 +135,13 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
             {post.body.map((block, i) =>
               i === midpoint ? (
                 <div key={`cta-${i}`}>
-                  <aside className="not-prose my-10 flex flex-col gap-5 rounded-3xl bg-navy-900 p-7 sm:flex-row sm:items-center">
-                    <Illustration name="consultation" className="size-16 shrink-0" />
+                  <aside className="not-prose my-10 flex flex-col gap-5 rounded-xl bg-navy-900 p-7 sm:flex-row sm:items-center">
+                    <IconBadge icon={MessagesSquare} light />
                     <div className="flex-1">
                       <p className="font-display text-xl leading-snug font-semibold text-white">Want expert help with this?</p>
                       <p className="mt-1 text-[0.9375rem] leading-relaxed text-white/70">Our team can handle it for you. Get a free, no-obligation quote.</p>
                     </div>
-                    <ButtonLink href="/quote" variant="gold" className="shrink-0 no-underline">
+                    <ButtonLink href="/quote" variant="primary" className="shrink-0 no-underline">
                       Get a quote
                     </ButtonLink>
                   </aside>
@@ -162,7 +168,7 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
                 <ol className="mt-4 space-y-2.5 border-l border-line text-sm">
                   {toc.map((h) => (
                     <li key={h.text}>
-                      <a href={`#${slugify(h.text)}`} className="-ml-px block border-l-2 border-transparent pl-4 text-body transition-colors hover:border-gold-500 hover:text-navy-700">
+                      <a href={`#${slugify(h.text)}`} className="-ml-px block border-l-2 border-transparent pl-4 text-body transition-colors hover:border-teal-500 hover:text-navy-700">
                         {h.text}
                       </a>
                     </li>
@@ -174,7 +180,7 @@ export default async function ArticlePage({ params }: PageProps<"/resources/[slu
               <p className="mb-3 text-xs font-bold tracking-[0.14em] text-muted uppercase">Share</p>
               <ShareButtons url={url} title={post.title} />
             </div>
-            <div className="rounded-3xl border border-line p-6">
+            <div className="rounded-xl border border-line p-6">
               <p className="font-display text-lg font-semibold text-ink">Talk to an adviser</p>
               <p className="mt-2 text-sm text-body">Book a consultation to discuss your situation.</p>
               <ButtonLink href="/book-consultation" size="sm" className="mt-4 w-full">

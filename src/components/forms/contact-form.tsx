@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactData, type ContactInput } from "@/lib/forms/schemas";
 import { buildContactMessage } from "@/lib/forms/quote-message";
 import { openWhatsapp, whatsappUrl } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { contactMethodOptions, serviceOptions } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ export function ContactForm() {
     const text = buildContactMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
+    trackEvent("generate_lead", { form: "contact" });
     openWhatsapp(url);
   }, focusFirstInvalid);
 

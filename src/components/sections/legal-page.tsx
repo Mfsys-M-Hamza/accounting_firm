@@ -8,8 +8,8 @@ export function LegalPage({ title, intro, path, lastUpdated, children }: { title
     <>
       <PageHero title={title} intro={intro} crumbs={[{ name: title, href: path }]} />
       <div className="container-page max-w-3xl py-16 sm:py-20">
-        <div role="note" className="mb-10 flex gap-3 rounded-2xl border border-dashed border-gold-500/60 bg-gold-100/40 p-5 text-sm leading-relaxed text-ink">
-          <AlertTriangle className="mt-0.5 size-5 shrink-0 text-gold-600" aria-hidden="true" />
+        <div role="note" className="mb-10 flex gap-3 rounded-2xl border border-dashed border-teal-500/60 bg-teal-100/40 p-5 text-sm leading-relaxed text-ink">
+          <AlertTriangle className="mt-0.5 size-5 shrink-0 text-teal-600" aria-hidden="true" />
           <p>
             <strong>Template notice:</strong> this document is a starting template. Replace all bracketed placeholders and have it reviewed by a qualified legal professional
             for your jurisdiction before publishing.

@@ -26,7 +26,7 @@ export function Breadcrumbs({ items, light = false, className }: { items: Crumb[
                     {c.name}
                   </span>
                 ) : (
-                  <Link href={c.href} className={cn("transition-colors", light ? "hover:text-gold-400" : "hover:text-navy-700")}>
+                  <Link href={c.href} className={cn("transition-colors", light ? "hover:text-teal-300" : "hover:text-navy-700")}>
                     {c.name}
                   </Link>
                 )}

@@ -8,7 +8,6 @@
 import { z } from "zod";
 import {
   businessTypeOptions,
-  callbackTimeOptions,
   consultationTimeOptions,
   consultationTypeOptions,
   contactMethodOptions,
@@ -19,6 +18,10 @@ import {
   serviceOptions,
   turnoverOptions,
 } from "@/content/form-options";
+
+// Skip Zod's `new Function` probe: the Content Security Policy blocks eval, and
+// the blocked probe shows up as a console error in Firefox on every page with a form.
+z.config({ jitless: true });
 
 const req = (label: string) => `Please enter your ${label}`;
 const choose = (label: string) => `Please select ${label}`;
@@ -116,9 +119,11 @@ export const consultationSchema = z.object({
 
 export const callbackSchema = z.object({
   name,
+  email,
   phone,
-  preferredTime: oneOf(callbackTimeOptions, "a preferred time"),
+  businessType: oneOf(businessTypeOptions, "a business type"),
   service: oneOf(serviceOptions, "a service"),
+  message: message(false),
   consent,
 });
 

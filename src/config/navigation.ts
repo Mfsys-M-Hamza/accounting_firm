@@ -1,37 +1,40 @@
+import { siteConfig } from "@/config/site";
+import { industries, industryHref } from "@/content/industries";
+
 export interface NavItem {
   label: string;
   href: string;
 }
 
+/** Main navigation, in display order. "Services" is rendered as a dropdown built from src/content/services.ts. */
 export const mainNav: NavItem[] = [
-  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Who We Help", href: "/industries" },
   { label: "About", href: "/about" },
-  // "Services" is rendered as a dropdown built from src/content/services.ts
-  { label: "Industries", href: "/industries" },
-  { label: "Resources", href: "/resources" },
+  { label: "Insights", href: "/resources" },
+  { label: "FAQs", href: "/faqs" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const footerNav = {
-  company: [
-    { label: "About Us", href: "/about" },
-    { label: "Industries", href: "/industries" },
-    { label: "Contact", href: "/contact" },
-    { label: "Book a Consultation", href: "/book-consultation" },
-  ],
   services: [
     { label: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
-    { label: "VAT Returns", href: "/services/vat-services" },
-    { label: "Tax Returns", href: "/services/taxation" },
+    { label: "VAT & Making Tax Digital", href: "/services/vat-services" },
+    { label: "Tax Returns & Planning", href: "/services/taxation" },
     { label: "Payroll", href: "/services/payroll" },
-    { label: "Company Registration", href: "/services/company-formation" },
+    { label: "Company Formation", href: "/services/company-formation" },
+    { label: "Management Accounts", href: "/services/cfo-services" },
     { label: "Xero & QuickBooks", href: "/services/cloud-accounting" },
+    { label: "Business Advisory", href: "/services/business-advisory" },
   ],
-  resources: [
-    { label: "Blog & Guides", href: "/resources" },
+  audiences: industries.slice(0, 8).map((i) => ({ label: i.name, href: industryHref(i) })),
+  company: [
+    { label: "About Us", href: "/about" },
+    ...(siteConfig.features.showTeam ? [{ label: "Our Team", href: "/team" }] : []),
+    { label: "Insights & Guides", href: "/resources" },
     { label: "FAQs", href: "/faqs" },
-    { label: "Get a Quote", href: "/quote" },
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms & Conditions", href: "/terms-and-conditions" },
+    { label: "Get a Free Quote", href: "/quote" },
+    { label: "Book a Consultation", href: "/book-consultation" },
+    { label: "Contact", href: "/contact" },
   ],
 } satisfies Record<string, NavItem[]>;

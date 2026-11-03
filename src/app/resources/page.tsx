@@ -25,7 +25,6 @@ export default function ResourcesPage() {
         title="Insights, guides & updates"
         intro="Practical, plain-English guidance to help you run a compliant, well-managed and growing business."
         crumbs={[{ name: "Resources", href: "/resources" }]}
-        illustration="bookkeeping"
       />
 
       <Section labelledBy="featured-title" tone="paper" className="pb-10 sm:pb-12 lg:pb-14">

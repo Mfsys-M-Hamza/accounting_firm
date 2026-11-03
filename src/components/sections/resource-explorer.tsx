@@ -78,7 +78,7 @@ export function ResourceExplorer({ posts }: { posts: PostSummary[] }) {
           ))}
         </ul>
       ) : (
-        <div className="mt-6 rounded-3xl border border-dashed border-line bg-white px-6 py-16 text-center">
+        <div className="mt-6 rounded-xl border border-dashed border-line bg-white px-6 py-16 text-center">
           <p className="font-display text-xl font-semibold text-ink">No articles found</p>
           <p className="mt-2 text-body">Try a different search term or category.</p>
           <button

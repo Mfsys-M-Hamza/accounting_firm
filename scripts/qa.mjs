@@ -81,7 +81,7 @@ section("Form API hardening");
   r = await post("/api/contact", { name: "A", email: "bad", message: "short", startedAt: Date.now() - 10_000 });
   const j = await r.json();
   r.status === 422 && j.errors?.email ? pass("server-side validation returns field errors (422)") : fail(`server validation returned ${r.status}`);
-  r = await post("/api/callback", { name: "Bot", phone: "123456789", preferredTime: "Any", service: "Payroll", consent: true, website: "http://spam", startedAt: Date.now() - 10_000 });
+  r = await post("/api/callback", { name: "Bot", email: "bot@example.com", phone: "123456789", businessType: "Other", service: "Payroll", consent: true, website: "http://spam", startedAt: Date.now() - 10_000 });
   (await r.json()).ok && r.status === 200 ? pass("honeypot submissions silently accepted (not delivered)") : fail("honeypot handling unexpected");
   r = await post("/api/contact", { name: "<script>alert(1)</script>Jo", email: "a@b.co", subject: "Hello there", message: "Testing sanitisation of input", contactMethod: "Email", consent: true, startedAt: Date.now() - 10_000 });
   [200, 503].includes(r.status) ? pass(`sanitised submission handled (${r.status})`) : fail(`sanitised submission returned ${r.status}`);
@@ -227,8 +227,8 @@ section("Navigation");
   (await page.$("#services-menu")) ? fail("dropdown did not close on Escape") : pass("dropdown closes on Escape and returns focus");
   await page.evaluate(() => window.scrollTo(0, 600));
   await sleep(500);
-  const solid = await page.$eval("header > div:nth-child(2)", (el) => getComputedStyle(el).backgroundColor);
-  solid !== "rgba(0, 0, 0, 0)" ? pass("header changes appearance on scroll") : fail("header did not change on scroll");
+  const header = await page.$eval("header", (el) => ({ top: el.getBoundingClientRect().top, shadow: getComputedStyle(el).boxShadow }));
+  header.top === 0 && header.shadow !== "none" ? pass("header stays at the top and gains a shadow on scroll") : fail(`header on scroll: top=${header.top}, shadow=${header.shadow}`);
   // Skip link
   await page.goto(`${BASE}/about`, { waitUntil: "networkidle0" });
   await page.keyboard.press("Tab");
@@ -268,10 +268,10 @@ section("Reduced motion");
   const { page } = await openPage("desktop");
   await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
   await page.goto(`${BASE}/`, { waitUntil: "networkidle0" });
-  await page.evaluate(() => document.querySelector("#industries-title")?.scrollIntoView());
+  await page.evaluate(() => document.querySelector("#audiences-title")?.scrollIntoView());
   await sleep(700);
-  const transform = await page.$eval("#industries-title", (h) => getComputedStyle(h.closest("div[style]") ?? h).transform);
-  const visible = await page.$eval("#industries-title", (h) => h.getBoundingClientRect().height > 0);
+  const transform = await page.$eval("#audiences-title", (h) => getComputedStyle(h.closest("div[style]") ?? h).transform);
+  const visible = await page.$eval("#audiences-title", (h) => h.getBoundingClientRect().height > 0);
   visible && (transform === "none" || transform.includes("matrix(1, 0, 0, 1, 0, 0)")) ? pass("reduced motion: content visible without transforms") : fail(`reduced motion transform: ${transform}`);
   await page.close();
 }
@@ -432,13 +432,18 @@ section("Callback form");
 {
   const { page } = await openPage("mobile");
   await page.goto(`${BASE}/services/payroll`, { waitUntil: "networkidle0" });
-  const svc = await page.$eval("#cta-title", (h) => h.closest("section").querySelector("select:last-of-type") && [...h.closest("section").querySelectorAll("select")].pop().value);
-  svc === "Payroll Services" ? pass("callback form pre-selects the page's service") : fail(`callback preselect was "${svc}"`);
   const form = "section[aria-labelledby=cta-title] form";
+  // The enquiry form loads only when scrolled near, so bring it into view first.
+  await page.$eval("#cta-title", (h) => h.scrollIntoView());
+  await page.waitForSelector(`${form} select[name=service]`);
+  const svc = await page.$eval(`${form} select[name=service]`, (s) => s.value);
+  svc === "Payroll Services" ? pass("callback form pre-selects the page's service") : fail(`callback preselect was "${svc}"`);
   await page.$eval(form, (f) => f.scrollIntoView());
   await page.type(`${form} input[autocomplete=name]`, "Pat Caller");
+  await page.type(`${form} input[type=email]`, "pat@example.com");
   await page.type(`${form} input[type=tel]`, "0161 496 0000");
-  await page.select(`${form} select`, "As soon as possible");
+  await page.select(`${form} select[name=businessType]`, "Partnership");
+  await page.type(`${form} textarea`, "Monthly payroll for six staff.");
   await page.$eval(`${form} input[name=consent]`, (i) => i.click());
   await page.evaluate(() => {
     window.__opened = [];
@@ -448,8 +453,9 @@ section("Callback form");
   await sleep(600);
   const opened = await page.evaluate(() => window.__opened);
   const text = opened.length === 1 ? (new URL(opened[0]).searchParams.get("text") ?? "") : "";
-  const missing = ["Please call me back.", "Pat Caller", "0161 496 0000", "As soon as possible", "Payroll Services"].filter((e) => !text.includes(e));
+  const missing = ["I would like to make an enquiry.", "Pat Caller", "pat@example.com", "0161 496 0000", "Partnership", "Payroll Services", "Monthly payroll for six staff."].filter((e) => !text.includes(e));
   opened.length === 1 && !missing.length ? pass("callback opens WhatsApp with all details") : fail(`callback WhatsApp: opened=${opened.length}, missing ${missing.join(", ")}`);
+  (await page.$eval("body", (b) => b.innerText.includes("Thank you, Pat."))) ? pass("callback shows a thank-you state") : fail("no callback thank-you state");
   await page.close();
 }
 

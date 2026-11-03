@@ -1,60 +1,72 @@
 @import "tailwindcss";
 
 /*
- * Design tokens (UK Accountax brand: "navy" = brand indigo #29288e, "gold" =
- * brand teal #25bba2). Rebrand a client by editing these values; components only
- * reference the token names (bg-navy-900, text-gold-500, font-display ...).
+ * Design tokens. Palette from the 2026 website brief: deep navy #12304A for
+ * headings and navigation, teal #176B87 for links, actions and accents, light
+ * blue-grey #F3F7F9 section backgrounds and a muted gold used sparingly for
+ * highlights. Components only reference the token names (bg-navy-900,
+ * text-teal-600, font-display ...), so a rebrand only touches this block.
  */
 @theme {
-  --color-navy-950: #0f0e3d;
-  --color-navy-900: #1c1b6b;
-  --color-navy-800: #29288e;
-  --color-navy-700: #3634a8;
-  --color-navy-600: #4644bf;
-  --color-navy-100: #e4e4f6;
-  --color-navy-50: #f3f3fb;
+  --color-navy-950: #0b2033;
+  --color-navy-900: #12304a;
+  --color-navy-800: #1a3f5e;
+  --color-navy-700: #245173;
+  --color-navy-600: #2f6488;
+  --color-navy-100: #e3ebf2;
+  --color-navy-50: #f1f5f9;
 
-  --color-gold-600: #0e7a68;
-  --color-gold-500: #25bba2;
-  --color-gold-400: #4fd1b9;
-  --color-gold-100: #d7f4ee;
+  --color-teal-800: #0f4c61;
+  --color-teal-700: #135a72;
+  --color-teal-600: #176b87;
+  --color-teal-500: #1f82a3;
+  --color-teal-400: #4fa7c4;
+  --color-teal-300: #8cc7da;
+  --color-teal-100: #ddeff5;
+  --color-teal-50: #eef7fa;
 
-  --color-ink: #1d2533;
+  --color-gold-700: #6e5420;
+  --color-gold-600: #94722c;
+  --color-gold-500: #c49a45;
+  --color-gold-400: #d6b46e;
+  --color-gold-100: #f6eedc;
+
+  --color-ink: #12304a;
   --color-body: #475467;
-  --color-muted: #667085;
-  --color-line: #e4e8ef;
-  --color-paper: #f7f8fb;
+  --color-muted: #5f6b7a;
+  --color-line: #e2e8ee;
+  --color-paper: #f3f7f9;
   --color-success: #16794c;
   --color-danger: #b42318;
   --color-whatsapp: #15803d;
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -8px rgb(16 24 40 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(16 24 40 / 0.05), 0 22px 44px -16px rgb(28 27 107 / 0.22);
+  /* Image crop ratios — use only these: section photos, article images, portraits. */
+  --aspect-photo: 4 / 3;
+  --aspect-wide: 16 / 9;
+  --aspect-portrait: 4 / 5;
 
-  --animate-float: float 7s ease-in-out infinite;
-  --animate-float-slow: float 9s ease-in-out infinite;
+  --shadow-card: 0 1px 2px rgb(18 48 74 / 0.04), 0 4px 16px -6px rgb(18 48 74 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(18 48 74 / 0.05), 0 16px 32px -14px rgb(18 48 74 / 0.2);
+
+  /* Dropdown and mobile menu entrance. */
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
 
   @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
       transform: none;
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
     }
   }
 }
@@ -62,7 +74,7 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
   }
 
   body {
@@ -80,7 +92,7 @@
   h4 {
     color: var(--color-ink);
     font-family: var(--font-display);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
@@ -89,13 +101,13 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-gold-500);
+    outline: 2px solid var(--color-teal-600);
     outline-offset: 3px;
     border-radius: 4px;
   }
 
   ::selection {
-    background: var(--color-gold-100);
+    background: var(--color-teal-100);
     color: var(--color-navy-900);
   }
 
@@ -114,12 +126,61 @@
       transition-duration: 0.001ms !important;
     }
   }
+
+  /*
+   * Scroll reveal (components/motion/motion.tsx). Content is only hidden once
+   * the inline reveal script has run (it sets data-js), so it stays visible
+   * without JavaScript. Reduced motion: shown at once, no movement.
+   */
+  [data-js] [data-reveal] {
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      scale 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-js] [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  [data-js] [data-reveal="down"]:not([data-revealed]) {
+    translate: 0 -12px;
+  }
+  [data-js] [data-reveal="left"]:not([data-revealed]) {
+    translate: 16px 0;
+  }
+  [data-js] [data-reveal="right"]:not([data-revealed]) {
+    translate: -16px 0;
+  }
+  [data-js] [data-reveal="none"]:not([data-revealed]) {
+    translate: none;
+  }
+  [data-js] [data-reveal="scale"]:not([data-revealed]) {
+    translate: none;
+    scale: 0.98;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-js] [data-reveal]:not([data-revealed]) {
+      opacity: 1;
+      translate: none;
+      scale: none;
+    }
+  }
 }
 
 @layer components {
+  /*
+   * Skip layout and paint for sections until they near the viewport, so the
+   * first screen renders without laying out the whole page. The browser
+   * remembers each section's real height once it has been rendered.
+   */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+
   .container-page {
     width: 100%;
-    max-width: 80rem;
+    max-width: 75rem;
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -145,33 +206,13 @@
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.625rem;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-gold-600);
-  }
-  .eyebrow::before {
-    content: "";
-    width: 1.75rem;
-    height: 1px;
-    background: currentColor;
+    color: var(--color-teal-600);
   }
 
-  /* Subtle blueprint grid used on dark sections. */
-  .bg-grid-dark {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-  .bg-grid-light {
-    background-image:
-      linear-gradient(rgb(28 27 107 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(28 27 107 / 0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
 
   /* Long-form article typography (resources + legal pages). */
   .prose-article {
@@ -202,7 +243,7 @@
     padding-left: 0.25rem;
   }
   .prose-article li::marker {
-    color: var(--color-gold-500);
+    color: var(--color-teal-600);
   }
   .prose-article a {
     color: var(--color-navy-700);

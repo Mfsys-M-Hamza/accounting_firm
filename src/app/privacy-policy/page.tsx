@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
 import { formattedAddress } from "@/lib/config-utils";
+import { analyticsEnabled } from "@/lib/analytics";
 import { LegalPage } from "@/components/sections/legal-page";
 
 export const metadata = buildMetadata({
@@ -74,10 +75,15 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <h2>9. Cookies</h2>
-      <p>
-        This website uses only the cookies and storage strictly necessary for it to function. [If you add analytics or marketing tools, update this section and implement a
-        consent mechanism where required.]
-      </p>
+      {analyticsEnabled ? (
+        <p>
+          With your consent, we use Google Analytics cookies to understand how visitors use this website — for example which pages are viewed and which contact options are
+          used. These cookies are only set if you choose &ldquo;Accept analytics&rdquo;, and you can change your choice at any time using &ldquo;Cookie settings&rdquo; at
+          the bottom of every page. Otherwise, this website uses only the storage strictly necessary for it to function, including remembering your cookie choice.
+        </p>
+      ) : (
+        <p>This website uses only the cookies and storage strictly necessary for it to function. We do not use analytics or advertising cookies.</p>
+      )}
 
       <h2>10. Changes to this policy</h2>
       <p>We may update this policy from time to time. The &ldquo;last updated&rdquo; date above shows when it was last revised.</p>

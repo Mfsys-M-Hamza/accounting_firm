@@ -15,7 +15,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
     { label: "Share on Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${u}`, icon: <SocialIcon platform="facebook" className="size-4" /> },
     { label: "Share on WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`, icon: <WhatsAppIcon className="size-4" /> },
   ];
-  const btn = "flex size-10 items-center justify-center rounded-full border border-line bg-white text-navy-800 transition-all hover:-translate-y-0.5 hover:border-navy-900 hover:bg-navy-900 hover:text-white";
+  const btn = "flex size-10 items-center justify-center rounded-lg border border-line bg-white text-navy-800 transition-colors hover:border-navy-900 hover:bg-navy-900 hover:text-white";
 
   return (
     <div className="flex items-center gap-2">

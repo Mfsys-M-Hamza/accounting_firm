@@ -25,13 +25,12 @@ export default function BookConsultationPage() {
         title="Book a consultation"
         intro="Choose how and when you'd like to meet. We'll confirm your appointment or suggest the nearest available time."
         crumbs={[{ name: "Book a Consultation", href: "/book-consultation" }]}
-        illustration="consultation"
       />
 
       <section aria-label="Consultation booking" className="bg-paper py-16 sm:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_22rem]">
           <Reveal>
-            <div className="rounded-[2rem] border border-line bg-white p-6 shadow-card sm:p-10">
+            <div className="rounded-2xl border border-line bg-white p-6 shadow-card sm:p-10">
               <h2 className="mb-6 text-2xl font-semibold">Your consultation details</h2>
               <ConsultationForm />
             </div>
@@ -40,7 +39,7 @@ export default function BookConsultationPage() {
             <aside className="space-y-4 lg:sticky lg:top-28">
               <h2 className="text-lg font-semibold">Consultation options</h2>
               {types.map((t) => (
-                <div key={t.title} className="group flex gap-4 rounded-3xl border border-line bg-white p-5">
+                <div key={t.title} className="group flex gap-4 rounded-xl border border-line bg-white p-5">
                   <IconBadge icon={t.icon} size="sm" />
                   <div>
                     <p className="font-semibold text-ink">{t.title}</p>

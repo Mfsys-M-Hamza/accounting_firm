@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Lexend, Manrope } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { siteUrl } from "@/lib/config-utils";
@@ -7,15 +7,14 @@ import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
-import { MotionProvider } from "@/components/motion/motion";
-import { IllustrationDefs } from "@/components/icons/illustrations";
+import { Analytics } from "@/components/layout/analytics";
+import { RevealScript } from "@/components/motion/motion";
 import { JsonLd } from "@/components/ui/json-ld";
 
 // Static files in public/ are not prefixed automatically when the site lives under a sub-path (GitHub Pages).
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const heading = Lexend({ subsets: ["latin"], variable: "--font-heading", display: "swap", weight: ["500", "600", "700"] });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -41,31 +40,30 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1c1b6b",
+  themeColor: "#12304a",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={siteConfig.locale} className={`${manrope.variable} ${heading.variable}`} data-scroll-behavior="smooth">
+    <html lang={siteConfig.locale} className={jakarta.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-dvh antialiased">
         <a
           href="#main"
-          className="fixed top-3 left-3 z-[100] -translate-y-20 rounded-full bg-gold-500 px-5 py-3 font-semibold text-navy-950 transition-transform focus:translate-y-0"
+          className="fixed top-3 left-3 z-[100] -translate-y-20 rounded-lg bg-teal-600 px-5 py-3 font-semibold text-white transition-transform focus:translate-y-0"
         >
           Skip to main content
         </a>
-        <IllustrationDefs />
-        <MotionProvider>
-          <Header />
-          <main id="main" tabIndex={-1} className="outline-none">
-            {children}
-          </main>
-          <Footer />
-        </MotionProvider>
+        <Header />
+        <main id="main" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
+        <Footer />
         <FloatingWhatsApp />
+        <Analytics />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <RevealScript />
       </body>
     </html>
   );

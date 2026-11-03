@@ -22,7 +22,7 @@ export function FloatingWhatsApp() {
       <span className="hidden translate-x-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink opacity-0 shadow-lift transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 md:block">
         Chat on WhatsApp
       </span>
-      <span className="relative flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_4px_0_#0e5a2b,0_16px_30px_-8px_rgb(21_128_61/0.6)] transition-transform duration-300 group-hover:-translate-y-1">
+      <span className="relative flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_10px_24px_-8px_rgb(21_128_61/0.55)] transition-colors duration-200 group-hover:bg-[#116932]">
         <span className="absolute inset-0 animate-ping rounded-full bg-whatsapp opacity-25 [animation-duration:2.5s] motion-reduce:hidden" aria-hidden="true" />
         <WhatsAppIcon className="relative size-7" />
       </span>

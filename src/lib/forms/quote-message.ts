@@ -54,12 +54,14 @@ export function buildCallbackMessage(c: CallbackData): string {
   return [
     `Hello ${siteConfig.companyName},`,
     "",
-    "Please call me back.",
+    "I would like to make an enquiry. Please get in touch.",
     "",
     line("Name", c.name),
+    line("Email", c.email),
     line("Phone", c.phone),
-    line("Preferred Time", c.preferredTime),
-    line("Service", c.service),
+    line("Business Type", c.businessType),
+    line("Service Required", c.service),
+    line("Message", c.message),
   ].join("\n");
 }
 

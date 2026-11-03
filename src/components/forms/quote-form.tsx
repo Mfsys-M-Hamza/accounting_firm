@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { quoteSchema, type QuoteData, type QuoteInput } from "@/lib/forms/schemas";
 import { buildQuoteMessage } from "@/lib/forms/quote-message";
 import { openWhatsapp, whatsappUrl } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import {
   businessTypeOptions,
   contactMethodOptions,
@@ -42,7 +43,7 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   return (
     <fieldset className="border-t border-line pt-8 first:border-t-0 first:pt-0">
       <legend className="mb-5 flex items-center gap-3">
-        <span className="flex size-8 items-center justify-center rounded-full bg-navy-900 font-display text-sm font-semibold text-gold-400">{n}</span>
+        <span className="flex size-8 items-center justify-center rounded-full bg-navy-900 font-display text-sm font-semibold text-teal-300">{n}</span>
         <span className="font-display text-xl font-semibold text-ink">{title}</span>
       </legend>
       {children}
@@ -63,6 +64,7 @@ export function QuoteForm() {
     const text = buildQuoteMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
+    trackEvent("generate_lead", { form: "quote" });
     openWhatsapp(url);
   }, focusFirstInvalid);
 

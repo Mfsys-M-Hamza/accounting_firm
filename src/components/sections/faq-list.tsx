@@ -12,7 +12,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 export function FaqList({ items, schema = false }: { items: FaqItem[]; schema?: boolean }) {
   return (
     <>
-      <div className="divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white">
+      <div className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-white">
         {items.map((f, i) => (
           <details key={f.question} className="group" open={i === 0}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 text-left transition-colors hover:bg-paper sm:px-8 [&::-webkit-details-marker]:hidden">

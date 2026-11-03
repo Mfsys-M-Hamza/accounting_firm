@@ -1,59 +1,74 @@
-/** Copy blocks shared by the home and about pages. Messaging adapted from UK Accountax's own LinkedIn/Instagram posts. */
+/** Copy blocks shared by the home and about pages. Hero copy follows the client's 2026 website brief. */
 import type { LucideIcon } from "lucide-react";
 import {
   Award,
   UserRoundCheck,
-  BadgeDollarSign,
+  BadgePoundSterling,
   LockKeyhole,
-  Clock3,
-  ShieldCheck,
+  BellRing,
+  CloudCog,
+  MessagesSquare,
   MonitorSmartphone,
-  Headset,
+  ReceiptText,
+  CalendarCheck,
   Scale,
   Handshake,
   Target,
 } from "lucide-react";
 
 export const hero = {
-  eyebrow: "Accounting · Bookkeeping · VAT · Tax · Payroll",
-  title: "Your Trusted Partner in Financial Success",
-  text: "UK-based qualified accountants helping small businesses, startups and online sellers keep accurate books, stay HMRC-compliant and save tax — so you can focus on growing your business.",
+  eyebrow: "UK accountants for small businesses",
+  title: "Clear, reliable accounting support for ambitious UK businesses.",
+  text: "From bookkeeping and VAT returns to payroll, tax planning and year-end accounts, UK Accountax helps small businesses stay organised, compliant and ready to grow — with a dedicated accountant and straightforward support.",
+  // TODO(client): the brief asks for this line only if each claim is accurate — confirm before launch.
+  trustLine: ["Qualified accounting support", "UK-wide service", "Clear, agreed fees"],
 };
 
-export const trustIndicators: { label: string; icon: LucideIcon }[] = [
-  { label: "Qualified Accountants", icon: Award },
-  { label: "HMRC Compliant", icon: ShieldCheck },
-  { label: "Fully Online, UK-wide", icon: MonitorSmartphone },
-  { label: "Low-Cost, Clear Fees", icon: BadgeDollarSign },
+/**
+ * Trust strip under the hero. Only verifiable statements belong here: add
+ * memberships through siteConfig.certifications and review ratings only with
+ * their source. Never add invented scores or client numbers.
+ */
+export const trustPoints: { title: string; text: string; icon: LucideIcon }[] = [
+  { title: "Xero & QuickBooks", text: "Cloud accounting set-up and support", icon: CloudCog },
+  { title: "Making Tax Digital", text: "VAT returns filed with MTD software", icon: ReceiptText },
+  { title: "UK-wide, fully online", text: "Phone, video, email or WhatsApp", icon: MonitorSmartphone },
+  // Founded 2021 according to the firm's LinkedIn page.
+  { title: "Established 2021", text: "Supporting UK small businesses", icon: CalendarCheck },
 ];
 
+/** "Why UK Accountax". The first six appear on the home page; the about page shows all of them. */
 export const advantages: { title: string; description: string; icon: LucideIcon }[] = [
-  { title: "Qualified, Experienced Team", description: "Qualified accountants who understand UK tax rules and the realities of running a small business.", icon: Award },
-  { title: "Your Dedicated Accountant", description: "No 'account managers' — a dedicated UK-based accountant who gets to know you and your business in detail.", icon: UserRoundCheck },
-  { title: "Unlimited Expert Advice", description: "Ask questions whenever you need to — by email, phone, WhatsApp or in a meeting.", icon: Headset },
-  { title: "All Filing Included", description: "Annual accounts and the tax returns you need are prepared and submitted for you — no hidden costs.", icon: BadgeDollarSign },
-  { title: "Regular Deadline Reminders", description: "Automated reminders tell you when accounts and returns are due, so you never miss an HMRC or Companies House deadline.", icon: Clock3 },
-  { title: "Tax Efficiency Reviews", description: "Regular reviews to make sure your business runs in the most tax-efficient way, claiming every relief available.", icon: Target },
-  { title: "Real-Time Information", description: "Cloud bookkeeping in Xero and QuickBooks gives you up-to-date numbers for better, faster decisions.", icon: MonitorSmartphone },
-  { title: "Confidential & Secure", description: "Strict confidentiality and secure handling of every document you share with us.", icon: LockKeyhole },
+  { title: "A dedicated accountant", description: "One named, UK-based accountant who knows your business — not a different person every time you call.", icon: UserRoundCheck },
+  { title: "Clear, agreed fees", description: "A fixed fee agreed before any work starts, with the filings you need included. No surprise invoices.", icon: BadgePoundSterling },
+  { title: "Proactive reminders", description: "We tell you what is due and what we need from you well before HMRC and Companies House deadlines.", icon: BellRing },
+  { title: "Practical advice", description: "Straight answers by phone, email, WhatsApp or video — and suggestions to keep more of what you earn.", icon: MessagesSquare },
+  {
+    title: "Secure document handling",
+    description: "Your records are only seen by the people working on your account and are handled in line with UK GDPR and our privacy policy.",
+    icon: LockKeyhole,
+  },
+  { title: "Cloud accounting", description: "Xero and QuickBooks set up properly, so you can see up-to-date numbers whenever you need them.", icon: CloudCog },
+  { title: "Qualified, experienced team", description: "Qualified accountants who understand UK tax rules and the realities of running a small business.", icon: Award },
+  { title: "Tax efficiency reviews", description: "Regular reviews to make sure your business runs tax-efficiently and claims the reliefs available to it.", icon: Target },
 ];
 
 export const processSteps = [
   {
-    title: "Initial Consultation",
-    description: "We get to know your business, your requirements and your current financial position.",
+    title: "Consultation",
+    description: "A free, no-obligation conversation about your business, what you need and where things stand today.",
   },
   {
-    title: "Requirement Assessment",
-    description: "We identify the accounting, VAT, tax or payroll services you need and agree a clear scope and a transparent fee.",
+    title: "Scope & fee",
+    description: "We confirm exactly which services you need and agree a clear, fixed fee before any work starts.",
   },
   {
-    title: "Professional Execution",
-    description: "Your dedicated accountant handles the work securely and on time, keeping you informed at every step.",
+    title: "Onboarding & delivery",
+    description: "We handle the switch from your previous accountant, set up your software and take care of the work, on time.",
   },
   {
-    title: "Ongoing Support",
-    description: "Deadline reminders, up-to-date reports and unlimited advice whenever you need it.",
+    title: "Ongoing support",
+    description: "Deadline reminders, up-to-date figures and practical advice whenever you need it.",
   },
 ];
 

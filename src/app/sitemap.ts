@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
 import { services } from "@/content/services";
+import { industries, industryHref } from "@/content/industries";
 import { posts } from "@/content/posts";
 import { publishedLocations } from "@/content/locations";
 import { absoluteUrl } from "@/lib/config-utils";
@@ -13,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/quote", priority: 0.9, changeFrequency: "yearly" },
     { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+    ...(siteConfig.features.showTeam ? [{ path: "/team", priority: 0.7, changeFrequency: "monthly" as const }] : []),
     { path: "/industries", priority: 0.7, changeFrequency: "monthly" },
     { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
@@ -25,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages.map((p) => ({ url: absoluteUrl(p.path), changeFrequency: p.changeFrequency, priority: p.priority })),
     ...services.map((s) => ({ url: absoluteUrl(`/services/${s.slug}`), changeFrequency: "monthly" as const, priority: 0.9 })),
+    ...industries.map((i) => ({ url: absoluteUrl(industryHref(i)), changeFrequency: "monthly" as const, priority: 0.8 })),
     ...posts.map((p) => ({ url: absoluteUrl(`/resources/${p.slug}`), lastModified: p.updatedAt ?? p.publishedAt, changeFrequency: "yearly" as const, priority: 0.6 })),
     ...publishedLocations.map((l) => ({ url: absoluteUrl(`/locations/${l.slug}`), changeFrequency: "monthly" as const, priority: 0.7 })),
   ];

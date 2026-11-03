@@ -1,39 +1,32 @@
 import { siteConfig } from "@/config/site";
-import { Counter, Stagger, StaggerItem } from "@/components/motion/motion";
 import { cn } from "@/lib/config-utils";
 
 /**
- * Firm statistics. Values come only from siteConfig.statistics; until a real
- * number is supplied the placeholder text (e.g. "[XX]+") is shown instead of
- * an invented figure.
+ * Firm statistics. Values come only from siteConfig.statistics and are
+ * rendered as plain text (no count-up), so screenshots, crawlers and no-JS
+ * visitors always see the real figure. Until a number is supplied the
+ * placeholder text (e.g. "[XX]") is shown instead of an invented figure.
  */
 export function Stats({ light = false, className }: { light?: boolean; className?: string }) {
   if (!siteConfig.features.showStatistics) return null;
   return (
-    <Stagger
-      as="ul"
+    <ul
       className={cn(
-        "grid gap-px overflow-hidden rounded-3xl",
+        "grid gap-px overflow-hidden rounded-xl border",
         siteConfig.statistics.length === 3 ? "sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4",
-        light ? "bg-white/10" : "bg-line",
+        light ? "border-white/10 bg-white/10" : "border-line bg-line",
         className,
       )}
     >
       {siteConfig.statistics.map((s) => (
-        <StaggerItem as="li" key={s.label} className={cn("px-6 py-8 text-center", light ? "bg-navy-900" : "bg-white")}>
-          <p className={cn("font-display text-4xl font-semibold sm:text-5xl", light ? "text-white" : "text-navy-900")}>
-            {s.value !== null ? (
-              <Counter value={s.value} suffix={s.suffix} />
-            ) : (
-              <span>
-                {s.placeholder}
-                {s.suffix}
-              </span>
-            )}
+        <li key={s.label} className={cn("px-6 py-7 text-center", light ? "bg-navy-900" : "bg-white")}>
+          <p className={cn("font-display text-4xl font-bold tabular-nums", light ? "text-white" : "text-navy-900")}>
+            {s.value !== null ? s.value.toLocaleString("en-GB") : s.placeholder}
+            {s.suffix}
           </p>
-          <p className={cn("mt-2 text-sm font-semibold tracking-wide uppercase", light ? "text-gold-400" : "text-gold-600")}>{s.label}</p>
-        </StaggerItem>
+          <p className={cn("mt-1.5 text-sm font-semibold", light ? "text-teal-300" : "text-teal-700")}>{s.label}</p>
+        </li>
       ))}
-    </Stagger>
+    </ul>
   );
 }

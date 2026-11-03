@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { consultationSchema, type ConsultationData, type ConsultationInput } from "@/lib/forms/schemas";
 import { buildConsultationMessage } from "@/lib/forms/quote-message";
 import { openWhatsapp, whatsappUrl } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { consultationTimeOptions, consultationTypeOptions, serviceOptions } from "@/content/form-options";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
 import { Button } from "@/components/ui/button";
@@ -44,6 +45,7 @@ export function ConsultationForm({ defaultService }: { defaultService?: string }
     const text = buildConsultationMessage(data);
     const url = whatsappUrl(text);
     setWaLink({ url, text });
+    trackEvent("generate_lead", { form: "consultation" });
     openWhatsapp(url);
   }, focusFirstInvalid);
 

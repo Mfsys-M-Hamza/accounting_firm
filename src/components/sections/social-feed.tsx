@@ -23,9 +23,10 @@ export function SocialFeed({ limit = socialPosts.length }: { limit?: number }) {
               href={primary.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-navy-50 shadow-card ring-1 ring-line"
+              className="group relative block aspect-portrait overflow-hidden rounded-2xl bg-navy-50 shadow-card ring-1 ring-line"
             >
               <Image
+                quality={85}
                 src={post.src}
                 alt={post.alt}
                 fill

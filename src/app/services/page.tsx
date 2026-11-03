@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { Process } from "@/components/sections/process";
 import { CtaBand } from "@/components/sections/cta-band";
-import { Illustration } from "@/components/icons/illustrations";
+import { IconBadge } from "@/components/icons/icon-badge";
 import { Stagger, StaggerItem } from "@/components/motion/motion";
 
 export const metadata = buildMetadata({
@@ -26,9 +26,8 @@ export default function ServicesPage() {
         title="Accounting, VAT, tax & payroll services"
         intro="Choose a single service or combine several into one coordinated engagement. Every service is scoped to your business, with clear deliverables and agreed fees."
         crumbs={[{ name: "Services", href: "/services" }]}
-        illustration="reporting"
       >
-        <ButtonLink href="/quote" variant="gold" size="lg">
+        <ButtonLink href="/quote" variant="primary" size="lg">
           Get a Free Quote <ArrowRight aria-hidden="true" />
         </ButtonLink>
       </PageHero>
@@ -45,7 +44,7 @@ export default function ServicesPage() {
           {services.map((s) => (
             <StaggerItem key={s.slug}>
               <div className="flex items-center gap-3 border-b border-line pb-4">
-                <Illustration name={s.illustration} className="size-12 shrink-0" />
+                <IconBadge icon={s.icon} size="sm" />
                 <h3 className="text-lg font-semibold">
                   <Link href={`/services/${s.slug}`} className="hover:text-navy-700">
                     {s.title}

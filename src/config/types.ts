@@ -23,8 +23,12 @@ export interface Statistic {
 export interface TeamMember {
   name: string;
   position: string;
-  qualification: string;
-  specialization: string;
+  /** "leadership" profiles get a large feature layout on /team; "team" members appear in the grid. */
+  group: "leadership" | "team";
+  /** e.g. "ACCA", "ACA", "AAT Level 4". Shown as badges. */
+  qualifications: string[];
+  /** Short areas of focus, e.g. ["VAT", "Construction (CIS)"]. */
+  expertise: string[];
   bio: string;
   linkedin: string;
   /** Path under /public, e.g. "/team/jane.webp". Leave "" to show initials. */

@@ -8,7 +8,8 @@
  * and reflects the services UK Accountax advertises. Have the firm
  * review figures and wording before launch, as UK thresholds change.
  */
-import type { IllustrationName } from "@/components/icons/illustrations";
+import type { LucideIcon } from "lucide-react";
+import { BookOpenCheck, Building2, ChartColumn, CloudCog, Landmark, Lightbulb, ReceiptText, UsersRound } from "lucide-react";
 import type { ImageKey } from "./images";
 
 export interface ServiceFeature {
@@ -25,7 +26,8 @@ export interface Service {
   slug: string;
   title: string;
   shortTitle: string;
-  illustration: IllustrationName;
+  /** Icon used on service cards and in the navigation. */
+  icon: LucideIcon;
   image: ImageKey;
   /** One sentence for cards. */
   summary: string;
@@ -48,8 +50,8 @@ export const services: Service[] = [
     slug: "accounting-bookkeeping",
     title: "Accounting & Bookkeeping",
     shortTitle: "Accounting",
-    illustration: "accounting",
-    image: "accountingDocuments",
+    icon: BookOpenCheck,
+    image: "blogReports",
     summary: "Complete monthly and yearly accounting — accurate books, reconciled accounts and year-end accounts filed on time.",
     headline: "Accounting & Bookkeeping That Takes the Headache Away",
     intro:
@@ -110,8 +112,8 @@ export const services: Service[] = [
     slug: "vat-services",
     title: "VAT Registration & Returns",
     shortTitle: "VAT",
-    illustration: "vat",
-    image: "auditDocumentReview",
+    icon: ReceiptText,
+    image: "blogRetailPos",
     summary: "VAT registration, Making Tax Digital returns and scheme advice — accurate and always on time.",
     headline: "VAT Registration & Making Tax Digital Returns",
     intro:
@@ -168,8 +170,8 @@ export const services: Service[] = [
     slug: "taxation",
     title: "Tax Returns & Planning",
     shortTitle: "Tax",
-    illustration: "tax",
-    image: "taxForms",
+    icon: Landmark,
+    image: "auditDocumentReview",
     summary: "Self Assessment, Corporation Tax and tax planning — filed accurately and on time with HMRC.",
     headline: "Tax Returns & Tax Planning Without the Stress",
     intro:
@@ -225,7 +227,7 @@ export const services: Service[] = [
     slug: "payroll",
     title: "Payroll Services",
     shortTitle: "Payroll",
-    illustration: "payroll",
+    icon: UsersRound,
     image: "payrollTeam",
     summary: "Accurate PAYE payroll, payslips, RTI submissions and pension auto-enrolment — every pay run.",
     headline: "Accurate, Confidential Payroll — Every Pay Run",
@@ -275,7 +277,7 @@ export const services: Service[] = [
     slug: "company-formation",
     title: "Company Registration & Start-Up",
     shortTitle: "Company Registration",
-    illustration: "formation",
+    icon: Building2,
     image: "companyFormationCity",
     summary: "Register your UK company and start right — Companies House, HMRC registrations and accounting set up for you.",
     headline: "Register a Company in the UK and Start on the Right Footing",
@@ -321,7 +323,7 @@ export const services: Service[] = [
     slug: "cfo-services",
     title: "Management Accounts & Remote Finance Director",
     shortTitle: "Management Accounts",
-    illustration: "cfo",
+    icon: ChartColumn,
     image: "cfoDashboard",
     summary: "Monthly management accounts and part-time finance director support — senior insight without a full-time hire.",
     headline: "Management Accounts & Remote Finance Director",
@@ -364,7 +366,7 @@ export const services: Service[] = [
     slug: "cloud-accounting",
     title: "Xero & QuickBooks Accounting",
     shortTitle: "Cloud Accounting",
-    illustration: "cloud",
+    icon: CloudCog,
     image: "cloudAnalytics",
     summary: "The right accounting software, set up properly — Xero, QuickBooks Online, bank feeds and automation.",
     headline: "Xero & QuickBooks Setup, Migration and Support",
@@ -408,7 +410,7 @@ export const services: Service[] = [
     slug: "business-advisory",
     title: "Finance & Business Consulting",
     shortTitle: "Consulting",
-    illustration: "advisory",
+    icon: Lightbulb,
     image: "advisoryPlanning",
     summary: "Financial analysis, business planning and profit growth advice that turn your numbers into better decisions.",
     headline: "Finance & Business Consulting for Confident Growth",

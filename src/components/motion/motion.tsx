@@ -1,135 +1,82 @@
-"use client";
-
 /**
- * Animation primitives. LazyMotion + `m` keeps the motion bundle small, and
- * MotionConfig reducedMotion="user" disables transform animations for people
- * who prefer reduced motion (content still fades in, nothing moves).
+ * Scroll reveal primitives, without a JavaScript animation library.
+ *
+ * These render plain server HTML marked with `data-reveal`; the CSS in
+ * globals.css and the small inline <RevealScript /> (end of <body>) fade them
+ * in as they scroll into view. Content already on screen is shown at once,
+ * and everything stays visible with JavaScript off or reduced motion on, so
+ * animation never delays content or interaction.
  */
-import { LazyMotion, MotionConfig, domAnimation, m, useInView, useReducedMotion, useScroll, useTransform, animate } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-
-const ease = [0.22, 1, 0.36, 1] as const;
-
-// The huge top margin also counts content that is already above the viewport as "in view",
-// so a section skipped by a fast scroll or an anchor jump is revealed instead of staying hidden.
-const REVEAL_MARGIN_80 = "100000px 0px -80px 0px";
-const REVEAL_MARGIN_60 = "100000px 0px -60px 0px";
-
-export function MotionProvider({ children }: { children: ReactNode }) {
-  return (
-    <LazyMotion features={domAnimation} strict>
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
-    </LazyMotion>
-  );
-}
+import type { ReactNode } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none" | "scale";
-
-const offsets: Record<Direction, Record<string, number>> = {
-  up: { y: 28 },
-  down: { y: -28 },
-  left: { x: 36 },
-  right: { x: -36 },
-  none: {},
-  scale: { scale: 0.94 },
-};
 
 export function Reveal({
   children,
   direction = "up",
   delay = 0,
   className,
-  as = "div",
+  as: Comp = "div",
 }: {
   children: ReactNode;
   direction?: Direction;
+  /** Seconds. */
   delay?: number;
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }) {
-  const Comp = m[as];
   return (
-    <Comp
-      className={className}
-      initial={{ opacity: 0, ...offsets[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: REVEAL_MARGIN_80 }}
-      transition={{ duration: 0.7, delay, ease }}
-    >
+    <Comp className={className} data-reveal={direction} style={delay ? { transitionDelay: `${delay}s` } : undefined} suppressHydrationWarning>
       {children}
     </Comp>
   );
 }
 
-/** Parent for staggered children. Use <StaggerItem> for each child. */
-export function Stagger({ children, className, gap = 0.08, as = "div" }: { children: ReactNode; className?: string; gap?: number; as?: "div" | "ul" | "ol" }) {
-  const Comp = m[as];
+/** Parent for staggered children: each <StaggerItem> starts `gap` seconds after the previous one. */
+export function Stagger({ children, className, gap = 0.05, as: Comp = "div" }: { children: ReactNode; className?: string; gap?: number; as?: "div" | "ul" | "ol" }) {
   return (
-    <Comp
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: REVEAL_MARGIN_60 }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: gap } } }}
-    >
+    <Comp className={className} data-reveal-stagger={Math.round(gap * 1000)}>
       {children}
     </Comp>
   );
 }
 
-export function StaggerItem({ children, className, as = "div" }: { children: ReactNode; className?: string; as?: "div" | "li" | "article" }) {
-  const Comp = m[as];
+export function StaggerItem({ children, className, as: Comp = "div" }: { children: ReactNode; className?: string; as?: "div" | "li" | "article" }) {
   return (
-    <Comp
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
-      }}
-    >
+    <Comp className={className} data-reveal="up" suppressHydrationWarning>
       {children}
     </Comp>
   );
 }
 
-/** Counts up to `value` the first time it scrolls into view. */
-export function Counter({ value, suffix = "", className }: { value: number; suffix?: string; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
-  const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (!inView || reduce) return;
-    const controls = animate(0, value, { duration: 1.8, ease, onUpdate: (v) => setDisplay(Math.round(v)) });
-    return () => controls.stop();
-  }, [inView, reduce, value]);
-
-  const shown = reduce ? value : display;
-
-  return (
-    <span ref={ref} className={className}>
-      {/* Screen readers get the final value immediately. */}
-      <span aria-hidden="true">
-        {shown.toLocaleString()}
-        {suffix}
-      </span>
-      <span className="sr-only">
-        {value.toLocaleString()}
-        {suffix}
-      </span>
-    </span>
-  );
+// Runs during HTML parsing, before React hydrates. Marks on-screen content as
+// revealed immediately, reveals the rest when it nears the viewport (the huge
+// top margin also reveals content skipped by an anchor jump), and watches for
+// content added by client-side navigation. Positions are read from the
+// enclosing .cv-auto section where there is one: measuring an element inside
+// a skipped section would force the layout that content-visibility avoids.
+const revealScript = `(function(){
+var d=document,docEl=d.documentElement;
+if(!("IntersectionObserver" in window))return;
+docEl.setAttribute("data-js","");
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.setAttribute("data-revealed","");io.unobserve(e.target);}});},{rootMargin:"100000px 0px -60px 0px"});
+function scan(root){
+  if(!root.querySelectorAll)return;
+  root.querySelectorAll("[data-reveal-stagger]").forEach(function(g){
+    var gap=+g.getAttribute("data-reveal-stagger")||50,i=0;
+    for(var c=g.firstElementChild;c;c=c.nextElementSibling){if(c.hasAttribute("data-reveal")&&!c.style.transitionDelay)c.style.transitionDelay=(i++*gap)+"ms";}
+  });
+  root.querySelectorAll("[data-reveal]:not([data-revealed])").forEach(function(el){
+    var host=el.closest(".cv-auto");
+    if(host&&host.getBoundingClientRect().top>=innerHeight){io.observe(el);return;}
+    if(el.getBoundingClientRect().top<innerHeight)el.setAttribute("data-revealed","");else io.observe(el);
+  });
 }
+scan(d);
+new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1)scan(n.parentNode||n);});});}).observe(d.body,{childList:true,subtree:true});
+})();`;
 
-/** Subtle vertical parallax tied to scroll position. */
-export function Parallax({ children, offset = 40, className }: { children: ReactNode; offset?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
-  return (
-    <m.div ref={ref} style={{ y }} className={className}>
-      {children}
-    </m.div>
-  );
+/** Place once, at the end of <body>. */
+export function RevealScript() {
+  return <script dangerouslySetInnerHTML={{ __html: revealScript }} />;
 }

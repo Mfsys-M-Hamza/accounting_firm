@@ -5,8 +5,8 @@ import { Button, ButtonLink } from "@/components/ui/button";
 
 export function SuccessPanel({ title, text, onReset }: { title: string; text: string; onReset: () => void }) {
   return (
-    <div role="status" className="flex flex-col items-center rounded-3xl border border-success/20 bg-success/5 px-6 py-12 text-center">
-      <span className="flex size-16 items-center justify-center rounded-full bg-success text-white shadow-[0_5px_0_#0f5a38]">
+    <div role="status" className="flex flex-col items-center rounded-xl border border-success/20 bg-success/5 px-6 py-12 text-center">
+      <span className="flex size-16 items-center justify-center rounded-full bg-success text-white">
         <CheckCircle2 className="size-8" aria-hidden="true" />
       </span>
       <p className="mt-6 font-display text-2xl font-semibold text-ink">{title}</p>

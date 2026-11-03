@@ -52,10 +52,9 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           { name: "Services", href: "/services" },
           { name: service.title, href: `/services/${service.slug}` },
         ]}
-        illustration={service.illustration}
       >
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href="/quote" variant="gold" size="lg">
+          <ButtonLink href="/quote" variant="primary" size="lg">
             Get a Free Quote <ArrowRight aria-hidden="true" />
           </ButtonLink>
           <ButtonLink href="/book-consultation" variant="outline-light" size="lg">
@@ -76,15 +75,15 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             </Reveal>
           </div>
           <Reveal direction="left" className="lg:sticky lg:top-28">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-lift">
-              <Image src={img.src} alt={img.alt} fill placeholder="blur" sizes="(min-width:1024px) 42vw, 100vw" className="object-cover" />
+            <div className="relative aspect-photo overflow-hidden rounded-2xl shadow-lift">
+              <Image quality={85} src={img.src} alt={img.alt} fill placeholder="blur" sizes="(min-width:1024px) 42vw, 100vw" className="object-cover" />
             </div>
-            <div className="mt-6 rounded-3xl border border-line bg-paper p-7">
+            <div className="mt-6 rounded-xl border border-line bg-paper p-7">
               <h3 className="text-lg font-semibold">Ideal for</h3>
               <ul className="mt-4 space-y-2.5">
                 {service.idealFor.map((x) => (
                   <li key={x} className="flex items-start gap-2.5 text-body">
-                    <Check className="mt-1 size-4 shrink-0 text-gold-500" aria-hidden="true" />
+                    <Check className="mt-1 size-4 shrink-0 text-teal-500" aria-hidden="true" />
                     {x}
                   </li>
                 ))}
@@ -100,8 +99,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {service.included.map((item, i) => (
             <StaggerItem key={item.title}>
-              <div className="group h-full rounded-3xl border border-line bg-white p-7 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <span className="font-display text-sm font-semibold text-gold-600">{String(i + 1).padStart(2, "0")}</span>
+              <div className="h-full rounded-xl border border-line bg-white p-6">
+                <span className="font-display text-sm font-semibold text-teal-600">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-3 text-xl font-semibold">{item.title}</h3>
                 <p className="mt-2 leading-relaxed text-body">{item.description}</p>
               </div>
@@ -118,8 +117,8 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             <Stagger className="space-y-5">
               {service.benefits.map((b) => (
                 <StaggerItem key={b.title}>
-                  <div className="flex gap-5 rounded-3xl border border-line p-6">
-                    <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#5a58d0,#1c1b6b)] text-gold-400 shadow-[0_4px_0_#0c0b36]">
+                  <div className="flex gap-5 rounded-xl border border-line p-6">
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
                       <Check className="size-6" aria-hidden="true" />
                     </span>
                     <div>
@@ -132,20 +131,20 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
             </Stagger>
           </div>
           <Reveal direction="left">
-            <div className="h-full rounded-[2rem] bg-navy-900 p-8 text-white sm:p-10">
-              <FileCheck2 className="size-10 text-gold-400" aria-hidden="true" />
+            <div className="h-full rounded-2xl bg-navy-900 p-8 text-white sm:p-10">
+              <FileCheck2 className="size-10 text-teal-300" aria-hidden="true" />
               <h2 className="mt-6 text-2xl font-semibold text-white">Typical deliverables</h2>
               <ul className="mt-6 space-y-4">
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-start gap-3 text-white/80">
-                    <Check className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden="true" />
+                    <Check className="mt-1 size-4 shrink-0 text-teal-300" aria-hidden="true" />
                     {d}
                   </li>
                 ))}
               </ul>
               <p className="mt-8 border-t border-white/10 pt-6 text-sm text-white/60">Exact deliverables are confirmed in your engagement letter.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="/quote" variant="gold">
+                <ButtonLink href="/quote" variant="primary">
                   Request a quote
                 </ButtonLink>
                 <ButtonLink href={generalWhatsappUrl()} variant="whatsapp" external>
@@ -179,7 +178,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
           <Stagger className="grid gap-6 md:grid-cols-3">
             {related.map((r) => (
               <StaggerItem key={r.slug}>
-                <ServiceCard service={r} showList={false} />
+                <ServiceCard service={r} tasks={0} />
               </StaggerItem>
             ))}
           </Stagger>

@@ -20,7 +20,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "linear-gradient(135deg, #3634a8 0%, #29288e 50%, #1c1b6b 100%)",
+          background: "linear-gradient(135deg, #1a3f5e 0%, #12304a 55%, #0b2033 100%)",
           color: "white",
           fontFamily: "sans-serif",
         }}
@@ -34,10 +34,10 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 34, fontWeight: 700 }}>{siteConfig.companyName}</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 26, letterSpacing: 6, color: "#4fd1b9", textTransform: "uppercase" }}>{siteConfig.tagline}</div>
-          <div style={{ fontSize: 64, lineHeight: 1.1, fontWeight: 700, maxWidth: 980 }}>Your trusted partner in financial success</div>
+          <div style={{ fontSize: 26, letterSpacing: 6, color: "#8cc7da", textTransform: "uppercase" }}>{siteConfig.tagline}</div>
+          <div style={{ fontSize: 58, lineHeight: 1.12, fontWeight: 700, maxWidth: 980 }}>Clear, reliable accounting support for ambitious UK businesses</div>
         </div>
-        <div style={{ display: "flex", height: 6, width: 240, background: "#25bba2", borderRadius: 3 }} />
+        <div style={{ display: "flex", height: 6, width: 240, background: "#c49a45", borderRadius: 3 }} />
       </div>
     ),
     size,

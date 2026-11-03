@@ -5,15 +5,21 @@ const isDev = process.env.NODE_ENV !== "production";
 const isStatic = process.env.STATIC_EXPORT === "true";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-// Content Security Policy. If you add third-party services (analytics, chat widgets,
-// captcha, a different map provider) add their origins to the matching directive.
+// Google Analytics origins are allowed only when a measurement ID is configured (see src/lib/analytics.ts).
+const ga = /^G-[A-Z0-9]+$/.test(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "");
+const gaScript = ga ? " https://www.googletagmanager.com" : "";
+const gaConnect = ga ? " https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com" : "";
+const gaImg = ga ? " https://*.google-analytics.com https://www.googletagmanager.com" : "";
+
+// Content Security Policy. If you add third-party services (chat widgets, captcha,
+// a different map provider) add their origins to the matching directive.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${gaScript}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  `img-src 'self' data: blob:${gaImg}`,
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${gaConnect}`,
   "frame-src https://www.google.com https://maps.google.com",
   "form-action 'self'",
   "base-uri 'self'",

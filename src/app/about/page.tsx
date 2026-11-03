@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Compass, Eye } from "lucide-react";
+import { ArrowRight, ClipboardList, Compass, Eye, FileCheck2, Lightbulb, MessagesSquare } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { values } from "@/content/home";
 import { images } from "@/content/images";
@@ -9,10 +9,10 @@ import { Section, SectionHeading } from "@/components/ui/section";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/motion";
 import { IconBadge } from "@/components/icons/icon-badge";
-import { Illustration } from "@/components/icons/illustrations";
 import { Stats } from "@/components/sections/stats";
-import { Team } from "@/components/sections/team";
+import { TeamPreview } from "@/components/sections/team";
 import { Advantages } from "@/components/sections/advantages";
+import { DataProtection } from "@/components/sections/data-protection";
 import { Testimonials } from "@/components/sections/testimonials";
 import { CtaBand } from "@/components/sections/cta-band";
 import { SocialFeed } from "@/components/sections/social-feed";
@@ -24,10 +24,10 @@ export const metadata = buildMetadata({
 });
 
 const approach = [
-  { title: "Understand", text: "We start by learning how your business works, what you want to achieve and where the risks lie.", illustration: "consultation" as const },
-  { title: "Plan", text: "Every engagement has an agreed scope, timetable, fee and named contact — before work begins.", illustration: "reporting" as const },
-  { title: "Deliver", text: "Work is carried out systematically, reviewed carefully and filed on time with HMRC and Companies House.", illustration: "audit" as const },
-  { title: "Advise", text: "We explain what the numbers mean and recommend practical next steps, not just deliver reports.", illustration: "advisory" as const },
+  { title: "Understand", text: "We start by learning how your business works, what you want to achieve and where the risks lie.", icon: MessagesSquare },
+  { title: "Plan", text: "Every engagement has an agreed scope, timetable, fee and named contact — before work begins.", icon: ClipboardList },
+  { title: "Deliver", text: "Work is carried out systematically, reviewed carefully and filed on time with HMRC and Companies House.", icon: FileCheck2 },
+  { title: "Advise", text: "We explain what the numbers mean and recommend practical next steps, not just deliver reports.", icon: Lightbulb },
 ];
 
 export default function AboutPage() {
@@ -35,10 +35,9 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="Your trusted partner in financial success"
+        title="Accounting support with a personal touch"
         intro={`${siteConfig.companyName} is a UK-based accountancy firm of qualified accountants, helping small businesses grow with accurate accounting, practical advice and stress-free tax.`}
         crumbs={[{ name: "About Us", href: "/about" }]}
-        illustration="compliance"
       />
 
       {/* Introduction */}
@@ -68,8 +67,8 @@ export default function AboutPage() {
             </Reveal>
           </div>
           <Reveal direction="left" className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-lift">
-              <Image src={images.modernOffice.src} alt={images.modernOffice.alt} fill placeholder="blur" sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
+            <div className="relative aspect-photo overflow-hidden rounded-2xl">
+              <Image quality={85} src={images.modernOffice.src} alt={images.modernOffice.alt} fill placeholder="blur" sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
             </div>
           </Reveal>
         </div>
@@ -82,19 +81,19 @@ export default function AboutPage() {
         </h2>
         <Stagger className="grid gap-6 md:grid-cols-2">
           <StaggerItem>
-            <div className="group h-full rounded-[2rem] bg-navy-900 p-10 text-white">
-              <IconBadge icon={Compass} tone="gold" size="lg" />
-              <h3 className="mt-8 text-3xl font-semibold text-white">Our Mission</h3>
-              <p className="mt-4 text-lg leading-relaxed text-white/75">
+            <div className="h-full rounded-xl bg-navy-900 p-8 text-white sm:p-10">
+              <IconBadge icon={Compass} size="lg" light />
+              <h3 className="mt-6 text-2xl font-bold text-white">Our mission</h3>
+              <p className="mt-3 text-lg leading-relaxed text-white/80">
                 Empowering businesses with accurate accounting, strategic planning and stress-free tax solutions — because your financial well-being is our priority.
               </p>
             </div>
           </StaggerItem>
           <StaggerItem>
-            <div className="group h-full rounded-[2rem] border border-line bg-white p-10">
-              <IconBadge icon={Eye} tone="navy" size="lg" />
-              <h3 className="mt-8 text-3xl font-semibold">Our Vision</h3>
-              <p className="mt-4 text-lg leading-relaxed text-body">
+            <div className="h-full rounded-xl border border-line bg-white p-8 sm:p-10">
+              <IconBadge icon={Eye} size="lg" />
+              <h3 className="mt-6 text-2xl font-bold">Our vision</h3>
+              <p className="mt-3 text-lg leading-relaxed text-body">
                 To be the trusted partner in financial success for small businesses across the UK, recognised for low-cost, high-quality service, modern online ways of
                 working and advice that makes a real difference.
               </p>
@@ -106,12 +105,12 @@ export default function AboutPage() {
       {/* Values */}
       <Section labelledBy="values-title">
         <SectionHeading id="values-title" eyebrow="Our values" title="The principles behind our work" />
-        <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((v, i) => (
+        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {values.map((v) => (
             <StaggerItem key={v.title}>
-              <div className="group h-full rounded-3xl border border-line bg-white p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <IconBadge icon={v.icon} tone={i % 2 ? "gold" : "navy"} className="mx-auto" />
-                <h3 className="mt-6 text-xl font-semibold">{v.title}</h3>
+              <div className="h-full rounded-xl border border-line bg-white p-6">
+                <IconBadge icon={v.icon} />
+                <h3 className="mt-4 text-lg font-bold">{v.title}</h3>
                 <p className="mt-2 leading-relaxed text-body">{v.description}</p>
               </div>
             </StaggerItem>
@@ -127,18 +126,18 @@ export default function AboutPage() {
           title="Rigorous, transparent and practical"
           text="Whatever the engagement, the same disciplined approach applies."
         />
-        <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {approach.map((a) => (
             <StaggerItem key={a.title}>
-              <div className="group h-full rounded-3xl bg-white p-7 shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <Illustration name={a.illustration} className="size-20 transition-transform duration-500 group-hover:-translate-y-1" />
-                <h3 className="mt-5 text-xl font-semibold">{a.title}</h3>
+              <div className="h-full rounded-xl border border-line bg-white p-6">
+                <IconBadge icon={a.icon} />
+                <h3 className="mt-4 text-lg font-bold">{a.title}</h3>
                 <p className="mt-2 leading-relaxed text-body">{a.text}</p>
               </div>
             </StaggerItem>
           ))}
         </Stagger>
-        <Stats className="mt-16" />
+        <Stats className="mt-12" />
       </Section>
 
       {/* Team */}
@@ -150,7 +149,7 @@ export default function AboutPage() {
             title="The people behind the work"
             text="Experienced professionals who take the time to understand your business."
           />
-          <Team />
+          <TeamPreview />
         </Section>
       ) : null}
 
@@ -158,6 +157,7 @@ export default function AboutPage() {
       <Section labelledBy="why-title" tone="paper">
         <SectionHeading id="why-title" eyebrow="Why clients choose us" title="What working with us looks like" />
         <Advantages />
+        <DataProtection className="mt-8" onPaper />
         <Reveal className="mt-12 text-center">
           <ButtonLink href="/services" size="lg">
             Explore our services <ArrowRight aria-hidden="true" />

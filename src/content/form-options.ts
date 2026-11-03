@@ -43,5 +43,3 @@ export const contactTimeOptions = ["Morning (9am â€“ 12pm)", "Afternoon (12pm â€
 export const consultationTypeOptions = ["Phone", "Video Meeting", "Office Meeting"];
 
 export const consultationTimeOptions = ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"];
-
-export const callbackTimeOptions = ["As soon as possible", ...contactTimeOptions.filter((o) => o !== "Any time")];

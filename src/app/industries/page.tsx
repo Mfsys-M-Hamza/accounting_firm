@@ -12,9 +12,9 @@ import { ServicesGrid } from "@/components/sections/services-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 
 export const metadata = buildMetadata({
-  title: "Industries We Serve",
+  title: "Who We Help",
   description:
-    "Accounting, VAT, payroll and tax services tailored to small businesses, startups, e-commerce sellers, sole traders, contractors, construction, landlords, retail, hospitality, healthcare, professional services, technology, freelancers and nonprofits.",
+    "Accounting, VAT, payroll and tax support for UK small businesses, startups, online sellers, sole traders and freelancers, contractors, construction, landlords, retail, hospitality, healthcare, professional services and technology businesses.",
   path: "/industries",
 });
 
@@ -22,23 +22,22 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Industries"
-        title="Specialist support for your sector"
+        eyebrow="Who we help"
+        title="Accounting support shaped around your business"
         intro="Every industry has its own revenue models, cost structures, regulations and reporting expectations. We tailor our accounting, VAT and tax work to fit."
-        crumbs={[{ name: "Industries", href: "/industries" }]}
-        illustration="formation"
+        crumbs={[{ name: "Who We Help", href: "/industries" }]}
       />
 
       <Section labelledBy="industries-title" tone="paper">
-        <SectionHeading id="industries-title" eyebrow="Who we work with" title="Industries we serve" />
+        <SectionHeading id="industries-title" eyebrow="Businesses we support" title="From sole traders to growing companies" />
         <IndustriesGrid detailed />
       </Section>
 
       <Section labelledBy="approach-title">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <Reveal direction="right">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-lift">
-              <Image src={images.industriesWorkshop.src} alt={images.industriesWorkshop.alt} fill placeholder="blur" sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
+            <div className="relative aspect-photo overflow-hidden rounded-2xl">
+              <Image quality={85} src={images.industriesWorkshop.src} alt={images.industriesWorkshop.alt} fill placeholder="blur" sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
             </div>
           </Reveal>
           <div>

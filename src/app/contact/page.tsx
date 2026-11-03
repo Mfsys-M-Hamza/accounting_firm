@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import { CalendarCheck, Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { CalendarCheck, Clock3, Mail, MapPin, MessagesSquare, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
 import { formattedAddress, isConfigured, mailtoHref, telHref, whatsappDisplay } from "@/lib/config-utils";
@@ -10,7 +10,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/motion";
 import { ContactForm } from "@/components/forms/contact-form";
 import { WhatsAppIcon } from "@/components/icons/brand-icons";
-import { Illustration } from "@/components/icons/illustrations";
+import { IconBadge } from "@/components/icons/icon-badge";
 
 export const metadata = buildMetadata({
   title: "Contact Us",
@@ -21,14 +21,14 @@ export const metadata = buildMetadata({
 function InfoCard({ icon: Icon, title, href, external, children }: { icon: ComponentType<{ className?: string }>; title: string; href?: string; external?: boolean; children: ReactNode }) {
   const body = (
     <>
-      <span className="flex size-12 items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#5a58d0,#1c1b6b)] text-gold-400 shadow-[0_4px_0_#0c0b36]">
+      <span className="flex size-12 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
         <Icon className="size-5" />
       </span>
       <h2 className="mt-5 font-sans text-sm font-bold tracking-[0.14em] text-muted uppercase">{title}</h2>
       <div className="mt-2 font-semibold break-words text-ink">{children}</div>
     </>
   );
-  const cls = "group block h-full rounded-3xl border border-line bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift";
+  const cls = "group block h-full rounded-xl border border-line bg-white p-6 transition-[border-color,box-shadow] duration-200 hover:border-teal-600/40 hover:shadow-lift";
   return href ? (
     <a href={href} className={cls} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
       {body}
@@ -47,7 +47,6 @@ export default function ContactPage() {
         title="Let's talk about your business"
         intro="Whether you need a quote, have a question or want to book a consultation, our team is here to help."
         crumbs={[{ name: "Contact Us", href: "/contact" }]}
-        illustration="consultation"
       />
 
       <Section labelledBy="contact-details" tone="paper" className="py-14 sm:py-16 lg:py-16">
@@ -99,18 +98,18 @@ export default function ContactPage() {
           </div>
           <div className="space-y-6">
             <Reveal direction="left">
-              <div className="overflow-hidden rounded-[2rem] border border-line">
+              <div className="overflow-hidden rounded-2xl border border-line">
                 {isConfigured(contact.mapEmbedUrl) ? (
                   <iframe
                     src={contact.mapEmbedUrl}
                     title={`Map showing the location of ${siteConfig.companyName}`}
-                    className="aspect-[4/3] w-full"
+                    className="aspect-photo w-full"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     allowFullScreen
                   />
                 ) : (
-                  <div className="bg-grid-light flex aspect-[4/3] flex-col items-center justify-center bg-paper p-8 text-center">
+                  <div className="flex aspect-photo flex-col items-center justify-center bg-paper p-8 text-center">
                     <MapPin className="size-10 text-navy-700" aria-hidden="true" />
                     <p className="mt-4 font-display text-xl font-semibold text-ink">Map placeholder</p>
                     <p className="mt-2 max-w-xs text-sm text-muted">Add a Google Maps embed URL to siteConfig.contact.mapEmbedUrl to show the office location here.</p>
@@ -119,14 +118,14 @@ export default function ContactPage() {
               </div>
             </Reveal>
             <Reveal direction="left">
-              <div className="rounded-[2rem] bg-navy-900 p-8 text-white">
+              <div className="rounded-xl bg-navy-900 p-8 text-white">
                 <div className="flex items-center gap-4">
-                  <Illustration name="consultation" className="size-16 shrink-0" />
+                  <IconBadge icon={MessagesSquare} light />
                   <h2 className="text-2xl font-semibold text-white">Prefer to talk it through?</h2>
                 </div>
                 <p className="mt-4 text-white/70">Book a phone call, video meeting or office meeting at a time that suits you, or message us on WhatsApp.</p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <ButtonLink href="/book-consultation" variant="gold">
+                  <ButtonLink href="/book-consultation" variant="primary">
                     <CalendarCheck aria-hidden="true" /> Book a Consultation
                   </ButtonLink>
                   <ButtonLink href={generalWhatsappUrl()} variant="whatsapp" external>

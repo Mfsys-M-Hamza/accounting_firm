@@ -41,7 +41,6 @@ export default async function LocationPage({ params }: PageProps<"/locations/[sl
         title={loc.headline}
         intro={loc.intro}
         crumbs={[{ name: loc.headline, href: `/locations/${loc.slug}` }]}
-        illustration="formation"
       />
       <Section labelledBy="local-title">
         <h2 id="local-title" className="sr-only">

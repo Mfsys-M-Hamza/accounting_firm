@@ -6,6 +6,7 @@
  * Articles are general guidance for UK businesses, not advice for a specific
  * situation — each page carries a disclaimer to that effect.
  */
+import { siteConfig } from "@/config/site";
 import type { ImageKey } from "./images";
 
 export const categories = ["Accounting", "VAT", "Tax", "Business", "Compliance", "Finance", "Startup Guides"] as const;
@@ -29,6 +30,8 @@ export interface Post {
   updatedAt?: string;
   /** Leave undefined to credit the firm's editorial team. */
   author?: string;
+  /** Name (and qualification) of the accountant who checked the article, once the firm supplies it. */
+  reviewedBy?: string;
   readingMinutes: number;
   featured?: boolean;
   body: Block[];
@@ -109,7 +112,7 @@ export const posts: Post[] = [
     excerpt:
       "Most tax-time stress comes from poor records, not complicated rules. These habits keep your paperwork organised all year round.",
     category: "Tax",
-    image: "blogTaxStatement",
+    image: "advisoryPlanning",
     publishedAt: "2026-08-11",
     readingMinutes: 5,
     body: [
@@ -233,6 +236,8 @@ export const posts: Post[] = [
 ];
 
 export const sortedPosts = [...posts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+
+export const postAuthor = (post: Pick<Post, "author">) => post.author ?? `${siteConfig.companyName} Editorial Team`;
 
 export function getPost(slug: string): Post | undefined {
   return posts.find((p) => p.slug === slug);

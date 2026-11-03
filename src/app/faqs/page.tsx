@@ -25,7 +25,6 @@ export default function FaqsPage() {
         title="Frequently asked questions"
         intro="Everything you need to know about working with us. Can't find your answer? Get in touch — we're happy to help."
         crumbs={[{ name: "FAQs", href: "/faqs" }]}
-        illustration="consultation"
       />
 
       <Section labelledBy="faq-list-title" tone="paper">
@@ -37,12 +36,12 @@ export default function FaqsPage() {
             <FaqList items={faqs} schema />
           </Reveal>
           <Reveal direction="left">
-            <aside className="rounded-3xl bg-navy-900 p-8 text-white lg:sticky lg:top-28">
-              <MessageCircleQuestion className="size-10 text-gold-400" aria-hidden="true" />
+            <aside className="rounded-xl bg-navy-900 p-8 text-white lg:sticky lg:top-28">
+              <MessageCircleQuestion className="size-10 text-teal-300" aria-hidden="true" />
               <h2 className="mt-5 text-2xl font-semibold text-white">Still have questions?</h2>
               <p className="mt-3 text-white/70">Speak to a member of our team for a clear, no-obligation answer.</p>
               <div className="mt-6 grid gap-3">
-                <ButtonLink href="/contact" variant="gold">
+                <ButtonLink href="/contact" variant="primary">
                   Contact us
                 </ButtonLink>
                 <ButtonLink href={generalWhatsappUrl()} variant="whatsapp" external>
